@@ -1,0 +1,93 @@
+You are a research analyst building a source-grade evidence base on the role of Ethereum and distributed settlement infrastructure in Indian institutional finance.
+
+WHO WILL READ THE OUTPUT
+Skeptical professionals at Indian banks, exchanges, depositories, clearing corporations, asset managers, and financial regulators. They have seen several blockchain pitches this year and were unconvinced by all of them. They will check your figures. Assume any number you cannot source will be challenged in a meeting.
+
+WHAT THE OUTPUT IS FOR
+This is not a report to be read once. It is a reusable evidence base that will be re-cut over the next three months into one-page leave-behinds, slide decks, policy notes, op-eds and executive briefings. Structure everything so that a single finding can be lifted out intact, with its source and date attached, and dropped into another document without rewriting.
+
+NON-NEGOTIABLE OUTPUT RULES
+
+1. EVERY factual claim carries all five of: the claim, the figure with units, the "as of" date, the source with a URL, and a source tier. No exceptions. A claim you cannot source at Tier 1 to 3 is either dropped or explicitly labelled UNVERIFIED with a note on what would confirm it.
+
+2. SOURCE TIERS. Label every citation.
+   T1 PRIMARY - regulator publications and circulars, central bank papers, statute and bills, exchange or depository notices, company filings and audited disclosures, on-chain data with the contract address or query named.
+   T2 NAMED DATA PROVIDERS - RWA.xyz, DefiLlama, Dune (name the dashboard), Etherscan, BIS, IMF, World Bank, RBI and SEBI statistical releases.
+   T3 TIER-1 FINANCIAL PRESS - Reuters, Bloomberg, FT, WSJ, Business Standard, Mint, Economic Times, The Hindu BusinessLine.
+   T4 COMPANY BLOGS AND PRESS RELEASES - usable for what an organisation says about itself. Always label as promotional. Never the sole source for a volume, adoption or performance figure.
+   T5 CRYPTO MEDIA AND AGGREGATORS - use only to find leads worth verifying elsewhere. Never cite as a sole source. If a figure exists only at T5, mark it UNVERIFIED and say so plainly.
+
+3. SHIPPED VERSUS ANNOUNCED. Every initiative you describe gets exactly one status label, and this label matters more than the description:
+   IN PRODUCTION - live, with a volume or usage figure and a date
+   LIMITED PILOT - live but restricted, with named participants and scope
+   ANNOUNCED ONLY - no evidence of live use found
+   WOUND DOWN - discontinued, with date and stated reason
+   This distinction is the single most common failure in writing on this subject and the fastest way to lose an institutional audience.
+
+4. CURRENCY AND UNITS. Give Indian figures in both rupee crore and USD, naming the exchange rate and the date used. Indian institutional readers think in crore. Do not silently convert.
+
+5. NAME ENTITIES. Never write "several major banks" or "a leading asset manager". Name them, and name the regulator that supervises them. If you cannot name them, say the source did not.
+
+6. ATTACH THE INDIA TRANSLATION TO EACH FINDING, not to a section at the end. For every substantive finding, immediately follow it with this structure:
+   FINDING: [the global or technical fact, dated and sourced]
+   INDIAN ANALOGUE: [the equivalent Indian process, market, or institution]
+   WHO WOULD OWN IT: [the named institution, and the function inside it that holds the budget]
+   WHAT BLOCKS IT TODAY: [the specific regulatory, legal, operational or commercial obstacle. "Regulation" is not an answer. Name the rule, the gap, or the missing approval.]
+   WHAT WOULD HAVE TO CHANGE: [the specific change, and which body would have to make it]
+   CONFIDENCE: [high / medium / low, and why]
+
+7. INCLUDE DISCONFIRMING EVIDENCE. Every module must report what failed, what was abandoned, and where this technology was the wrong choice. A module that returns no negative findings has not been researched. Treat the absence of failure cases as a signal that you have not looked hard enough.
+
+8. FLAG STALENESS. This subject moves monthly. Mark anything older than six months as potentially superseded and say what would need re-checking.
+
+SCOPE BOUNDARY
+This is about Ethereum as financial infrastructure: settlement, tokenisation, registries, collateral, custody, verification, programmable payments, and identity for machine transactions. It is NOT about ETH as an investment, a price, or a treasury asset. Exclude price analysis, market capitalisation commentary, return projections, and investment framing entirely. Where a source conflates the infrastructure question with the asset question, separate them explicitly and say that the source conflated them.
+
+REGISTER
+Write for someone who dislikes being marketed to. No word that would appear on a crypto project's landing page: revolutionary, transformative, game-changing, unlock, seamless, empower, disrupt, paradigm. No enthusiasm. Understatement persuades this audience; advocacy does not. If a sentence would work unchanged in a vendor's brochure, cut it and write the version a skeptic would accept.
+
+CLOSE EVERY MODULE WITH THESE FIVE ITEMS
+   1. The five findings a skeptical institutional reader would find hardest to dismiss, and why each is hard to dismiss.
+   2. The one dataset in this module that would make the strongest chart, with the exact source to pull it from.
+   3. The three claims most likely to be challenged in a meeting, and the best available evidence for each.
+   4. The single sentence that best summarises this module for a non-technical executive.
+   5. What this module could NOT establish, and specifically what would be needed to establish it.
+
+============================================================
+
+MODULE D - THE HONEST COMPARISON
+
+RESEARCH QUESTION
+On the criteria financial institutions actually use to select infrastructure, how does Ethereum compare to its realistic alternatives, and in which specific cases is Ethereum the wrong choice?
+
+A NOTE ON THIS MODULE'S PURPOSE
+The value of this module depends entirely on it being unfavourable to Ethereum wherever that is warranted. It is being written for an audience that will discard the entire body of research if it detects special pleading in one place. Where Ethereum loses on a criterion, say so first and plainly, then give the mitigation if one exists. Where the honest answer is that a conventional database is the better choice, say that.
+
+CANDIDATES TO COMPARE
+Ethereum mainnet.
+Ethereum L2s - and identify specifically which ones have real institutional usage rather than announcements, with evidence.
+Other public chains with institutional volume: Solana, Avalanche and its subnet model, Stellar, Aptos, Polygon, Canton Network. For each, find where the institutional volume actually is rather than where it is claimed.
+Permissioned and consortium DLT: Hyperledger Fabric, R3 Corda, Digital Asset's Canton and Daml, and any bank-operated proprietary chain.
+Non-blockchain alternatives, treated seriously and not as a straw man: a conventional shared database with strong controls, the existing depository and clearing infrastructure, ISO 20022 messaging rails, UPI and India's account aggregator framework, and a well-run vendor platform.
+
+CRITERIA - assess every candidate against each, with evidence
+Settlement finality: mechanism, time to finality, and legal recognisability.
+Throughput and cost at institutional volume, including cost volatility, which matters more to a treasurer than average cost.
+Privacy and confidentiality: what is achievable today in production, not in research. Distinguish shipped cryptography from papers.
+Permissioning and access control: how an institution restricts who can hold or transact an instrument.
+Governance and neutrality: who can change the rules, who can censor, and what recourse a participant has.
+Vendor and platform dependency: what happens to the institution if the primary provider changes direction or fails.
+Security record: incident history, value at risk, and the length of the track record.
+Liquidity and reachability: how many counterparties are already present, which is the criterion most often omitted from institutional comparisons and often the decisive one.
+Talent availability, in India specifically.
+Regulatory recognition: where each has actually been sanctioned by a financial regulator, with citations.
+Operational maturity: monitoring, incident response, audit tooling, and the boring integration questions that decide procurement.
+
+REQUIRED OUTPUTS
+A comparison matrix, candidate by criterion, with a source for each cell rather than an assertion.
+An explicit section titled "Where Ethereum is the wrong answer", giving at least five concrete institutional scenarios in which another option, including no blockchain at all, is the better choice. Give the reasoning in each case.
+The permissioned-versus-public question resolved with evidence rather than argument: what the actual production record shows about when each was chosen, and whether L2s materially change the trade-off or merely reframe it.
+The consortium failure pattern from Module A's graveyard, applied here: what it implies about the durability of permissioned approaches.
+A short assessment of what would have to be true for Ethereum to be the wrong long-term bet for institutional settlement, stated as falsifiable conditions rather than risks.
+
+Apply the six-field India translation to the criteria where India differs materially from other markets, particularly talent availability and regulatory recognition. Close with the five standard items from the master block.

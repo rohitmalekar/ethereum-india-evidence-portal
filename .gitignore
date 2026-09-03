@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Third-party source PDFs — not ours to redistribute
+Literature/
+
+# Stale duplicate of content/
+content copy/
+
+# Scratch
+Research Prompts/_to_delete/
+
+# Machine-local Claude Code permissions (launch.json is shared, this is not)
+.claude/settings.local.json
+
+# Not used — the project has zero dependencies
+node_modules/

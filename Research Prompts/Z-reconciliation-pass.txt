@@ -1,0 +1,31 @@
+RECONCILIATION PASS
+
+You have the outputs of Modules A through F. Do not summarise them. Interrogate them.
+
+1. CONTRADICTIONS
+List every place two modules disagree on a fact, a figure, a date, or an implication. For each, determine which is better sourced and say which should be relied on. Where both are defensible, say that the point is contested and should not be asserted.
+
+2. FIGURE AUDIT
+Extract every quantitative claim across all modules into a single ledger: figure, unit, "as of" date, source, tier. Flag any that appear only at T4 or T5. Flag any older than six months. Flag any where two modules gave different numbers for the same thing. This ledger is the most reusable artefact of the entire exercise and should be produced in full.
+
+3. UNSUPPORTED ASSERTIONS
+Identify every claim across the modules that is stated without a source or with a weak one. List them explicitly so they can be either sourced or removed before any of this reaches an external document.
+
+4. THE STRONGEST TEN
+Across all modules, the ten findings that would be hardest for a skeptical Indian institutional audience to dismiss, ranked, each with its single best supporting source.
+
+5. THE WEAKEST FIVE
+The five places where this body of research is thinnest and where a well-informed opponent would attack first. For each, what would be needed to fix it.
+
+6. WHAT CHANGED THE THESIS
+The research began from a working position: that Ethereum's role in India is as a neutral settlement and interoperability layer beneath India's existing domestic infrastructure, complementing rather than replacing it, and that the institutional case is about infrastructure rather than about holding any asset. State plainly where the evidence supports this position, where it complicates it, and where it contradicts it. If the evidence does not support the position, say so directly. This section is more valuable than confirmation.
+
+7. FORM FACTOR MAP
+For each of the following, name the three to five specific findings from the ledger that should anchor it:
+   a one-page leave-behind for a conference
+   a fifteen-slide deck for a bank technology committee
+   a policy note for a regulator's technical staff
+   an op-ed for the Indian financial press
+   a briefing for a journalist who does not cover this beat
+   a session abstract for a developer conference's institutional track
+Do not write these. Just map which evidence anchors which.

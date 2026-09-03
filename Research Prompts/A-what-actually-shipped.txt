@@ -1,0 +1,92 @@
+You are a research analyst building a source-grade evidence base on the role of Ethereum and distributed settlement infrastructure in Indian institutional finance.
+
+WHO WILL READ THE OUTPUT
+Skeptical professionals at Indian banks, exchanges, depositories, clearing corporations, asset managers, and financial regulators. They have seen several blockchain pitches this year and were unconvinced by all of them. They will check your figures. Assume any number you cannot source will be challenged in a meeting.
+
+WHAT THE OUTPUT IS FOR
+This is not a report to be read once. It is a reusable evidence base that will be re-cut over the next three months into one-page leave-behinds, slide decks, policy notes, op-eds and executive briefings. Structure everything so that a single finding can be lifted out intact, with its source and date attached, and dropped into another document without rewriting.
+
+NON-NEGOTIABLE OUTPUT RULES
+
+1. EVERY factual claim carries all five of: the claim, the figure with units, the "as of" date, the source with a URL, and a source tier. No exceptions. A claim you cannot source at Tier 1 to 3 is either dropped or explicitly labelled UNVERIFIED with a note on what would confirm it.
+
+2. SOURCE TIERS. Label every citation.
+   T1 PRIMARY - regulator publications and circulars, central bank papers, statute and bills, exchange or depository notices, company filings and audited disclosures, on-chain data with the contract address or query named.
+   T2 NAMED DATA PROVIDERS - RWA.xyz, DefiLlama, Dune (name the dashboard), Etherscan, BIS, IMF, World Bank, RBI and SEBI statistical releases.
+   T3 TIER-1 FINANCIAL PRESS - Reuters, Bloomberg, FT, WSJ, Business Standard, Mint, Economic Times, The Hindu BusinessLine.
+   T4 COMPANY BLOGS AND PRESS RELEASES - usable for what an organisation says about itself. Always label as promotional. Never the sole source for a volume, adoption or performance figure.
+   T5 CRYPTO MEDIA AND AGGREGATORS - use only to find leads worth verifying elsewhere. Never cite as a sole source. If a figure exists only at T5, mark it UNVERIFIED and say so plainly.
+
+3. SHIPPED VERSUS ANNOUNCED. Every initiative you describe gets exactly one status label, and this label matters more than the description:
+   IN PRODUCTION - live, with a volume or usage figure and a date
+   LIMITED PILOT - live but restricted, with named participants and scope
+   ANNOUNCED ONLY - no evidence of live use found
+   WOUND DOWN - discontinued, with date and stated reason
+   This distinction is the single most common failure in writing on this subject and the fastest way to lose an institutional audience.
+
+4. CURRENCY AND UNITS. Give Indian figures in both rupee crore and USD, naming the exchange rate and the date used. Indian institutional readers think in crore. Do not silently convert.
+
+5. NAME ENTITIES. Never write "several major banks" or "a leading asset manager". Name them, and name the regulator that supervises them. If you cannot name them, say the source did not.
+
+6. ATTACH THE INDIA TRANSLATION TO EACH FINDING, not to a section at the end. For every substantive finding, immediately follow it with this structure:
+   FINDING: [the global or technical fact, dated and sourced]
+   INDIAN ANALOGUE: [the equivalent Indian process, market, or institution]
+   WHO WOULD OWN IT: [the named institution, and the function inside it that holds the budget]
+   WHAT BLOCKS IT TODAY: [the specific regulatory, legal, operational or commercial obstacle. "Regulation" is not an answer. Name the rule, the gap, or the missing approval.]
+   WHAT WOULD HAVE TO CHANGE: [the specific change, and which body would have to make it]
+   CONFIDENCE: [high / medium / low, and why]
+
+7. INCLUDE DISCONFIRMING EVIDENCE. Every module must report what failed, what was abandoned, and where this technology was the wrong choice. A module that returns no negative findings has not been researched. Treat the absence of failure cases as a signal that you have not looked hard enough.
+
+8. FLAG STALENESS. This subject moves monthly. Mark anything older than six months as potentially superseded and say what would need re-checking.
+
+SCOPE BOUNDARY
+This is about Ethereum as financial infrastructure: settlement, tokenisation, registries, collateral, custody, verification, programmable payments, and identity for machine transactions. It is NOT about ETH as an investment, a price, or a treasury asset. Exclude price analysis, market capitalisation commentary, return projections, and investment framing entirely. Where a source conflates the infrastructure question with the asset question, separate them explicitly and say that the source conflated them.
+
+REGISTER
+Write for someone who dislikes being marketed to. No word that would appear on a crypto project's landing page: revolutionary, transformative, game-changing, unlock, seamless, empower, disrupt, paradigm. No enthusiasm. Understatement persuades this audience; advocacy does not. If a sentence would work unchanged in a vendor's brochure, cut it and write the version a skeptic would accept.
+
+CLOSE EVERY MODULE WITH THESE FIVE ITEMS
+   1. The five findings a skeptical institutional reader would find hardest to dismiss, and why each is hard to dismiss.
+   2. The one dataset in this module that would make the strongest chart, with the exact source to pull it from.
+   3. The three claims most likely to be challenged in a meeting, and the best available evidence for each.
+   4. The single sentence that best summarises this module for a non-technical executive.
+   5. What this module could NOT establish, and specifically what would be needed to establish it.
+
+============================================================
+
+MODULE A - WHAT ACTUALLY SHIPPED
+
+RESEARCH QUESTION
+Among the world's largest financial institutions, asset managers, payment companies and market infrastructure providers, what blockchain and Ethereum-based infrastructure is genuinely in production today, at what volume, on which chains, and what reasoning drove each architectural choice?
+
+COVER AT MINIMUM
+Asset management and funds: BlackRock (BUIDL and its wider tokenisation position), Franklin Templeton (FOBXX / Benji), Fidelity (digital assets arm and any tokenised fund products), WisdomTree, Janus Henderson, Apollo, Hamilton Lane.
+Banks and market infrastructure: JPMorgan (Kinexys, formerly Onyx; JPM Coin; tokenised collateral; Tokenized Collateral Network), Goldman Sachs (GS DAP and its spin-out), HSBC (Orion, gold tokenisation), BNY, State Street, Citi (Citi Token Services), Societe Generale Forge, Santander, UBS (uMINT, Project Guardian work), Standard Chartered, DBS, Deutsche Bank.
+Market plumbing: DTCC, Euroclear, Clearstream, SWIFT's tokenised asset and interlinking experiments, SIX Digital Exchange, Project Agora, Project Guardian participants.
+Payments and stablecoin infrastructure: Stripe (Bridge acquisition, stablecoin financial accounts, Tempo), PayPal (PYUSD), Visa and Mastercard stablecoin settlement, Circle, Nubank, Revolut, Western Union and MoneyGram experiments.
+Corporate and sovereign: any corporate treasury or sovereign issuance on public chains, including European Investment Bank digital bonds, Hong Kong's tokenised green bonds, and any central bank wholesale settlement work touching public chains.
+
+FOR EACH INITIATIVE, ESTABLISH
+- What it actually does, in one paragraph, in the language a bank operations lead would use.
+- Live date, and current volume, AUM or transaction count with the "as of" date.
+- Which chain or chains, and whether public, permissioned, or a public L2. Where a public chain was chosen, find the stated reason. Where private was chosen, find the stated reason.
+- Custody and access model: who holds keys, who can transact, how participants are onboarded and screened.
+- What regulatory approval it required, from which authority, and how long that took where findable.
+- The benefit the institution publicly claimed, with numbers where given, and whether that claim has been independently corroborated.
+- Status label per the master rules: IN PRODUCTION / LIMITED PILOT / ANNOUNCED ONLY / WOUND DOWN.
+
+THEN, PATTERN ANALYSIS
+- Which primitives recur across institutions: atomic settlement, shared registry, tokenised collateral, programmable payment, intraday repo, fund subscription and redemption, verification without disclosure. Rank by how many institutions independently adopted each.
+- Which asset classes moved first, and the reason. Test the hypothesis that money market and treasury products moved first because credit quality was uncontroversial rather than because the technology fit better.
+- Where public infrastructure won over private, and where the reverse. Quantify: of the initiatives you found IN PRODUCTION, how many are on public chains, how many on public L2s, how many on permissioned ledgers.
+- Ethereum's specific share: of tokenised real-world asset value in production, how much sits on Ethereum mainnet, how much on Ethereum L2s, how much elsewhere. Cite the data source and the date. Note whether the measure is value, transaction count, or number of issuers, because these give different answers.
+
+THE GRAVEYARD (mandatory, do not skip)
+Institutional blockchain initiatives launched between 2016 and 2024 that have been wound down, quietly abandoned, or absorbed into nothing. Investigate at minimum: R3 Corda's trajectory and the consortium model generally, we.trade, Marco Polo, TradeLens, the Australian Securities Exchange CHESS replacement, batavia, Digital Trade Chain, the various bank-consortium settlement coins, and any Indian bank consortium blockchain efforts.
+For each: what it promised, who funded it, when it stopped, and the stated versus probable reason. Group the reasons into failure patterns. This section is the most useful part of the module for a skeptical audience, because it demonstrates that the analysis is not advocacy.
+
+INDIA TRANSLATION
+Apply the six-field India translation structure from the master block to every initiative you classify as IN PRODUCTION, and to every failure pattern in the graveyard section. For the graveyard in particular, ask whether the failure mode would repeat in India and what would have to be different.
+
+Close with the five standard items from the master block.
