@@ -56,9 +56,10 @@ there is no `npm install` step, no lockfile, and no `node_modules/`.
 The generated HTML is committed on purpose — it is what makes the site
 readable over `file://`, forkable with no toolchain, and complete on the first
 byte of a plain `curl`. The cost is that it can drift from its source, so
-`.github/workflows/pages.yml` rebuilds on every push and **fails the run if a
-fresh build differs from what you committed**. If CI fails with "Generated
-HTML is out of date", you skipped step 4.
+`.github/workflows/pages.yml` rebuilds on every push and pull request, on any
+branch, and **fails the run if a fresh build differs from what you
+committed**. If CI fails with "Generated HTML is out of date", you skipped
+step 4. Only pushes to `main` deploy.
 
 That same workflow deploys the whole tree to Pages, `data/figures.json`
 included (the Figure Ledger fetches it at runtime) and `content/*.md`
