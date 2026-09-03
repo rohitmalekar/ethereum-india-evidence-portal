@@ -7,7 +7,7 @@ hand-authored HTML. Edit `content/*.md`, not the `.html` files.
 
 A static, multi-page site presenting the six-module Ethereum/India
 institutional evidence base, a reconciliation page, and an interactive figure
-ledger. Every page is real HTML on first byte — no JavaScript is required to
+ledger. Every page is real HTML on first byte. No JavaScript is required to
 read any of the content, navigate between pages, switch reading depth, or
 read the full Figure Ledger. JavaScript is used only to layer a few
 conveniences on top: one-click "copy for an LLM" buttons and the Figure
@@ -15,7 +15,7 @@ Ledger's live filter/sort/search.
 
 This matters for two audiences beyond a browser with JS enabled: a plain
 `curl`/`fetch` (what most "paste this URL into an LLM chat" integrations
-actually do — no JS execution) gets the full module text back immediately,
+actually do, with no JS execution) gets the full module text back immediately,
 and a reader with JavaScript disabled or blocked can still read and navigate
 everything.
 
@@ -28,7 +28,7 @@ python3 -m http.server 8000
 ```
 
 Then open `http://localhost:8000` in a browser. You can also open any of the
-generated `.html` files directly as a `file://` URL — navigation, tier
+generated `.html` files directly as a `file://` URL. Navigation, tier
 switching, and manual copy (select-all in the textarea) all work the same
 way. The one thing that can be blocked under `file://` in some browsers is
 the async Clipboard API used by the one-click "Copy to clipboard" buttons and
@@ -37,7 +37,7 @@ copy-paste from the textarea; the ledger's pre-rendered static table) if so.
 
 ## Prerequisites
 
-Node 18 or newer, and nothing else. The project has **zero dependencies** —
+Node 18 or newer, and nothing else. The project has **zero dependencies**:
 there is no `npm install` step, no lockfile, and no `node_modules/`.
 `package.json` exists only to declare `"type": "module"` and alias
 `npm run build`.
@@ -45,7 +45,7 @@ there is no `npm install` step, no lockfile, and no `node_modules/`.
 ## Forking and publishing your own copy
 
 1. Fork the repo on GitHub, then clone your fork.
-2. Enable Pages on the fork: **Settings → Pages → Source: GitHub Actions**.
+2. Enable Pages on the fork: **Settings -> Pages -> Source: GitHub Actions**.
    Forks start with Pages and Actions disabled, so nothing deploys until you
    turn both on.
 3. Edit `content/*.md` or `data/figures.json`.
@@ -53,7 +53,7 @@ there is no `npm install` step, no lockfile, and no `node_modules/`.
 5. **Commit the regenerated `.html` files and `llms.txt` in the same commit as
    the Markdown you changed**, and push to `main`.
 
-The generated HTML is committed on purpose — it is what makes the site
+The generated HTML is committed on purpose, because it is what makes the site
 readable over `file://`, forkable with no toolchain, and complete on the first
 byte of a plain `curl`. The cost is that it can drift from its source, so
 `.github/workflows/pages.yml` rebuilds on every push and pull request, on any
@@ -79,11 +79,11 @@ node scripts/build.js
 Edit a `.md` file (or `data/figures.json`), run the build script, reload the
 page. This is the one deliberate build step in the project, traded
 specifically so pages are real static HTML rather than an empty shell that
-JavaScript fills in at runtime — see "Why a build step" below.
+JavaScript fills in at runtime (see "The reason for a build step" below).
 
 `scripts/build.js` reads `content/*.md` and `data/figures.json` and writes
 one `.html` file per page at the repository root (`index.html`,
-`what-shipped.html`, `ledger.html`, etc. — see the `TABS` array at the top of
+`what-shipped.html`, `ledger.html`, etc.; see the `TABS` array at the top of
 the script for the full list and the tab-label-to-file mapping) plus
 `llms.txt`. It needs Node (no other dependency) and does not touch anything
 under `content/` or `data/`.
@@ -98,8 +98,8 @@ files:
 <!-- TIER:full -->
 ```
 
-Everything **before** the first delimiter is the page header — the `# H1`
-title and the `**Question:**` line — and is always shown above the tier
+Everything **before** the first delimiter is the page header, meaning the `# H1`
+title and the `**Question:**` line, and is always shown above the tier
 switcher. The build script splits the raw Markdown text on these delimiter
 strings *before* handing each segment to the Markdown parser, so the HTML
 comments themselves never reach the renderer, then renders each tier to a
@@ -107,27 +107,27 @@ separate `<div class="tier-panel">` in the generated HTML.
 
 Files with no `<!-- TIER: -->` markers at all (`intro.md`, `reconciliation.md`)
 render as a single flowing document with no tier switcher. `devcon-pitch.md`
-carries a single `<!-- TIER:full -->` marker by design (see its stub content) —
-since only one tier exists, it also renders without a switcher, and (per the
+carries a single `<!-- TIER:full -->` marker by design (see its stub content). Since
+only one tier exists, it also renders without a switcher, and (per the
 original design) without the "copy for an LLM" affordance either.
 
 The `**Question:**` line is detected and styled as a callout automatically;
-you don't need to add any markup for it — just keep the line as
+you don't need to add any markup for it. Just keep the line as
 `**Question:** ...` at the top of the file, as the existing files already do.
 
-Two things are load-bearing and shouldn't be removed when editing content:
+Do not remove either of these when editing content:
 
 - The italic connective note at the top of each full-report tier (it points
   readers to the Reconciliation page).
 - The `<!-- TIER:... -->` delimiters and their exact spelling.
 
-## Why a build step
+## The reason for a build step
 
 The site used to be a single-page app: one `index.html` shell, hash-based
 routing (`#/what-shipped`), and `assets/app.js` fetching each `content/*.md`
 file and rendering it client-side. That works fine for a browser with
-JavaScript enabled, but a plain HTTP GET — which is how most "point an LLM at
-this URL" integrations actually fetch a page — got back an almost-empty
+JavaScript enabled, but a plain HTTP GET, which is how most "point an LLM at
+this URL" integrations actually fetch a page, got back an almost-empty
 `<div id="main-content">`, since nothing renders until JS runs and a hash
 route resolves.
 
@@ -147,7 +147,7 @@ does the same for a small per-`###`-section copy button (sourced from a
 Just edit the `.md` files under `content/`, run `node scripts/build.js`, and
 reload. Supported Markdown: `#`/`##`/`###` headings, `**bold**`, `*italic*`,
 `` `inline code` ``, `[links](https://example.com)`, pipe tables, `-` bullet
-lists, `1.` numbered lists, `>` blockquotes, and `---` horizontal rules — the
+lists, `1.` numbered lists, `>` blockquotes, and `---` horizontal rules. That is the
 full subset the vendored parser understands (see below), and the full subset
 the existing content actually uses.
 
@@ -196,17 +196,17 @@ Run `node scripts/build.js` and reload. A few notes:
 - `tier` can be a single tier (`T3`) or a composite (`T1/T2`) where a claim is
   cross-sourced; filtering and the tier chip colour both key off the weakest
   (highest-numbered) tier present in the string.
-- `meta.row_count` is informational only — the "Showing N of M" count and all
+- `meta.row_count` is informational only; the "Showing N of M" count and all
   filtering always use the actual length of the `figures` array.
 
 `ledger.html` ships with the full table (all rows, all columns, staleness and
-tier colouring already computed) statically rendered — so it reads correctly
+tier colouring already computed) statically rendered, so it reads correctly
 with no JavaScript at all. When JS is available, `assets/app.js` fetches
 `data/figures.json` and replaces that static table with the interactive
 version from `assets/ledger.js` (module/tier/flag filters, free-text search,
 column sort, and a one-click per-row citation-copy button). If the fetch
-fails — e.g. some browsers restrict `fetch()` of local files under
-`file://` — the static table stays in place, which is a real (if
+fails (some browsers restrict `fetch()` of local files under `file://`, for
+instance) the static table stays in place, which is a real (if
 less convenient) ledger, not an error message.
 
 ## The vendored Markdown parser
@@ -220,15 +220,15 @@ without first downloading it from somewhere. It's a pure string-in,
 string-out function with no DOM dependency, which is why `scripts/build.js`
 can import and run it directly under Node as well as in the browser. It
 intentionally covers only the Markdown subset the content actually uses (see
-"Editing content" above) — no nested lists, fenced code blocks, images, or
-reference links — which keeps it easy to audit. Inline links are rendered
+"Editing content" above): no nested lists, fenced code blocks, images, or
+reference links, which keeps it easy to audit. Inline links are rendered
 only for `http(s)`, page-relative and fragment targets; anything else (a
 `javascript:` or `data:` URL, or a URL carrying a quote character) is left as
 literal text rather than turned into an anchor.
 
 ## llms.txt
 
-`scripts/build.js` also writes `llms.txt` at the repository root — a plain
+`scripts/build.js` also writes `llms.txt` at the repository root, a plain
 Markdown index (following the emerging `llms.txt` convention) listing every
 page and the raw Figure Ledger JSON, for any tool that checks for it before
 crawling.
@@ -236,19 +236,19 @@ crawling.
 ## No browser storage
 
 Tier selection is plain CSS radio-button state, which the browser itself
-keeps per open tab and resets on reload — there is no `localStorage` or
+keeps per open tab and resets on reload. There is no `localStorage` or
 `sessionStorage` call anywhere in `assets/` or `vendor/`, by design (the team
 explicitly didn't want browser storage used, partly because this portal is
 also meant to run from `file://`, where storage can be blocked or
 partitioned unpredictably).
 
-## Where the research came from
+## Origins of the research
 
 `Research Prompts/` holds the deep-research prompts that produced this
 evidence base, one per module plus a master block and a reconciliation pass.
 `Research Prompts/README.txt` gives the run order (A and B first, since C and
 E depend on them), the two failure modes to check any output against, and the
-standing note that **Module B should be re-run periodically** — India's
+standing note that **Module B should be re-run periodically**, because India's
 regulatory perimeter moves month to month while the rest has a longer shelf
 life.
 
@@ -260,13 +260,13 @@ down into the three tiers and update any affected rows in `data/figures.json`.
 
 `BUILD-SPEC.md` is the original brief the portal was built from, kept for
 provenance. Two of its sections have since been superseded: the "no build
-step" constraint (the site is now pre-rendered — see "Why a build step"), and
+step" constraint (the site is now pre-rendered; see "The reason for a build step"), and
 the `BUILD = 'internal' | 'public'` flag with its `internalOnly` tab config,
 which no longer exists because the whole evidence base, Reconciliation page
 included, is published.
 
 ## Licence
 
-Code — `scripts/`, `assets/`, `vendor/` — is MIT (see `LICENSE`);
-`vendor/minimark.js` carries its own MIT notice. The research prose and data —
-`content/`, `data/`, `research/` and `Research Prompts/` — is CC BY 4.0.
+Code (`scripts/`, `assets/`, `vendor/`) is MIT, see `LICENSE`;
+`vendor/minimark.js` carries its own MIT notice. The research prose and data
+(`content/`, `data/`, `research/` and `Research Prompts/`) is CC BY 4.0.
