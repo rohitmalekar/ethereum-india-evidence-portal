@@ -5,7 +5,7 @@
 The pages are generated from Markdown by a build script; nothing here is
 hand-authored HTML. Edit `content/*.md`, not the `.html` files.
 
-A static, multi-page site presenting the six-module Ethereum/India
+A static, multi-page site presenting the seven-module Ethereum/India
 institutional evidence base, a reconciliation page, and an interactive figure
 ledger. Every page is real HTML on first byte. No JavaScript is required to
 read any of the content, navigate between pages, switch reading depth, or
@@ -88,7 +88,7 @@ the script for the full list and the tab-label-to-file mapping) plus
 `llms.txt`. It needs Node (no other dependency) and does not touch anything
 under `content/` or `data/`.
 
-Each of the six module files (`module-a.md` … `module-f.md`) is split into
+Each of the seven module files (`module-a.md` … `module-g.md`) is split into
 three depth tiers using HTML comment delimiters that already exist in the
 files:
 

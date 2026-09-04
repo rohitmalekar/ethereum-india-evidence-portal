@@ -7,8 +7,8 @@
 
 import { tierComponents, worstTierNum, isStale, isWeakTier, citationFor } from './ledger-core.js';
 
-// Module codes come from the data, not a hardcoded list, so a new group of
-// rows (e.g. the cross-cutting 'P' privacy rows) gets a filter button for free.
+// Module codes come from the data, not a hardcoded list, so adding or
+// renumbering a module changes the filter buttons without touching this file.
 const moduleCodes = rows => [...new Set(rows.map(r => r.module))].sort();
 const TIERS = ['T1', 'T2', 'T3', 'T4', 'T5'];
 
