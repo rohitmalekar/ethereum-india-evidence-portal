@@ -7,7 +7,9 @@
 
 import { tierComponents, worstTierNum, isStale, isWeakTier, citationFor } from './ledger-core.js';
 
-const MODULES = ['A', 'B', 'C', 'D', 'E', 'F'];
+// Module codes come from the data, not a hardcoded list, so a new group of
+// rows (e.g. the cross-cutting 'P' privacy rows) gets a filter button for free.
+const moduleCodes = rows => [...new Set(rows.map(r => r.module))].sort();
 const TIERS = ['T1', 'T2', 'T3', 'T4', 'T5'];
 
 async function copyText(text) {
@@ -109,7 +111,7 @@ export function renderLedger(container, data) {
 
   const heading = document.createElement('div');
   heading.className = 'tab-header';
-  heading.innerHTML = `<h1>Figure Ledger</h1><p class="ledger-intro">Every quantitative claim across the six modules, with its source tier and "as of" date — filterable, searchable, and one click from a properly-attributed citation.</p>`;
+  heading.innerHTML = `<h1>Figure Ledger</h1><p class="ledger-intro">Every quantitative claim in this evidence base, with its source tier and "as of" date — filterable, searchable, and one click from a properly-attributed citation.</p>`;
   root.appendChild(heading);
 
   root.appendChild(buildLegend(meta));
@@ -124,7 +126,7 @@ export function renderLedger(container, data) {
   moduleRow.innerHTML = '<span class="filter-label">Module</span>';
   const moduleButtons = document.createElement('div');
   moduleButtons.className = 'toggle-group';
-  ['all', ...MODULES].forEach(m => {
+  ['all', ...moduleCodes(rows)].forEach(m => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.textContent = m === 'all' ? 'All' : m;

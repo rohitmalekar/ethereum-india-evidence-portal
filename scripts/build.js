@@ -23,6 +23,7 @@ const TABS = [
   { id: 'whats-legal-in-india', label: "What's legal in India", module: 'B', file: 'content/module-b.md', page: 'whats-legal-in-india.html', hasTiers: true },
   { id: 'where-the-value-is', label: 'Where the value is', module: 'C', file: 'content/module-c.md', page: 'where-the-value-is.html', hasTiers: true },
   { id: 'ethereum-vs-alternatives', label: 'Ethereum vs alternatives', module: 'D', file: 'content/module-d.md', page: 'ethereum-vs-alternatives.html', hasTiers: true },
+  { id: 'the-privacy-question', label: 'The privacy question', file: 'content/privacy.md', page: 'the-privacy-question.html', hasTiers: true },
   { id: 'the-objections', label: 'The objections', module: 'E', file: 'content/module-e.md', page: 'the-objections.html', hasTiers: true },
   { id: 'how-adoption-happens', label: 'How adoption happens', module: 'F', file: 'content/module-f.md', page: 'how-adoption-happens.html', hasTiers: true },
   { id: 'ledger', label: 'Figure Ledger', page: 'ledger.html', isLedger: true },
@@ -124,7 +125,7 @@ function renderCopyDetails(tab, fullRaw) {
       </details>`;
 }
 
-const OVERVIEW_PROMPT = `Please fetch {{BASE_URL}}llms.txt first. It indexes the ten pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": six module reports, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}} and open whichever module pages look most relevant.
+const OVERVIEW_PROMPT = `Please fetch {{BASE_URL}}llms.txt first. It indexes the eleven pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": six module reports, a page on where Ethereum privacy has and has not reached regulated production, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}} and open whichever module pages look most relevant.
 
 Before you answer, use what you already know about me from memory and our past conversations: what I work on, what I follow, what I have asked you before. If you know nothing about me, ask me that first.
 
@@ -270,7 +271,7 @@ function renderLedgerBody(data) {
   return `<div id="ledger-root">
     <div class="tab-header">
       <h1>Figure Ledger</h1>
-      <p class="ledger-intro">Every quantitative claim across the six modules, with its source tier and "as of" date.</p>
+      <p class="ledger-intro">Every quantitative claim in this evidence base, with its source tier and "as of" date.</p>
     </div>
     ${renderLedgerLegend(meta)}
     <p class="ledger-count">Showing ${rows.length} of ${rows.length}</p>
@@ -354,7 +355,7 @@ async function writeLlmsTxt() {
   const lines = [
     '# Ethereum/India Institutional Evidence Portal',
     '',
-    '> A six-module evidence base on Ethereum and distributed-settlement infrastructure for Indian institutional finance. Every claim carries a source and date; every quantitative figure carries a source tier (T1 primary … T5 crypto media/aggregator) in the Figure Ledger.',
+    '> A six-module evidence base on Ethereum and distributed-settlement infrastructure for Indian institutional finance, with a cross-cutting page on the state of privacy. Every claim carries a source and date; every quantitative figure carries a source tier (T1 primary … T5 crypto media/aggregator) in the Figure Ledger.',
     '',
     '## Pages',
     ...TABS.map(t => `- [${t.label}](${t.page})`),
