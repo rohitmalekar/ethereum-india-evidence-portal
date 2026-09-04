@@ -17,6 +17,23 @@ RUN ORDER
 Save each output as its own file next to these. The point is a queryable
 evidence base, not a document.
 
+PROMPT LETTERS vs PUBLISHED MODULE LETTERS
+These prompt files are the record of what was actually run on 31 August 2026
+and keep their original letters. The published modules were renumbered in
+September 2026 when the privacy module was inserted at E, so the letters no
+longer line up:
+
+  A-what-actually-shipped.txt  -> Module A
+  B-india-perimeter.txt        -> Module B
+  C-where-the-value-is.txt     -> Module C
+  D-honest-comparison.txt      -> Module D
+  (no prompt; researched directly in September 2026) -> Module E, privacy
+  E-objection-bank.txt         -> Module F
+  F-adoption-precedent.txt     -> Module G
+
+Module E has no prompt file here. If it is ever re-run, write one against the
+master block first, so the provenance matches the other six.
+
 RE-RUN Module B in late October 2026. India's regulatory perimeter moves
 month to month; everything else has a longer shelf life.
 
