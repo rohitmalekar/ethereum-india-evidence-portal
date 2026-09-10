@@ -2,7 +2,7 @@
 
 **What this is:** A seven-module evidence base on where distributed-ledger settlement and tokenisation stand for Indian institutional finance, built for readers who have seen several blockchain pitches this year and were unconvinced by all of them. Every claim carries its source and date. Every figure carries a source tier. It is written to be checkable rather than persuasive.
 
-**Start here if the premise is new to you.** [The primer](primer.html) takes the prior question, which the modules assume you have already settled: what a distributed ledger is actually for, when an institution needs one rather than a database, and why most of the ones built in the last decade are dead. No crypto vocabulary, and no figure that is not sourced elsewhere in this base.
+**The primer.** [Start here](primer.html) if the premise is new: what a distributed ledger does for an institution, and the test for when one is warranted. No crypto vocabulary, and no figure that is not sourced elsewhere in this base.
 
 ## The 30-second position
 
