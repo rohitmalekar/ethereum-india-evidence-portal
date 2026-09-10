@@ -4,6 +4,7 @@
 
 ## Pages
 - [Overview](index.html)
+- [The primer](primer.html)
 - [What shipped](what-shipped.html)
 - [What's legal in India](whats-legal-in-india.html)
 - [Where the value is](where-the-value-is.html)

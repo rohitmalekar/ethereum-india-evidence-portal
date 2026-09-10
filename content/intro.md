@@ -2,6 +2,8 @@
 
 **What this is:** A seven-module evidence base on where distributed-ledger settlement and tokenisation stand for Indian institutional finance, built for readers who have seen several blockchain pitches this year and were unconvinced by all of them. Every claim carries its source and date. Every figure carries a source tier. It is written to be checkable rather than persuasive.
 
+**Start here if the premise is new to you.** [The primer](primer.html) takes the prior question, which the modules assume you have already settled: what a distributed ledger is actually for, when an institution needs one rather than a database, and why most of the ones built in the last decade are dead. No crypto vocabulary, and no figure that is not sourced elsewhere in this base.
+
 ## The 30-second position
 
 India already runs a blockchain in mandatory production in regulated finance. SEBI's Security and Covenant Monitoring System has recorded charges and covenants for corporate bonds on a distributed ledger since April 2022, operated by the depositories NSDL and CDSL, and no ISIN activates without it. The open domestic question is which process is worth the organisational cost, and on which rail.

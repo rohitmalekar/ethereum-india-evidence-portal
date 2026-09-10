@@ -19,6 +19,7 @@ const ROOT = path.resolve(__dirname, '..');
 
 const TABS = [
   { id: 'overview', label: 'Overview', file: 'content/intro.md', page: 'index.html', hasTiers: false },
+  { id: 'primer', label: 'The primer', file: 'content/primer.md', page: 'primer.html', hasTiers: false },
   { id: 'what-shipped', label: 'What shipped', module: 'A', file: 'content/module-a.md', page: 'what-shipped.html', hasTiers: true },
   { id: 'whats-legal-in-india', label: "What's legal in India", module: 'B', file: 'content/module-b.md', page: 'whats-legal-in-india.html', hasTiers: true },
   { id: 'where-the-value-is', label: 'Where the value is', module: 'C', file: 'content/module-c.md', page: 'where-the-value-is.html', hasTiers: true },

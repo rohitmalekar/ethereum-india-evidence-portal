@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The primer — Ethereum/India Institutional Evidence Portal</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<input type="checkbox" id="nav-toggle-checkbox" class="nav-toggle-checkbox" aria-hidden="true">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header">
+  <label for="nav-toggle-checkbox" class="nav-toggle" aria-label="Toggle navigation">
+    <span class="hamburger" aria-hidden="true"></span>
+  </label>
+  <div class="site-title">
+    <span class="portal-name">Ethereum/India Institutional Evidence Portal</span>
+    <span class="current-tab">The primer</span>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" aria-label="Portal sections">
+    <div class="sidebar-nav">
+      <a href="index.html" class="nav-item">Overview</a>
+      <a href="primer.html" class="nav-item active" aria-current="page">The primer</a>
+      <a href="what-shipped.html" class="nav-item" aria-label="Module A, What shipped"><span class="nav-letter" aria-hidden="true">A</span> What shipped</a>
+      <a href="whats-legal-in-india.html" class="nav-item" aria-label="Module B, What's legal in India"><span class="nav-letter" aria-hidden="true">B</span> What's legal in India</a>
+      <a href="where-the-value-is.html" class="nav-item" aria-label="Module C, Where the value is"><span class="nav-letter" aria-hidden="true">C</span> Where the value is</a>
+      <a href="ethereum-vs-alternatives.html" class="nav-item" aria-label="Module D, Ethereum vs alternatives"><span class="nav-letter" aria-hidden="true">D</span> Ethereum vs alternatives</a>
+      <a href="the-privacy-question.html" class="nav-item" aria-label="Module E, The privacy question"><span class="nav-letter" aria-hidden="true">E</span> The privacy question</a>
+      <a href="the-objections.html" class="nav-item" aria-label="Module F, The objections"><span class="nav-letter" aria-hidden="true">F</span> The objections</a>
+      <a href="how-adoption-happens.html" class="nav-item" aria-label="Module G, How adoption happens"><span class="nav-letter" aria-hidden="true">G</span> How adoption happens</a>
+      <a href="ledger.html" class="nav-item">Figure Ledger</a>
+      <a href="reconciliation.html" class="nav-item">Reconciliation</a>
+      <a href="devcon-pitch.html" class="nav-item">The Devcon pitch</a>
+    </div>
+  </nav>
+  <label for="nav-toggle-checkbox" class="nav-scrim" aria-hidden="true"></label>
+  <main id="main-content" class="main-content" tabindex="-1">
+    <div class="tab-header"></div>
+<div class="tab-body"><h1>Why Institutions Need a Shared Ledger</h1>
+<blockquote><p><strong>A primer for people who do not work in crypto.</strong> The rest of this portal assumes you accept the premise and want the Indian evidence. This page does not assume it. It starts from the ordinary problem a distributed ledger is meant to solve, works through the four things one actually does in production, separates why a company would want one from why a government would, and ends with the questions to ask when a proposal lands on your desk. No token prices appear anywhere in it.</p></blockquote>
+<h2>Start with the boring problem</h2>
+<p>Two organisations, one fact, two copies.</p>
+<p>A bank has financed an invoice. The supplier's own system records the same invoice. A second bank, approached with the same paperwork a week later, has no way to see the first bank's copy. Each institution's record is internally consistent and privately held, and there is no shared place where the three of them meet.</p>
+<p>That is not a technology failure. It is the normal architecture of commerce, and most of it works. What it costs is a permanent function inside every large institution whose job is to make copies of the same fact agree: reconciliation. Nostro accounts matched line by line. Trustees confirming to issuers what the issuers already told them. Custodians, depositories and brokers running end-of-day breaks. Nobody questions the line item, because it has been there longer than anyone in the building.</p>
+<p>Occasionally the divergence is not a cost but a hole. Between 2011 and 2018, letters of undertaking issued at a single Punjab National Bank branch were not recorded in the bank's core system, so the guarantees existed at the receiving banks and not at the issuing one. When the two records were finally compared, the gap was roughly ₹14,000 crore. Sources for that figure are weak (T5/T3, see the <a href="ledger.html">Figure Ledger</a>), but the shape of the failure is not in dispute: an obligation that exists on one party's copy and not the other's.</p>
+<p>A distributed ledger is a bet that in some specific, narrow cases, the second copy is optional.</p>
+<h2>Start with "ledger", not "blockchain"</h2>
+<p>A ledger is the oldest information technology in commerce: a list of entries in an agreed order. A database is a ledger with one owner, and the owner's copy is the real one. That is a governance answer, not a technical one, and for most records it is the right answer. You trust your bank's balance because you trust the bank, its auditor and its regulator, and if the balance is wrong you call someone who can fix it.</p>
+<p>What "distributed" changes is only that governance answer. In a distributed ledger, the authoritative record is the one the participants jointly computed, and any of them can check it without asking the operator's permission or taking the operator's word.</p>
+<p>That is the entire idea. Mining, tokens, wallets, exchanges, the price of anything: those are either implementation details of particular networks or, more often, a different business altogether. An institution can adopt everything described on this page without ever holding a crypto-asset, and the one system running in mandatory production in Indian regulated finance does exactly that.</p>
+<h2>The three properties you are buying</h2>
+<p><strong>One copy, many writers.</strong> Several parties write to the same record rather than each keeping a version to be matched later. The reconciliation function shrinks because there is nothing to reconcile.</p>
+<p><strong>Tamper-evidence.</strong> Entries are appended, not edited, and the history is cryptographically chained, so a later alteration is detectable rather than merely against policy. You can prove what the record said on a date, to someone who was not there.</p>
+<p><strong>Independent verification.</strong> A participant, an auditor or a regulator can confirm the state of the record directly, instead of receiving a report about it.</p>
+<p>Each has a price, and the prices are what most pitches leave out. Participants see more than they would in a private system, which is why confidentiality is the single most cited reason banks reject public chains. Agreeing an entry among many parties is slower and costlier per write than a single database doing the same thing. And the rules become genuinely hard to change afterwards, which is the point, and also the problem: an institution used to fixing a bad record quietly at 6pm now has to fix it in public, with a correcting entry.</p>
+<h2>The one test worth applying</h2>
+<p>Before any architecture discussion, one question separates a real case from a pitch:</p>
+<p><strong>What happens when the party who keeps the record is wrong, absent, or conflicted?</strong></p>
+<p>If the answer is "we call them and they fix it," you want a database with good audit logs. Say so in the meeting. That is the correct answer for the overwhelming majority of records inside any institution, and being the person who says it is worth more than being the person who says yes.</p>
+<p>Three answers point the other way.</p>
+<p><em>"We cannot call them, because there are forty of them and half are competitors."</em> No single participant will be accepted as the keeper of the record, and no one wants to fund a neutral one.</p>
+<p><em>"They are a party to the transaction they are recording."</em> The keeper has an interest in the entry. This is the case for registries of obligation: covenants, guarantees, charges, custody.</p>
+<p><em>"The record has to outlive them."</em> Continuity beyond the operator, the vendor contract, the ministry reorganisation or the government. This is mostly a state's answer, and it is the one enterprises rarely reach for.</p>
+<h2>The four things a shared ledger actually does</h2>
+<p>Strip away the vocabulary and production systems do four things. Each is worth understanding on its own, because most proposals quietly promise all four and deliver one.</p>
+<h3>1. A shared registry</h3>
+<p>One authoritative list that many parties write to and all can read.</p>
+<p>India runs the clearest example in the world of this, and its regulator built it. <a href="https://www.sebi.gov.in/" target="_blank" rel="noopener noreferrer">SEBI</a>'s <a href="https://www.sebi.gov.in/legal/circulars/mar-2022/operational-guidelines-for-security-and-covenant-monitoring-using-distributed-ledger-technology-dlt-_57331.html" target="_blank" rel="noopener noreferrer">Security and Covenant Monitoring System</a> has recorded charges and covenants for corporate bonds on a permissioned distributed ledger since April 2022, operated by the depositories <a href="https://nsdl.co.in/" target="_blank" rel="noopener noreferrer">NSDL</a> and <a href="https://www.cdslindia.com/" target="_blank" rel="noopener noreferrer">CDSL</a>. It is not a pilot and not optional: no ISIN activates without it, and coverage of the secured-debt universe is close to complete (the specific adoption counts rest on a T4 vendor case study; see <a href="whats-legal-in-india.html">What's legal in India</a>).</p>
+<p>Note what it is and is not. It is a register of <em>facts about</em> securities, sitting inside the existing depository perimeter. It transfers no property and settles no cash. That is precisely why it shipped while more ambitious systems did not.</p>
+<h3>2. Atomic exchange</h3>
+<p>Two transfers that either both complete or neither does.</p>
+<p>Delivery versus payment is the oldest problem in settlement: I send you the bond, you send me the cash, and between the two someone carries the risk that the other leg never arrives. The industry's answer has been intermediaries, margin, and settlement windows measured in days. A ledger that holds both legs can make the swap conditional on itself, so the failure mode is "nothing happened" rather than "one side is exposed."</p>
+<p>This is where the largest production volumes are. <a href="https://www.broadridge.com/capability/middle-and-back-office-solutions/post-trade-processing/distributed-ledger-repo-solutions" target="_blank" rel="noopener noreferrer">Broadridge</a>'s distributed-ledger repo platform settled roughly $8tn in July 2026 alone. It runs on a permissioned ledger, not a public one.</p>
+<h3>3. Programmable settlement</h3>
+<p>The condition lives in the record rather than in a person's inbox.</p>
+<p>Money that can only be spent on eligible goods, collateral that releases when a price is breached, a payment that executes when a document is filed. The Indian example is again a state one: in FY26 the <a href="https://www.rbi.org.in/" target="_blank" rel="noopener noreferrer">RBI</a> used programmable central bank digital currency for direct benefit transfers of food subsidy in Gujarat, Puducherry and Chandigarh, redeemable only against eligible purchases. Whatever one thinks of CBDC, that is a working programmable-payments deployment with no crypto-asset anywhere in it.</p>
+<h3>4. Verifiable provenance</h3>
+<p>An append-only history a third party can audit later without the operator's cooperation.</p>
+<p>This one attracts the least vendor attention, because there is no transaction fee in it, and it is the one governments should care about most. It is the property that makes a record evidence rather than an assertion: land titles, public procurement, custody chains, subsidy disbursement, clinical or environmental measurement. The value shows up years later, in a dispute, which is exactly when a business case written in payback periods has stopped counting.</p>
+<h2>Enterprises and states want different things</h2>
+<p>The technology is the same. The reason for buying it is not, and conflating the two is why so many pitches land badly in both rooms.</p>
+<p><strong>An enterprise is buying working capital, headcount and days.</strong> The CFO's question is payback, and for most processes the honest answer is that there is none, because the incumbent rail already clears the trade. India's securities settle at T+1. <a href="https://www.npci.org.in/what-we-do/upi/product-overview" target="_blank" rel="noopener noreferrer">UPI</a> clears retail payments instantly and at zero merchant cost. Against that baseline, "faster and cheaper" is not a case, and a room full of Indian bankers will say so within ten minutes.</p>
+<p>Two enterprise cases do survive that test, and neither is an efficiency argument.</p>
+<p>The first is <strong>fraud that a single-copy record makes possible</strong>: the same invoice financed twice, the same collateral pledged to three lenders, the guarantee that exists at the receiving bank and not the issuing one. A shared registry does not detect fraud cleverly. It removes the blind spot that made the fraud mechanical.</p>
+<p>The second is <strong>capital mobility</strong>: collateral that can be moved, substituted or recalled in minutes rather than at end of day. The saving is not in fees, it is in the buffer an institution holds because its assets cannot move fast enough. That buffer is large, it is funded, and unlike a headcount saving it is visible on the balance sheet.</p>
+<p><strong>A state is buying something an enterprise cannot put in a business case.</strong></p>
+<p><em>Continuity.</em> A record that survives the vendor, the contract, the department and the government. A state plans in decades and has been burned by systems it cannot read after the supplier's contract lapses.</p>
+<p><em>Provable neutrality.</em> This is the underrated one. The reason consortium ledgers failed and regulator-built ones ship is that a state can compel participation and simultaneously demonstrate it is not favouring a participant. No private consortium can do either.</p>
+<p><em>Auditability of public money.</em> Spending traceable without a special request, an RTI application, or the cooperation of the department being audited.</p>
+<p><em>Sovereignty over infrastructure it does not operate.</em> The unstated driver behind most central bank digital currency and cross-border settlement work: not depending on a rail whose operator sits in another jurisdiction and can be leaned on there.</p>
+<p>And a state holds the instrument no enterprise has: it can mandate. India's own record says this is usually decisive. Dematerialisation of securities succeeded because a statute, a regulator-owned utility and phased compulsion arrived together; none of the three alone would have done it, and mass adoption still took about a decade. See <a href="how-adoption-happens.html">How adoption happens</a>.</p>
+<h2>The graveyard, and what actually killed it</h2>
+<p>Any primer that skips this part is a brochure.</p>
+<p>Every major bank-consortium trade-finance blockchain of the last decade is dead. <a href="https://www.maersk.com/news/articles/2022/11/29/maersk-and-ibm-to-discontinue-tradelens" target="_blank" rel="noopener noreferrer">TradeLens</a> (Maersk and IBM) wound down in early 2023. <a href="https://www.ledgerinsights.com/trade-finance-blockchain-contour-acquires-assets-from-we-trade/" target="_blank" rel="noopener noreferrer">we.trade</a>, a twelve-bank European consortium, went insolvent in 2022 having lost more than $8m on about $4m of revenue, with only two of its shareholder banks fully deployed. <a href="https://www.ledgerinsights.com/marco-polo-blockchain-trade-finance-insolvency/" target="_blank" rel="noopener noreferrer">Marco Polo</a> followed in 2023 with roughly $85m of cumulative losses. <a href="https://www.ledgerinsights.com/contour-blockchain-trade-finance-network-shutter/" target="_blank" rel="noopener noreferrer">Contour</a> closed the same year. The Australian exchange's <a href="https://www.ledgerinsights.com/asx-pauses-dlt-settlement-chess/" target="_blank" rel="noopener noreferrer">blockchain rebuild of its clearing and settlement system</a> was scrapped in November 2022 after a write-off of A$245–255m, with the software about 63% complete.</p>
+<p>Almost none of them failed for cryptographic reasons. They failed because rivals would not route commercially sensitive data through a platform carrying a competitor's name; because the network effect never arrived and a shared ledger with half the participants is worth less than the system it replaced; because documentary trade finance turned out not to want the product; and because the commercial models never covered the cost of running the thing.</p>
+<p>The lesson generalises. <strong>A shared ledger is a governance arrangement wearing a technology costume.</strong> The cryptography has been the easy part for a decade. The hard part is persuading institutions that compete with each other to write to the same record, and then keeping that arrangement funded and neutral for the years it takes network effects to arrive. Every failure above is a governance failure, and every one of them would have failed identically on a shared database.</p>
+<p>Which is why the systems that survive have one of two shapes: a single operator whose perimeter is the privacy boundary (a bank's own rail), or a regulator who can mandate participation and be believed when it says it is neutral (SEBI's covenant system). Consortiums of equals are the shape with the graveyard.</p>
+<h2>Public or private is the second question</h2>
+<p>Non-specialists often hear "distributed ledger" and think "public blockchain, therefore everything is visible, therefore not for us." Those are separable questions, and the production record separates them cleanly.</p>
+<p>The highest settlement <em>volumes</em> run on permissioned ledgers: banks and market infrastructure, with confidentiality given as the stated reason. The highest tokenised-asset <em>value</em> sits on public chains, mostly Ethereum: funds and stablecoins, where the holder base is broad and the point is reach. These are two different layers of the stack, and treating them as one is the most common error in writing on this subject.</p>
+<p>The practical choice is three-way rather than two-way: a multi-party confidential architecture where many counterparties settle one transaction and each may see only its own leg; a single-operator permissioned chain where the privacy boundary is the institution's own perimeter; and a public chain where reach matters more than confidentiality. <a href="ethereum-vs-alternatives.html">Ethereum vs alternatives</a> works through the trade-offs, and <a href="the-privacy-question.html">The privacy question</a> covers what is being built to close the confidentiality gap.</p>
+<p>Decide whether you need a shared ledger before deciding which one. Most proposals do it in the wrong order, and most vendors prefer it that way.</p>
+<h2>What a distributed ledger does not fix</h2>
+<p><strong>Bad data.</strong> A ledger makes a wrong entry durable and provable, which is worse than a database where it can be corrected quietly. Every input still arrives from a system or a person you already had reason to doubt.</p>
+<p><strong>Anything about the physical world.</strong> Whether the cargo was loaded, whether the borrower is solvent, whether the goods match the invoice: all of it enters through a human or a sensor, and the ledger faithfully records whatever they said. Half the trade-finance graveyard was built on the assumption that this problem would yield.</p>
+<p><strong>The legal question.</strong> A ledger entry is a fact about a computer until a law makes it a fact about ownership. In India, settlement finality is conferred only on RBI-designated systems under the <a href="https://rbidocs.rbi.org.in/rdocs/Publications/PDFs/PSS29042022228C43D5250B4A69A12899CD5054894C.PDF" target="_blank" rel="noopener noreferrer">Payment and Settlement Systems Act 2007</a>, and the <a href="https://www.sebi.gov.in/legal/acts/sep-1995/depositories-act-1996-as-amended-by-the-international-financial-services-centres-authority-act-2019-w-e-f-october-01-2020-_1.html" target="_blank" rel="noopener noreferrer">Depositories Act 1996</a> contemplates a depository rather than a ledger. These are gaps rather than prohibitions, which matters, because a gap closes with an administrative act or a narrow amendment. But a pilot does not close it, and no amount of engineering will.</p>
+<p><strong>Adoption.</strong> Building the rail does not produce usage. India has two clean demonstrations. The retail e-rupee's <em>stock in circulation</em> fell about 24% year on year, from ₹1,016 crore in March 2025 to ₹772 crore in March 2026, while the pilot was expanding. The Account Aggregator framework, built without a mandate, still converts under 10% of enabled accounts to linked ones five years in. Both were technically sound and regulator-blessed. Neither had a mandate or a subsidy behind it.</p>
+<h2>How to read a proposal</h2>
+<p>Six questions, in order. A proposal that cannot answer the first three is not a proposal.</p>
+<ol><li><strong>Name the record that more than one party keeps a copy of.</strong> One sentence, no adjectives. If nobody can produce it, there is no use case, only a technology looking for one.</li><li><strong>Name the parties who must write to it, and say why none of them can hold it.</strong> If one of them obviously can, the answer is a database and an API.</li><li><strong>State what breaks today, in rupees or days, with a source.</strong> Not a market size. The corporate bond market being ₹53.6 lakh crore tells you nothing; secondary turnover of ₹7,645 crore a day against that stock tells you where the friction is.</li><li><strong>Name who owns that budget.</strong> Cross-organisational savings with no single owner are the most common reason a sound pilot never becomes a system. Reconciliation cost usually sits in operations while the benefit accrues to treasury, and neither will fund it.</li><li><strong>Ask what the incumbent rail already does.</strong> If it clears the trade at T+1 and the fee is near zero, efficiency is not your case. Fraud or capital mobility might be. Make that argument instead, or drop it.</li><li><strong>Ask what happens on day one if only half the participants join.</strong> If the answer is "nothing works," you have a network-effect problem rather than a technology problem, and that is what killed everything in the graveyard. Then ask who can compel the other half, and what it would take.</li></ol>
+<p>And the closing test, worth applying to your own enthusiasm as much as to a vendor's: <strong>could a shared database with strong audit logs and one trusted operator do this?</strong> If yes, do that. It is cheaper, faster, better understood, and easier to hire for. A distributed ledger starts earning its cost only at the point where the honest answer is that there is no one every participant will accept as that operator, and no realistic prospect of appointing one.</p>
+<h2>Where this leaves you</h2>
+<p>The pitch a decade ago was that distributed ledgers would replace institutions. The production record shows something duller and more useful: institutions using them to stop keeping duplicate copies of each other's records, in a small number of places where the duplication was expensive or dangerous enough to be worth the governance fight.</p>
+<p>That is a real category of problem, and it is not going away, because the underlying condition — several organisations needing to agree on one fact that none of them can be trusted to hold alone — is a permanent feature of finance, trade and government. It is just much narrower than the market for the technology suggested it would be.</p>
+<p>Where it has worked, someone could name the record, name the parties, and name who pays. That is the whole test.</p>
+<p><strong>Next.</strong> <a href="what-shipped.html">What shipped</a> is the production record and the graveyard in full. <a href="whats-legal-in-india.html">What's legal in India</a> separates what is barred from what is merely unaddressed. <a href="where-the-value-is.html">Where the value is</a> sizes the Indian opportunities and names their owners. <a href="the-objections.html">The objections</a> states the strongest case against everything above.</p>
+<p><em>Every figure on this page is drawn from the modules and carries its source, date and tier in the <a href="ledger.html">Figure Ledger</a>. Two of them rest on the weakest tiers and are flagged as such in the text. This subject moves monthly; re-check anything before it leaves the room.</em></p></div>
+  </main>
+</div>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>
