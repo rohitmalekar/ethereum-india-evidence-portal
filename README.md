@@ -186,18 +186,20 @@ Run `node scripts/build.js` and reload. A few notes:
   undated figures (statutes, current rates). It drives sorting and the
   staleness computation.
 - **Staleness is computed from data, not hand-flagged**: a row is flagged
-  `STALE` (amber) if its `as_of_sort` is older than `meta.staleness_cutoff`
-  and its `flags` do not include `HISTORICAL` or `CURRENT`. Editing
-  `meta.staleness_cutoff`, or a row's date, changes the flagging on the next
-  build automatically. This logic lives once, in `assets/ledger-core.js`,
-  and is imported by both the build script (the static table) and
-  `assets/ledger.js` (the JS-enhanced interactive table), so the two can
-  never disagree.
+  `STALE` (amber) if its `as_of_sort` is older than the staleness cutoff and
+  its `flags` do not include `HISTORICAL` or `CURRENT`. The cutoff is derived
+  as six months before `meta.generated` by `stalenessCutoff()`, so bumping
+  `meta.generated` on a rebuild moves it automatically and it cannot silently
+  drift; set `meta.staleness_cutoff` explicitly only to override. This logic
+  lives once, in `assets/ledger-core.js`, and is imported by both the build
+  script (the static table) and `assets/ledger.js` (the JS-enhanced
+  interactive table), so the two can never disagree.
 - `tier` can be a single tier (`T3`) or a composite (`T1/T2`) where a claim is
   cross-sourced; filtering and the tier chip colour both key off the weakest
   (highest-numbered) tier present in the string.
-- `meta.row_count` is informational only; the "Showing N of M" count and all
-  filtering always use the actual length of the `figures` array.
+- There is no `meta.row_count`; the "Showing N of M" count and all filtering
+  use the actual length of the `figures` array. Do not reintroduce a stored
+  count, because it goes stale the first time a row is added.
 
 `ledger.html` ships with the full table (all rows, all columns, staleness and
 tier colouring already computed) statically rendered, so it reads correctly

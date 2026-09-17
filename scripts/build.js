@@ -12,7 +12,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { renderMarkdown } from '../vendor/minimark.js';
-import { isStale, worstTierNum } from '../assets/ledger-core.js';
+import { isStale, worstTierNum, stalenessCutoff } from '../assets/ledger-core.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -261,7 +261,8 @@ function renderLedgerRow(row, stalenessCutoff) {
 function renderLedgerBody(data) {
   const meta = data.meta;
   const rows = data.figures;
-  const rowsHtml = rows.map(row => renderLedgerRow(row, meta.staleness_cutoff)).join('\n    ');
+  const cutoff = stalenessCutoff(meta);
+  const rowsHtml = rows.map(row => renderLedgerRow(row, cutoff)).join('\n    ');
 
   // Everything lives inside #ledger-root so the JS enhancement in app.js can
   // do a clean `root.innerHTML = ''` and rebuild the interactive version in

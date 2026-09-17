@@ -5,7 +5,7 @@
 // progressive enhancement on top of a static, fully-populated HTML table
 // (see scripts/build.js) that already works with no JavaScript at all.
 
-import { tierComponents, worstTierNum, isStale, isWeakTier, citationFor } from './ledger-core.js';
+import { tierComponents, worstTierNum, isStale, isWeakTier, citationFor, stalenessCutoff } from './ledger-core.js';
 
 // Module codes come from the data, not a hardcoded list, so adding or
 // renumbering a module changes the filter buttons without touching this file.
@@ -92,6 +92,7 @@ function buildLegend(meta) {
 
 export function renderLedger(container, data) {
   const meta = data.meta;
+  const cutoff = stalenessCutoff(meta);
   const rows = data.figures;
   const totalCount = rows.length;
 
@@ -277,7 +278,7 @@ export function renderLedger(container, data) {
     const tbody = document.createElement('tbody');
     filtered.forEach(row => {
       const tr = document.createElement('tr');
-      const stale = isStale(row, meta.staleness_cutoff);
+      const stale = isStale(row, cutoff);
       if (stale) tr.classList.add('row-stale');
       if (row.flags.includes('UNVERIFIED')) tr.classList.add('row-unverified');
 
@@ -365,7 +366,7 @@ export function renderLedger(container, data) {
       if (state.module !== 'all' && row.module !== state.module) return false;
       if (state.tier !== 'all' && !tierComponents(row.tier).includes(state.tier)) return false;
       if (state.weakTier && !isWeakTier(row)) return false;
-      if (state.stale && !isStale(row, meta.staleness_cutoff)) return false;
+      if (state.stale && !isStale(row, cutoff)) return false;
       if (state.conflict && !row.flags.includes('CONFLICT')) return false;
       if (state.search) {
         const haystack = (row.claim + ' ' + row.source).toLowerCase();

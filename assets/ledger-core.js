@@ -13,10 +13,21 @@ export function worstTierNum(tierStr) {
   return nums.length ? Math.max(...nums) : 0;
 }
 
-export function isStale(row, stalenessCutoff) {
+// Six months back from the ledger's generation date. Derived rather than stored
+// so the cutoff cannot silently drift while the base is being updated.
+export function stalenessCutoff(meta) {
+  if (meta && meta.staleness_cutoff) return meta.staleness_cutoff;
+  const generated = (meta && meta.generated) || null;
+  if (!generated) return '0000-00-00';
+  const d = new Date(generated + 'T00:00:00Z');
+  d.setUTCMonth(d.getUTCMonth() - 6);
+  return d.toISOString().slice(0, 10);
+}
+
+export function isStale(row, cutoff) {
   if (!row.as_of_sort) return false;
   if (row.flags.includes('HISTORICAL') || row.flags.includes('CURRENT')) return false;
-  return row.as_of_sort < stalenessCutoff;
+  return row.as_of_sort < cutoff;
 }
 
 export function isWeakTier(row) {
