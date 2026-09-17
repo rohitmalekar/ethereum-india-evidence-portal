@@ -847,3 +847,11 @@ body {
     word-break: break-all;
   }
 }
+
+/* Targeted figure row: arrived via a deep link to a specific figure
+   (ledger.html#fig-N). .row-targeted is set by focusHashRow() after the
+   interactive table replaces the static one. */
+.ledger-table tbody tr:target,
+.ledger-table tbody tr.row-targeted {
+  box-shadow: inset 4px 0 0 var(--color-accent);
+}

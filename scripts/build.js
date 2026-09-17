@@ -245,7 +245,7 @@ function renderLedgerRow(row, stalenessCutoff) {
       }),
   ].join('');
   const trClasses = ['', stale ? 'row-stale' : '', row.flags.includes('UNVERIFIED') ? 'row-unverified' : ''].filter(Boolean).join(' ');
-  return `<tr class="${trClasses}">
+  return `<tr id="fig-${row.id}" class="${trClasses}">
       <td>${row.id}</td>
       <td>${row.module}</td>
       <td class="col-claim">${escapeHtmlText(row.claim)}</td>

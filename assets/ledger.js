@@ -278,6 +278,7 @@ export function renderLedger(container, data) {
     const tbody = document.createElement('tbody');
     filtered.forEach(row => {
       const tr = document.createElement('tr');
+      tr.id = 'fig-' + row.id;
       const stale = isStale(row, cutoff);
       if (stale) tr.classList.add('row-stale');
       if (row.flags.includes('UNVERIFIED')) tr.classList.add('row-unverified');
@@ -400,4 +401,20 @@ export function renderLedger(container, data) {
 
   applyAndRender();
   container.appendChild(root);
+  focusHashRow();
+}
+
+/**
+ * enhanceLedger() blanks #ledger-root and rebuilds, so by the time the new
+ * rows exist the browser has already resolved any #fig-N against the static
+ * table and discarded it. Re-find the row and scroll to it. Default filter
+ * state is all/all, so a targeted row is never filtered out on arrival.
+ */
+function focusHashRow() {
+  const id = location.hash.slice(1);
+  if (!/^fig-\d+$/.test(id)) return;
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ block: 'center' });
+  el.classList.add('row-targeted');
 }
