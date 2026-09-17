@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "title": "Tokenised settlement in India",
+    "tagline": "what's live, what's legal, where Ethereum fits",
+    "description": "A research base on where distributed-ledger settlement actually stands in Indian institutional finance — including the places it argued against its own thesis. Built ahead of Devcon 8, Mumbai, 3–6 November 2026.",
+    "site_base": "https://rohitmalekar.github.io/ethereum-india-evidence-portal/",
+    "devcon": {
+      "name": "Devcon 8",
+      "city": "Mumbai",
+      "venue": "Jio World Centre, BKC",
+      "start": "2026-11-03",
+      "end": "2026-11-06",
+      "date_label": "3–6 November 2026",
+      "url": "https://devcon.org/en/",
+      "tickets_url": "https://devcon.org/en/tickets/store/",
+      "tiers": [
+        {
+          "label": "Student & builder",
+          "price": "from $25",
+          "note": "Application-based — student and Sanctuary tech builder discounts."
+        },
+        {
+          "label": "Community",
+          "price": "from $149",
+          "note": "Verify eligibility against Devcon's published criteria."
+        },
+        {
+          "label": "General admission",
+          "price": "from $499 in ETH",
+          "note": "or from $999 in fiat. Sold in waves."
+        }
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "id": "hero",
+      "kind": "hero",
+      "eyebrow": "Ethereum and Indian institutional finance",
+      "headline": "India already runs a blockchain in regulated finance.",
+      "sub": "It has since 2022. It is mandatory. Almost nobody talks about it — including the people selling blockchains.",
+      "lede": "This is a seven-module evidence base on where distributed-ledger settlement actually stands in India. It set out to argue that Ethereum is the neutral settlement layer beneath Indian finance. The evidence said otherwise, and we published the correction rather than the pitch.\n\nWhat follows is the short version. Every number carries the strength of its source, because a quarter of them are weak and pretending otherwise would waste your time."
+    },
+    {
+      "id": "score",
+      "kind": "prose",
+      "number": "01",
+      "eyebrow": "The thing nobody mentions",
+      "headline": "Not a pilot. Not a press release. A mandate.",
+      "body": "SEBI's Security and Covenant Monitoring System has recorded charges and covenants for corporate bonds on a distributed ledger since 1 April 2022, under circular SEBI/HO/MIRSD/CRADT/CIR/P/2022/38. It is operated by the two depositories, NSDL and CDSL. No corporate bond ISIN activates without it.\n\nThat is the part worth sitting with. The most durable piece of blockchain infrastructure in Indian finance was not built by a startup, did not need a token, and arrived by regulation rather than adoption.\n\nThe number usually quoted alongside it — [[fig:35|4,291 issuers onboarded]] — comes from a vendor case study and is a year old. The mandate is the strong claim here. The adoption figure is not.",
+      "couldNotEstablish": "What SCoRe cost to build or to operate. No figure has been published, by SEBI or by either depository.",
+      "deeper": {
+        "page": "what-shipped.html",
+        "label": "Module A — what actually shipped, worldwide"
+      }
+    },
+    {
+      "id": "the-line",
+      "kind": "split-sort",
+      "number": "02",
+      "eyebrow": "The line India actually draws",
+      "headline": "Not anti-blockchain. Anti-crypto-as-an-asset.",
+      "body": "On 10 September 2026 the RBI Governor and the SEBI Chairman launched a tokenised corporate-bond rail together: [[fig:156|₹1,025 crore]] raised across three issuers, settled atomically in wholesale CBDC. At the same event, crypto and stablecoins were kept off the programme entirely.\n\nBoth halves of the line, drawn in public, in the same week. Getting this distinction wrong is the most expensive mistake available in an Indian institutional conversation — and it is the one most pitches make in their first sentence.",
+      "widget": {
+        "prompt": "Nine activities. Which side of the line does each fall on?",
+        "sides": [
+          {
+            "id": "infra",
+            "label": "DLT as infrastructure",
+            "sub": "Mandated, piloted, or permitted"
+          },
+          {
+            "id": "asset",
+            "label": "Crypto as an asset",
+            "sub": "Tolerated, taxed, or refused"
+          }
+        ],
+        "items": [
+          {
+            "text": "DLT security & covenant monitoring for corporate bonds",
+            "side": "infra",
+            "status": "Mandatory, in production since Apr 2022",
+            "authority": "SEBI; NSDL/CDSL"
+          },
+          {
+            "text": "Tokenised corporate bond primary issuance",
+            "side": "infra",
+            "status": "Sandbox only — Demat 2.0, Sep 2026",
+            "authority": "SEBI; RBI (e₹-W leg)"
+          },
+          {
+            "text": "Bank issuance of tokenised CDs settled in wholesale CBDC",
+            "side": "infra",
+            "status": "Sandbox only — UMI pilot",
+            "authority": "RBI"
+          },
+          {
+            "text": "Tokenisation technology provision in GIFT City",
+            "side": "infra",
+            "status": "Permitted — TechFin registration, since Jul 2025",
+            "authority": "IFSCA"
+          },
+          {
+            "text": "On-chain records as evidence in court",
+            "side": "infra",
+            "status": "Permitted, with a s.63(4) certificate",
+            "authority": "Bharatiya Sakshya Adhiniyam 2023"
+          },
+          {
+            "text": "Trading or holding private crypto",
+            "side": "asset",
+            "status": "Permitted, taxed punitively — 30% + 4% cess, 1% TDS, no loss set-off",
+            "authority": "CBDT, ss.115BBH / 194S"
+          },
+          {
+            "text": "Running an exchange or custody service",
+            "side": "asset",
+            "status": "Permitted with registration",
+            "authority": "FIU-IND under PMLA"
+          },
+          {
+            "text": "Banking services to crypto businesses",
+            "side": "asset",
+            "status": "Permitted — the 2018 RBI ban was set aside",
+            "authority": "Supreme Court, IAMAI v. RBI, 2020"
+          },
+          {
+            "text": "Issuing a private rupee stablecoin domestically",
+            "side": "asset",
+            "status": "Unaddressed, and de facto barred — no framework, active RBI opposition",
+            "authority": "RBI"
+          }
+        ]
+      },
+      "couldNotEstablish": "Whether the CBDT will treat a tokenised security as a virtual digital asset. That single unanswered classification sits over the economics of every case on the left-hand side.",
+      "deeper": {
+        "page": "whats-legal-in-india.html",
+        "label": "Module B — the full 18-row perimeter, with citations"
+      }
+    },
+    {
+      "id": "devcon",
+      "kind": "cta",
+      "number": "03",
+      "eyebrow": "So why a conference?",
+      "headline": "A conference convenes and aligns. It does not procure.",
+      "body": "That sentence is from our own research, and it cuts against what follows, so here it is first.\n\nDemat 2.0 was *launched* on a conference main stage in September 2026. It was *produced* by SEBI's Regulatory Sandbox — REC's issuance had already executed three days before the announcement. A conference is where a regulator chooses to be seen doing the thing. The sandbox is where the thing gets done.\n\nWe also could not find a single sourced outcome linking any Ethereum developer-conference institutional track to an institutional pilot. Anywhere. We looked, and we are saying so.\n\nSo the claim here is narrower than a pitch would make it. The people who decide India's rail question — the regulators, the depositories, the bank technology committees — will be within a few kilometres of Devcon in November. The argument on this page is worth having with them in person, and it is better had by people who have read the objections than by people who have not.",
+      "concession": "No live Indian pilot has produced a measured rupee saving. It is the largest hole in this evidence base, it is the first thing a fund manager will ask for, and it is better conceded than filled with a vendor figure.",
+      "asks": [
+        {
+          "kind": "primary",
+          "label": "Get a ticket",
+          "note": "Devcon 8 tickets, from $25"
+        },
+        {
+          "kind": "secondary",
+          "label": "Read the evidence base",
+          "href": "evidence.html",
+          "note": "Seven modules, 164 sourced figures, every contradiction logged"
+        },
+        {
+          "kind": "secondary",
+          "label": "Explore it with your own LLM",
+          "href": "evidence.html#llm",
+          "note": "A prompt that points a model at the whole thing"
+        }
+      ]
+    }
+  ]
+}

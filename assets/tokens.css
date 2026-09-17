@@ -1,0 +1,143 @@
+/* Shared design tokens. Loaded first by BOTH surfaces:
+ *   index.html  -> tokens.css + narrative.css   (the narrative front door)
+ *   everything else -> tokens.css + styles.css  (the evidence portal)
+ *
+ * This file holds what the two surfaces must agree on: the type stacks, the
+ * accent, and above all the semantic ramp. A T4 chip has to look the same on
+ * the landing page as it does in the Figure Ledger, or the source-strength
+ * signal stops meaning anything. Layout and density stay in the two
+ * stylesheets, which is where the surfaces are meant to differ.
+ *
+ * Add a colour here, not there.
+ */
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-bg: #faf8f4;
+  --color-bg-raised: #ffffff;
+  --color-bg-sunken: #f4f1e9;
+  --color-text: #1c1a17;
+  --color-text-muted: #57534a;
+  --color-text-subtle: #7d7663;
+  --color-border: #ddd7cc;
+  --color-border-strong: #b8b0a0;
+
+  --color-accent: #2f5148;
+  --color-accent-contrast: #ffffff;
+  --color-accent-soft: #e6f2ed;
+  --color-link: #2f5148;
+  /* Used on the deep panels, where the muted accent has too little contrast. */
+  --color-accent-bright: #16a37b;
+
+  /* The deep panel: the narrative hero and CTA, and the site header on every
+     portal page. Deliberately the same in both themes — it is the one element
+     that makes the two surfaces read as one object. */
+  --color-deep: #14120e;
+  --color-deep-2: #1e1b14;
+  --color-deep-text: #f6f2e8;
+  --color-deep-text-muted: #b3aa94;
+  --color-deep-border: #2e2a22;
+
+  /* Semantic ramp. Reserved strictly for source strength and staleness, so a
+     warning never competes with decoration. Amber = degraded or stale,
+     red = unverified, safe/neutral = T1-T2 / T3. */
+  --color-amber-bg: #fdf1dc;
+  --color-amber-border: #c8850f;
+  --color-amber-text: #7a4d05;
+
+  --color-red-bg: #fdecec;
+  --color-red-border: #b3261e;
+  --color-red-text: #7f1d17;
+
+  --color-safe-bg: #eef2f0;
+  --color-safe-text: #33544c;
+  --color-neutral-bg: #f1efe9;
+  --color-neutral-text: #57534a;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #100f0c;
+    --color-bg-raised: #1a1813;
+    --color-bg-sunken: #23201a;
+    --color-text: #f3efe5;
+    --color-text-muted: #b9b1a0;
+    --color-text-subtle: #8e8676;
+    --color-border: #2e2a22;
+    --color-border-strong: #413c31;
+
+    --color-accent: #2fbf93;
+    --color-accent-contrast: #0b1a15;
+    --color-accent-soft: #14312a;
+    --color-link: #2fbf93;
+    --color-accent-bright: #46d6a9;
+
+    /* The semantic ramp has to survive the theme flip: these are the rows a
+       reader is meant to distrust, and they must stay legible and still read
+       as amber and red rather than as decoration. */
+    --color-amber-bg: #2e2211;
+    --color-amber-border: #d99a2b;
+    --color-amber-text: #f0c67a;
+
+    --color-red-bg: #331715;
+    --color-red-border: #d4534a;
+    --color-red-text: #f2a9a3;
+
+    --color-safe-bg: #17241f;
+    --color-safe-text: #8fd4bb;
+    --color-neutral-bg: #242118;
+    --color-neutral-text: #b9b1a0;
+  }
+}
+
+/* The shared figure chip: a number with its source tier attached.
+ * Rendered by scripts/citations.js on the narrative page and by
+ * renderLedgerRow()/assets/ledger.js in the ledger. One component, so the
+ * tier colouring cannot drift between the two. */
+.chip,
+.fig-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 5px;
+  font-weight: 600;
+  line-height: 1.35;
+  background: var(--color-neutral-bg);
+  color: var(--color-neutral-text);
+}
+
+.fig-chip {
+  padding: 0.05rem 0.2rem 0.05rem 0.4rem;
+  text-decoration: none;
+  white-space: nowrap;
+  background: var(--color-safe-bg);
+  color: var(--color-safe-text);
+  border-bottom: 2px solid transparent;
+}
+.fig-chip:hover { border-bottom-color: currentColor; }
+
+.fig-tier {
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  .fig-tier { background: rgba(255, 255, 255, 0.12); }
+}
+
+.fig-chip.fig-neutral { background: var(--color-neutral-bg); color: var(--color-neutral-text); }
+.fig-chip.fig-warn { background: var(--color-amber-bg); color: var(--color-amber-text); }
+.fig-chip.is-unverified {
+  background: var(--color-red-bg);
+  color: var(--color-red-text);
+  text-decoration: underline wavy currentColor 1px;
+  text-underline-offset: 3px;
+}

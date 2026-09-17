@@ -66,14 +66,14 @@ function enhanceModuleCopy() {
 
 function landingBaseUrl() {
   let base = location.href.split(/[?#]/)[0];
-  base = base.replace(/index\.html$/, '');
+  base = base.replace(/[^/]*\.html$/, '');
   if (!base.endsWith('/')) base += '/';
   return base;
 }
 
 function enhanceLandingPrompt() {
   const details = document.querySelector('.landing-prompt-details');
-  if (!details) return; // only present on index.html
+  if (!details) return; // only present on evidence.html
   const textarea = details.querySelector('.copy-textarea');
   const summary = details.querySelector('.landing-prompt-summary');
   if (!textarea) return;

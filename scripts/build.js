@@ -13,12 +13,14 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { renderMarkdown } from '../vendor/minimark.js';
 import { isStale, worstTierNum, stalenessCutoff } from '../assets/ledger-core.js';
+import { renderNarrativePage } from './narrative.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
 const TABS = [
-  { id: 'overview', label: 'Overview', file: 'content/intro.md', page: 'index.html', hasTiers: false },
+  { id: 'narrative', label: 'Start here', file: 'data/narrative.json', page: 'index.html', isNarrative: true },
+  { id: 'overview', label: 'Overview', file: 'content/intro.md', page: 'evidence.html', hasTiers: false },
   { id: 'what-shipped', label: 'What shipped', module: 'A', file: 'content/module-a.md', page: 'what-shipped.html', hasTiers: true },
   { id: 'whats-legal-in-india', label: "What's legal in India", module: 'B', file: 'content/module-b.md', page: 'whats-legal-in-india.html', hasTiers: true },
   { id: 'where-the-value-is', label: 'Where the value is', module: 'C', file: 'content/module-c.md', page: 'where-the-value-is.html', hasTiers: true },
@@ -125,7 +127,7 @@ function renderCopyDetails(tab, fullRaw) {
       </details>`;
 }
 
-const OVERVIEW_PROMPT = `Please fetch {{BASE_URL}}llms.txt first. It indexes the eleven pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}} and open whichever module pages look most relevant.
+const OVERVIEW_PROMPT = `Please fetch {{BASE_URL}}llms.txt first. It indexes the twelve pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}}evidence.html and open whichever module pages look most relevant.
 
 Before you answer, use what you already know about me from memory and our past conversations: what I work on, what I follow, what I have asked you before. If you know nothing about me, ask me that first.
 
@@ -134,7 +136,8 @@ Then give me a handful of bullet points about Ethereum's institutional potential
 Stay ready for my follow-ups: a specific module, a number in the Figure Ledger, or an objection I want pressure-tested.`;
 
 function renderLandingPromptCta() {
-  return `<div class="landing-prompt">
+  // id="llm": the narrative front door links straight to this widget.
+  return `<div class="landing-prompt" id="llm">
     <details class="landing-prompt-details js-copy-widget" data-copy-label="a personalized exploration prompt">
       <summary class="landing-prompt-summary">Copy a personalized prompt — explore this report with your own LLM</summary>
       <div class="landing-prompt-panel">
@@ -320,6 +323,7 @@ function pageShell({ tab, bodyHtml }) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${tab.label} — Ethereum/India Institutional Evidence Portal</title>
+<link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -368,17 +372,23 @@ async function writeLlmsTxt() {
 }
 
 async function main() {
+  // Parsed once: both the ledger table and the narrative's citation chips
+  // read it, and they must agree about every row.
+  const figuresData = JSON.parse(await readFile(path.join(ROOT, 'data/figures.json'), 'utf8'));
   const built = [];
   for (const tab of TABS) {
-    let bodyHtml;
-    if (tab.isLedger) {
-      const raw = await readFile(path.join(ROOT, 'data/figures.json'), 'utf8');
-      bodyHtml = renderLedgerBody(JSON.parse(raw));
+    let html;
+    if (tab.isNarrative) {
+      // The narrative page brings its own shell: no sidebar, its own
+      // stylesheet, and the social/meta tags the portal pages don't need.
+      const narrative = JSON.parse(await readFile(path.join(ROOT, tab.file), 'utf8'));
+      html = renderNarrativePage({ narrative, figuresData, tabs: TABS });
+    } else if (tab.isLedger) {
+      html = pageShell({ tab, bodyHtml: renderLedgerBody(figuresData) });
     } else {
       const raw = await readFile(path.join(ROOT, tab.file), 'utf8');
-      bodyHtml = renderModuleBody(tab, raw);
+      html = pageShell({ tab, bodyHtml: renderModuleBody(tab, raw) });
     }
-    const html = pageShell({ tab, bodyHtml });
     await writeFile(path.join(ROOT, tab.page), html, 'utf8');
     built.push(tab.page);
   }

@@ -3,75 +3,189 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Overview — Ethereum/India Institutional Evidence Portal</title>
-<link rel="stylesheet" href="assets/styles.css">
+<title>Tokenised settlement in India: what's live, what's legal, where Ethereum fits</title>
+<meta name="description" content="A research base on where distributed-ledger settlement actually stands in Indian institutional finance — including the places it argued against its own thesis. Built ahead of Devcon 8, Mumbai, 3–6 November 2026.">
+<link rel="canonical" href="https://rohitmalekar.github.io/ethereum-india-evidence-portal/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rohitmalekar.github.io/ethereum-india-evidence-portal/">
+<meta property="og:title" content="Tokenised settlement in India: what's live, what's legal, where Ethereum fits">
+<meta property="og:description" content="A research base on where distributed-ledger settlement actually stands in Indian institutional finance — including the places it argued against its own thesis. Built ahead of Devcon 8, Mumbai, 3–6 November 2026.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tokenised settlement in India: what's live, what's legal, where Ethereum fits">
+<meta name="twitter:description" content="A research base on where distributed-ledger settlement actually stands in Indian institutional finance — including the places it argued against its own thesis. Built ahead of Devcon 8, Mumbai, 3–6 November 2026.">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/narrative.css">
 </head>
-<body>
-<input type="checkbox" id="nav-toggle-checkbox" class="nav-toggle-checkbox" aria-hidden="true">
+<body class="narrative">
 <a class="skip-link" href="#main-content">Skip to content</a>
-
-<header class="site-header">
-  <label for="nav-toggle-checkbox" class="nav-toggle" aria-label="Toggle navigation">
-    <span class="hamburger" aria-hidden="true"></span>
-  </label>
-  <div class="site-title">
-    <span class="portal-name">Ethereum/India Institutional Evidence Portal</span>
-    <span class="current-tab">Overview</span>
-  </div>
-</header>
-
-<div class="layout">
-  <nav class="sidebar" aria-label="Portal sections">
-    <div class="sidebar-nav">
-      <a href="index.html" class="nav-item active" aria-current="page">Overview</a>
-      <a href="what-shipped.html" class="nav-item" aria-label="Module A, What shipped"><span class="nav-letter" aria-hidden="true">A</span> What shipped</a>
-      <a href="whats-legal-in-india.html" class="nav-item" aria-label="Module B, What's legal in India"><span class="nav-letter" aria-hidden="true">B</span> What's legal in India</a>
-      <a href="where-the-value-is.html" class="nav-item" aria-label="Module C, Where the value is"><span class="nav-letter" aria-hidden="true">C</span> Where the value is</a>
-      <a href="ethereum-vs-alternatives.html" class="nav-item" aria-label="Module D, Ethereum vs alternatives"><span class="nav-letter" aria-hidden="true">D</span> Ethereum vs alternatives</a>
-      <a href="the-privacy-question.html" class="nav-item" aria-label="Module E, The privacy question"><span class="nav-letter" aria-hidden="true">E</span> The privacy question</a>
-      <a href="the-objections.html" class="nav-item" aria-label="Module F, The objections"><span class="nav-letter" aria-hidden="true">F</span> The objections</a>
-      <a href="how-adoption-happens.html" class="nav-item" aria-label="Module G, How adoption happens"><span class="nav-letter" aria-hidden="true">G</span> How adoption happens</a>
-      <a href="ledger.html" class="nav-item">Figure Ledger</a>
-      <a href="reconciliation.html" class="nav-item">Reconciliation</a>
-      <a href="devcon-pitch.html" class="nav-item">The Devcon pitch</a>
-    </div>
-  </nav>
-  <label for="nav-toggle-checkbox" class="nav-scrim" aria-hidden="true"></label>
-  <main id="main-content" class="main-content" tabindex="-1">
-    <div class="tab-header"></div>
-<div class="tab-body"><h1>Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance</h1>
-<p><strong>What this is:</strong> A seven-module evidence base on where distributed-ledger settlement and tokenisation stand for Indian institutional finance, built for readers who have seen several blockchain pitches this year and were unconvinced by all of them. Every claim carries its source and date. Every figure carries a source tier. It is written to be checkable rather than persuasive.</p>
-<div class="landing-prompt">
-    <details class="landing-prompt-details js-copy-widget" data-copy-label="a personalized exploration prompt">
-      <summary class="landing-prompt-summary">Copy a personalized prompt — explore this report with your own LLM</summary>
-      <div class="landing-prompt-panel">
-        <p class="landing-prompt-hint">Paste this into ChatGPT, Claude, Gemini, or any LLM that can fetch a URL. With JavaScript on, the box below already has this page's real address in it. Reading without JavaScript? Swap the <code>{{BASE_URL}}</code> placeholder for this page's address before you paste.</p>
-        <textarea class="copy-textarea landing-prompt-textarea" readonly rows="14" aria-label="Personalized prompt for exploring this report with an LLM">Please fetch {{BASE_URL}}llms.txt first. It indexes the eleven pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}} and open whichever module pages look most relevant.
-
-Before you answer, use what you already know about me from memory and our past conversations: what I work on, what I follow, what I have asked you before. If you know nothing about me, ask me that first.
-
-Then give me a handful of bullet points about Ethereum's institutional potential in India that I'm least likely to already know, each with a line on why it is new or useful for me specifically. Flag the source tier (T1–T5) behind anything surprising; roughly a fifth of this report rests on the weakest two.
-
-Stay ready for my follow-ups: a specific module, a number in the Figure Ledger, or an objection I want pressure-tested.</textarea>
+<main id="main-content" tabindex="-1">
+    <header class="hero" id="hero">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Ethereum and Indian institutional finance</p>
+        <h1 class="hero-headline">India already runs a blockchain in regulated finance.</h1>
+        <p class="hero-sub">It has since 2022. It is mandatory. Almost nobody talks about it — including the people selling blockchains.</p>
+        <div class="hero-lede"><p>This is a seven-module evidence base on where distributed-ledger settlement actually stands in India. It set out to argue that Ethereum is the neutral settlement layer beneath Indian finance. The evidence said otherwise, and we published the correction rather than the pitch.</p>
+<p>What follows is the short version. Every number carries the strength of its source, because a quarter of them are weak and pretending otherwise would waste your time.</p></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#score">Start reading</a>
+          <a class="btn btn-ghost" href="evidence.html">Skip to the evidence base</a>
+        </div>
+        <p class="hero-devcon">Built ahead of <a href="https://devcon.org/en/">Devcon 8</a> — Mumbai, 3–6 November 2026</p>
       </div>
-    </details>
-  </div>
-<h2>The 30-second position</h2>
-<p>India already runs a blockchain in mandatory production in regulated finance. SEBI's Security and Covenant Monitoring System has recorded charges and covenants for corporate bonds on a distributed ledger since April 2022, operated by the depositories NSDL and CDSL, and no ISIN activates without it. In September 2026 SEBI and the RBI added a second, smaller thing: Demat 2.0, a sandbox pilot that issued ₹1,025 crore of tokenised corporate bonds on a permissioned depository-owned ledger settled atomically in wholesale CBDC. A pilot, not production, and primary issuance only. The open domestic question is which process is worth the organisational cost, and on which rail.</p>
-<p>On the rail, the evidence revised the working position. This research started from Ethereum as a neutral settlement layer beneath Indian finance, and that does not survive the production record. Every bank-run core-settlement venue with real volume chose a permissioned ledger and said so on the record, citing confidentiality. India's own near-term pilots settle in wholesale CBDC. Ethereum leads the global asset-tokenisation layer by value, which is the funds-and-stablecoins layer rather than the bank-settlement layer, and that distinction decides everything downstream. The defensible role for public Ethereum in India is narrow: GIFT City fund tokenisation, genuinely cross-border flows, and, once the VDA tax classification is settled, unit tracking inside an already-regulated fund wrapper. September 2026 tightened rather than loosened this. Given a live mandate and a clean sheet, India's two securities regulators built on a permissioned ledger and settled in central-bank money.</p>
-<p>The infrastructure claim survived intact. India's regulators mandate and pilot DLT <em>infrastructure</em> while remaining hostile to crypto <em>as an asset</em>. That is the line they actually draw, and the most important one to get right in any external conversation.</p>
-<h2>Findings by module</h2>
-<ul><li><strong>A — What shipped.</strong> Production tokenisation is confined to cash and short-term money: deposit tokens, money-market and Treasury funds, repo, stablecoins. Bonds, equities and trade finance are pilots or failures. The world's highest-volume system, Broadridge's repo platform at roughly $8tn in a single month, is permissioned rather than public. The graveyard is the part to read. TradeLens, we.trade, Marco Polo, Contour and the ASX CHESS replacement all failed, almost none of them for cryptographic reasons; they failed on consortium governance and competitor distrust, and the same failure modes are latent in India's IBBIC/IBDIC.</li><li><strong>B — What's legal in India.</strong> No ban, and no law either, which for the institutional case are very different things. The binding constraint is unaddressed legal ground rather than prohibition: on-chain settlement finality and ledger-as-legal-register are not contemplated by Indian statute, and supervisory caution does the rest. Only the private-crypto route is genuinely restrictive, via a punitive tax, and that is not this case. The widest permitted perimeter is GIFT City rather than the domestic market, though the domestic sandbox moved first in September 2026 and now carries a live tokenised-bond issuance. Check here before conceding that anything is "not allowed."</li><li><strong>C — Where the value is.</strong> The largest rupee prizes and the nearest permitted pilots do not overlap, and that gap is the whole strategic problem. The big opportunities sit in the domestic RBI/SEBI perimeter where the law is silent, while the permitted pilots are offshore, tiny, or aimed at the wrong leg. The module's sharpest call survived contact: SEBI's bond pilot shipped in September 2026 and tokenised primary issuance, which was never slow, leaving the illiquid secondary market untouched. Read it before sizing any opportunity, because for most of these processes the incumbent rail already clears the trade, which leaves fraud or capital mobility as the only honest marginal case.</li><li><strong>D — Ethereum vs alternatives.</strong> The choice is three-way: public chains, multi-party permissioned (Canton), and single-operator permissioned EVM. The middle option is usually left out of the argument. Ethereum wins on uptime, counterparty reachability and India-available talent, and loses on confidentiality, cost predictability, permissioning granularity and legally recognised finality, which are precisely the criteria that decide bank settlement. This is the module to reach for when someone asks why not just use Ethereum.</li><li><strong>E — The privacy question.</strong> The forward-looking answer to the confidentiality finding that runs through A, D and F. Ethereum's base layer is not becoming confidential and was never proposed to be; the work sits in overlays. One regulated deployment now exists, tokenised money-market funds from four large managers distributed through the FCA-regulated Archax with a privacy wrapper, live since February 2026, and it is at the fund layer rather than the bank-settlement layer. SWIFT meanwhile built its shared ledger on Ethereum layer-2 technology and kept it permissioned. Read it before answering anyone who asks what Ethereum is doing about privacy.</li><li><strong>F — The objections.</strong> Each objection is stated in its strongest form, with the honest response and the residual weakness that survives it. The regulatory objections are the strongest and mostly correct as stated, so conceding them is more persuasive than defending against them. The two an opponent is most likely to win are "every consortium blockchain failed" and "we already have UPI" — though the second weakened in September 2026, when the RBI and SEBI built atomic securities settlement on a new ledger rather than extending UPI. Lead with the specific rupee problem and the named owner, never with the technology.</li><li><strong>G — How adoption happens.</strong> Indian financial infrastructure adopts in a repeatable order: statute first, a regulator-owned utility second, a mandate or subsidy third, phased compulsion fourth, network effects last. A tokenised settlement layer moved to stage one-to-two in September 2026 — a regulator-blessed utility now exists — but it is still pre-statute, running on a sandbox relaxation with neither a mandate nor a subsidy. Demat scaled only under compulsion, and Account Aggregator, built without a mandate, is under 10% conversion after five years. A conference convenes and aligns; the sandbox procures, which is exactly what Global Fintech Fest 2026 demonstrated.</li></ul>
-<p><strong>Before anything leaves the room.</strong> The most-quoted number in this base, Ethereum's share of tokenised real-world assets, is contested across three modules at roughly 50%, 58–63% and 65%; the defensible phrasing is "the largest single share, roughly half," and the other two should be retired. No live Indian pilot has produced a measured rupee saving, which is the largest evidentiary hole here, and it is better conceded than papered over with a vendor figure. The Reconciliation tab covers both.</p>
-<h2>Reading guide and scope</h2>
-<p><em>This portal is a working research artifact, published openly so its sources can be checked. The summary tiers reflect the reconciliation pass; the full module reports are as originally researched. See the Reconciliation tab for every place two modules diverged and which figure to rely on.</em></p>
-<p><strong>How to read the modules.</strong> Each module opens with three tiers: a 30-second answer, a 5-minute summary, and the full report. The summary tiers carry the corrections from the reconciliation pass; the full reports are the modules as originally researched, with a note where a figure or framing was later revised. The Figure Ledger is the reusable spine, holding every quantitative claim with its source, date and tier, filterable and staleness-flagged. When two modules disagreed on a number, the Reconciliation tab records which to rely on. Nothing here should be lifted into an external document without checking that tab and the ledger first.</p>
-<p><strong>Source tiers</strong>, used on every figure: <strong>T1</strong> primary (regulator, statute, filing, on-chain); <strong>T2</strong> named data provider (RWA.xyz, DefiLlama, World Bank, BIS); <strong>T3</strong> tier-1 financial press; <strong>T4</strong> company blog or press release (promotional); <strong>T5</strong> crypto media or aggregator (leads only, never a sole source).</p>
-<p><strong>Status labels</strong>, on every initiative: <strong>IN PRODUCTION</strong> (live, with a volume figure and date); <strong>LIMITED PILOT</strong> (live but restricted, named participants); <strong>ANNOUNCED ONLY</strong> (no evidence of live use); <strong>WOUND DOWN</strong> (discontinued, with date and reason).</p>
-<p><strong>A standing caveat.</strong> This subject moves monthly. About a quarter of the figures in this base rest on the weakest two source tiers, and many carry an "as of" date more than six months old. The Figure Ledger flags both. Re-check anything flagged before it reaches an external document.</p></div>
-  </main>
-</div>
+    </header>
 
-<script type="module" src="assets/app.js"></script>
+    <section class="scene scene-prose" id="score">
+      <div class="scene-inner">
+        <p class="scene-eyebrow"><span class="scene-num" aria-hidden="true">01</span>The thing nobody mentions</p><h2 class="scene-headline">Not a pilot. Not a press release. A mandate.</h2>
+        <div class="scene-body"><p>SEBI's Security and Covenant Monitoring System has recorded charges and covenants for corporate bonds on a distributed ledger since 1 April 2022, under circular SEBI/HO/MIRSD/CRADT/CIR/P/2022/38. It is operated by the two depositories, NSDL and CDSL. No corporate bond ISIN activates without it.</p>
+<p>That is the part worth sitting with. The most durable piece of blockchain infrastructure in Indian finance was not built by a startup, did not need a token, and arrived by regulation rather than adoption.</p>
+<p>The number usually quoted alongside it — <a class="fig-chip fig-warn is-stale" href="ledger.html#fig-35" title="SEBI DLT covenant system - issuers onboarded: 4,291 issuers (as of FY25) — Cognizant case study [T4], WEAK_TIER, STALE">4,291 issuers onboarded<span class="fig-tier">T4</span></a> — comes from a vendor case study and is a year old. The mandate is the strong claim here. The adoption figure is not.</p></div>
+        <aside class="scene-limit">
+        <span class="scene-limit-label">What this could not establish</span>
+        <p>What SCoRe cost to build or to operate. No figure has been published, by SEBI or by either depository.</p>
+      </aside>
+        <p class="scene-deeper"><a href="what-shipped.html">Module A — what actually shipped, worldwide<span aria-hidden="true"> →</span></a></p>
+      </div>
+    </section>
+
+    <section class="scene scene-sort" id="the-line">
+      <div class="scene-inner">
+        <p class="scene-eyebrow"><span class="scene-num" aria-hidden="true">02</span>The line India actually draws</p><h2 class="scene-headline">Not anti-blockchain. Anti-crypto-as-an-asset.</h2>
+        <div class="scene-body"><p>On 10 September 2026 the RBI Governor and the SEBI Chairman launched a tokenised corporate-bond rail together: <a class="fig-chip fig-safe" href="ledger.html#fig-156" title="Demat 2.0 tokenised corporate bond pilot: total raised: 1,025 Rs cr (as of 10 Sep 2026) — SEBI PR 56/2026 [T1]">₹1,025 crore<span class="fig-tier">T1</span></a> raised across three issuers, settled atomically in wholesale CBDC. At the same event, crypto and stablecoins were kept off the programme entirely.</p>
+<p>Both halves of the line, drawn in public, in the same week. Getting this distinction wrong is the most expensive mistake available in an Indian institutional conversation — and it is the one most pitches make in their first sentence.</p></div>
+        <div class="sort-widget" data-widget="split-sort">
+          <p class="sort-prompt">Nine activities. Which side of the line does each fall on?</p>
+          <div class="sort-col" data-side="infra">
+            <h3 class="sort-col-label">DLT as infrastructure</h3>
+            <p class="sort-col-sub">Mandated, piloted, or permitted</p>
+            <ul class="sort-list">
+            <li class="sort-item" data-side="infra">
+              <span class="sort-item-text">DLT security &amp; covenant monitoring for corporate bonds</span>
+              <span class="sort-item-status">Mandatory, in production since Apr 2022</span>
+              <span class="sort-item-authority">SEBI; NSDL/CDSL</span>
+            </li>
+            <li class="sort-item" data-side="infra">
+              <span class="sort-item-text">Tokenised corporate bond primary issuance</span>
+              <span class="sort-item-status">Sandbox only — Demat 2.0, Sep 2026</span>
+              <span class="sort-item-authority">SEBI; RBI (e₹-W leg)</span>
+            </li>
+            <li class="sort-item" data-side="infra">
+              <span class="sort-item-text">Bank issuance of tokenised CDs settled in wholesale CBDC</span>
+              <span class="sort-item-status">Sandbox only — UMI pilot</span>
+              <span class="sort-item-authority">RBI</span>
+            </li>
+            <li class="sort-item" data-side="infra">
+              <span class="sort-item-text">Tokenisation technology provision in GIFT City</span>
+              <span class="sort-item-status">Permitted — TechFin registration, since Jul 2025</span>
+              <span class="sort-item-authority">IFSCA</span>
+            </li>
+            <li class="sort-item" data-side="infra">
+              <span class="sort-item-text">On-chain records as evidence in court</span>
+              <span class="sort-item-status">Permitted, with a s.63(4) certificate</span>
+              <span class="sort-item-authority">Bharatiya Sakshya Adhiniyam 2023</span>
+            </li>
+            </ul>
+          </div>
+          <div class="sort-col" data-side="asset">
+            <h3 class="sort-col-label">Crypto as an asset</h3>
+            <p class="sort-col-sub">Tolerated, taxed, or refused</p>
+            <ul class="sort-list">
+            <li class="sort-item" data-side="asset">
+              <span class="sort-item-text">Trading or holding private crypto</span>
+              <span class="sort-item-status">Permitted, taxed punitively — 30% + 4% cess, 1% TDS, no loss set-off</span>
+              <span class="sort-item-authority">CBDT, ss.115BBH / 194S</span>
+            </li>
+            <li class="sort-item" data-side="asset">
+              <span class="sort-item-text">Running an exchange or custody service</span>
+              <span class="sort-item-status">Permitted with registration</span>
+              <span class="sort-item-authority">FIU-IND under PMLA</span>
+            </li>
+            <li class="sort-item" data-side="asset">
+              <span class="sort-item-text">Banking services to crypto businesses</span>
+              <span class="sort-item-status">Permitted — the 2018 RBI ban was set aside</span>
+              <span class="sort-item-authority">Supreme Court, IAMAI v. RBI, 2020</span>
+            </li>
+            <li class="sort-item" data-side="asset">
+              <span class="sort-item-text">Issuing a private rupee stablecoin domestically</span>
+              <span class="sort-item-status">Unaddressed, and de facto barred — no framework, active RBI opposition</span>
+              <span class="sort-item-authority">RBI</span>
+            </li>
+            </ul>
+          </div>
+        </div>
+        <aside class="scene-limit">
+        <span class="scene-limit-label">What this could not establish</span>
+        <p>Whether the CBDT will treat a tokenised security as a virtual digital asset. That single unanswered classification sits over the economics of every case on the left-hand side.</p>
+      </aside>
+        <p class="scene-deeper"><a href="whats-legal-in-india.html">Module B — the full 18-row perimeter, with citations<span aria-hidden="true"> →</span></a></p>
+      </div>
+    </section>
+
+    <section class="scene scene-cta" id="devcon">
+      <div class="scene-inner">
+        <p class="scene-eyebrow"><span class="scene-num" aria-hidden="true">03</span>So why a conference?</p><h2 class="scene-headline">A conference convenes and aligns. It does not procure.</h2>
+        <div class="scene-body"><p>That sentence is from our own research, and it cuts against what follows, so here it is first.</p>
+<p>Demat 2.0 was <em>launched</em> on a conference main stage in September 2026. It was <em>produced</em> by SEBI's Regulatory Sandbox — REC's issuance had already executed three days before the announcement. A conference is where a regulator chooses to be seen doing the thing. The sandbox is where the thing gets done.</p>
+<p>We also could not find a single sourced outcome linking any Ethereum developer-conference institutional track to an institutional pilot. Anywhere. We looked, and we are saying so.</p>
+<p>So the claim here is narrower than a pitch would make it. The people who decide India's rail question — the regulators, the depositories, the bank technology committees — will be within a few kilometres of Devcon in November. The argument on this page is worth having with them in person, and it is better had by people who have read the objections than by people who have not.</p></div>
+        <aside class="scene-limit scene-limit-strong">
+          <span class="scene-limit-label">The concession that comes first</span>
+          <p>No live Indian pilot has produced a measured rupee saving. It is the largest hole in this evidence base, it is the first thing a fund manager will ask for, and it is better conceded than filled with a vendor figure.</p>
+        </aside>
+        <div class="cta-card">
+          <p class="cta-kicker">Devcon 8</p>
+          <p class="cta-when"><time datetime="2026-11-03">3–6 November 2026</time><span class="countdown" data-countdown-to="2026-11-03"></span></p>
+          <p class="cta-where">Jio World Centre, BKC, Mumbai</p>
+          <ul class="tier-list">
+            <li class="tier">
+              <span class="tier-price">from $25</span>
+              <span class="tier-label">Student &amp; builder</span>
+              <span class="tier-note">Application-based — student and Sanctuary tech builder discounts.</span>
+            </li>
+            <li class="tier">
+              <span class="tier-price">from $149</span>
+              <span class="tier-label">Community</span>
+              <span class="tier-note">Verify eligibility against Devcon's published criteria.</span>
+            </li>
+            <li class="tier">
+              <span class="tier-price">from $499 in ETH</span>
+              <span class="tier-label">General admission</span>
+              <span class="tier-note">or from $999 in fiat. Sold in waves.</span>
+            </li>
+          </ul>
+          <a class="btn btn-primary btn-lg" href="https://devcon.org/en/tickets/store/">Get a ticket<span aria-hidden="true"> →</span></a>
+          <p class="cta-fineprint">Ticket tiers and prices are Devcon's and change in waves — check the store for what is open now.</p>
+        </div>
+        <div class="cta-secondary">
+          <p class="cta-secondary-label">Or go the slower way</p>
+          <ul>
+            <li><a href="evidence.html">Read the evidence base</a> <span>Seven modules, 164 sourced figures, every contradiction logged</span></li>
+            <li><a href="evidence.html#llm">Explore it with your own LLM</a> <span>A prompt that points a model at the whole thing</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+<footer class="site-foot">
+    <nav class="foot-nav" aria-label="The evidence base">
+      <h2>The evidence base</h2>
+      <ul>
+        <li><a href="evidence.html">Overview</a></li>
+        <li><a href="what-shipped.html"><span class="foot-letter" aria-hidden="true">A</span>What shipped</a></li>
+        <li><a href="whats-legal-in-india.html"><span class="foot-letter" aria-hidden="true">B</span>What's legal in India</a></li>
+        <li><a href="where-the-value-is.html"><span class="foot-letter" aria-hidden="true">C</span>Where the value is</a></li>
+        <li><a href="ethereum-vs-alternatives.html"><span class="foot-letter" aria-hidden="true">D</span>Ethereum vs alternatives</a></li>
+        <li><a href="the-privacy-question.html"><span class="foot-letter" aria-hidden="true">E</span>The privacy question</a></li>
+        <li><a href="the-objections.html"><span class="foot-letter" aria-hidden="true">F</span>The objections</a></li>
+        <li><a href="how-adoption-happens.html"><span class="foot-letter" aria-hidden="true">G</span>How adoption happens</a></li>
+        <li><a href="ledger.html">Figure Ledger</a></li>
+        <li><a href="reconciliation.html">Reconciliation</a></li>
+        <li><a href="devcon-pitch.html">The Devcon pitch</a></li>
+      </ul>
+    </nav>
+    <p class="foot-note">Every quantitative claim on this page links to the Figure Ledger, which carries its source, date and source tier (T1 primary … T5 crypto media). Roughly a quarter of the figures in this base rest on the weakest two tiers, and the ledger flags them rather than hiding them. Figures current as of 2026-09-15; this subject moves monthly.</p>
+    <p class="foot-note">Prose and data CC BY 4.0. Code MIT. <a href="reconciliation.html">Every place two modules disagreed is logged here.</a></p>
+  </footer>
+<script type="module" src="assets/narrative.js"></script>
 </body>
 </html>
