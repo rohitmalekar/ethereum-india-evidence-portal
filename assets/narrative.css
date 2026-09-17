@@ -304,7 +304,9 @@ a { color: var(--n-accent); }
 .scene-cta .scene-num { color: var(--n-accent-2); }
 .scene-cta .scene-body { color: var(--n-deep-ink-2); }
 .scene-cta .scene-body p:first-child { color: var(--n-deep-ink); }
-.scene-cta a { color: var(--n-accent-2); }
+/* Prose links only. Unscoped, this out-specifies .btn-primary and paints the
+   ticket button's label the same green as its own background. */
+.scene-cta a:not([class]) { color: var(--n-accent-2); }
 
 .cta-card {
   margin: 2.5rem 0 0;
@@ -519,15 +521,84 @@ a { color: var(--n-accent); }
 .sort-item.is-right .sort-verdict { color: var(--n-accent); }
 .sort-item.is-wrong .sort-verdict { color: var(--n-amber-text); }
 
+/* Sits above the tiles, so the rule goes underneath it. */
 .sort-controls {
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  padding-top: 1rem;
-  border-top: 1px solid var(--n-line);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--n-line);
 }
 .sort-score { margin: 0; font-weight: 600; font-size: 0.95rem; max-width: 40ch; }
 .btn-sm { padding: 0.45rem 1rem; font-size: 0.85rem; }
 .sort-widget .btn-ghost { border-color: var(--n-line-2); color: var(--n-ink); }
+
+/* --- "Explore with your own LLM" widget ---------------------------------
+   Same markup as evidence.html (scripts/llm-prompt.js renders both), but this
+   page never loads styles.css, so it needs its own rules. It sits on the deep
+   CTA panel, so the colours are the fixed deep-panel tokens rather than the
+   theme-following ones. */
+
+.landing-prompt { margin: 1.75rem 0 0; max-width: 40rem; }
+
+.landing-prompt-details {
+  background: #1c1a14;
+  border: 1px solid var(--color-deep-border);
+  border-left: 3px solid var(--n-accent-2);
+  border-radius: var(--n-radius);
+  padding: 0.85rem 1rem;
+}
+
+.landing-prompt-summary {
+  font-family: var(--n-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--n-deep-ink);
+  cursor: pointer;
+}
+.landing-prompt-summary:hover { color: var(--n-accent-2); }
+.landing-prompt-details[open] .landing-prompt-summary { margin-bottom: 0.75rem; }
+.landing-prompt-summary.copied { color: var(--n-accent-2); }
+
+.landing-prompt-hint {
+  color: var(--n-deep-ink-2);
+  font-size: 0.85rem;
+  margin: 0 0 0.65rem;
+}
+.landing-prompt-hint code {
+  background: var(--color-deep);
+  border: 1px solid var(--color-deep-border);
+  border-radius: 3px;
+  padding: 0.05em 0.35em;
+  font-size: 0.92em;
+}
+
+.copy-textarea {
+  width: 100%;
+  max-width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--n-deep-ink-2);
+  background: var(--color-deep);
+  border: 1px solid var(--color-deep-border);
+  border-radius: 6px;
+  padding: 0.6rem 0.7rem;
+  resize: vertical;
+}
+
+.copy-btn {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  margin-bottom: 0.6rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--n-accent-2);
+  color: #0b1a15;
+  cursor: pointer;
+}
+.copy-btn[hidden] { display: none; }

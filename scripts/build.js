@@ -10,13 +10,31 @@
 
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { renderMarkdown } from '../vendor/minimark.js';
 import { isStale, worstTierNum, stalenessCutoff } from '../assets/ledger-core.js';
 import { renderNarrativePage } from './narrative.js';
+import { renderLandingPromptCta } from './llm-prompt.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
+
+/**
+ * Appends a short content hash to an asset URL: assets/x.css?v=a1b2c3d4.
+ *
+ * Without it, a browser that has cached a stylesheet keeps using it after the
+ * file changes, which shows up as a page that is subtly wrong for returning
+ * visitors and for anyone reloading a local server. The hash is derived from
+ * the file's bytes, so it changes only when the file does and the build stays
+ * deterministic. Never use a timestamp here: CI rebuilds and diffs, so a
+ * changing query string would fail every push.
+ */
+async function versionedAsset(relPath) {
+  const bytes = await readFile(path.join(ROOT, relPath));
+  const hash = createHash('sha256').update(bytes).digest('hex').slice(0, 8);
+  return `${relPath}?v=${hash}`;
+}
 
 const TABS = [
   { id: 'narrative', label: 'Start here', file: 'data/narrative.json', page: 'index.html', isNarrative: true },
@@ -125,27 +143,6 @@ function renderCopyDetails(tab, fullRaw) {
         <summary>Full report — copy for an LLM</summary>
         <textarea class="copy-textarea" readonly rows="6" aria-label="Full report markdown, with source provenance, for pasting into an LLM">${escapeHtmlText(payload)}</textarea>
       </details>`;
-}
-
-const OVERVIEW_PROMPT = `Please fetch {{BASE_URL}}llms.txt first. It indexes the twelve pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}}evidence.html and open whichever module pages look most relevant.
-
-Before you answer, use what you already know about me from memory and our past conversations: what I work on, what I follow, what I have asked you before. If you know nothing about me, ask me that first.
-
-Then give me a handful of bullet points about Ethereum's institutional potential in India that I'm least likely to already know, each with a line on why it is new or useful for me specifically. Flag the source tier (T1–T5) behind anything surprising; roughly a fifth of this report rests on the weakest two.
-
-Stay ready for my follow-ups: a specific module, a number in the Figure Ledger, or an objection I want pressure-tested.`;
-
-function renderLandingPromptCta() {
-  // id="llm": the narrative front door links straight to this widget.
-  return `<div class="landing-prompt" id="llm">
-    <details class="landing-prompt-details js-copy-widget" data-copy-label="a personalized exploration prompt">
-      <summary class="landing-prompt-summary">Copy a personalized prompt — explore this report with your own LLM</summary>
-      <div class="landing-prompt-panel">
-        <p class="landing-prompt-hint">Paste this into ChatGPT, Claude, Gemini, or any LLM that can fetch a URL. With JavaScript on, the box below already has this page's real address in it. Reading without JavaScript? Swap the <code>{{BASE_URL}}</code> placeholder for this page's address before you paste.</p>
-        <textarea class="copy-textarea landing-prompt-textarea" readonly rows="14" aria-label="Personalized prompt for exploring this report with an LLM">${escapeHtmlText(OVERVIEW_PROMPT)}</textarea>
-      </div>
-    </details>
-  </div>`;
 }
 
 function splitBeforeFirstH2(raw) {
@@ -316,15 +313,15 @@ function renderSidebar(activeId) {
   return `<div class="sidebar-nav">\n${items}\n    </div>`;
 }
 
-function pageShell({ tab, bodyHtml }) {
+function pageShell({ tab, bodyHtml, assets }) {
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${tab.label} — Ethereum/India Institutional Evidence Portal</title>
-<link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="${assets.tokens}">
+<link rel="stylesheet" href="${assets.styles}">
 </head>
 <body>
 <input type="checkbox" id="nav-toggle-checkbox" class="nav-toggle-checkbox" aria-hidden="true">
@@ -350,7 +347,7 @@ function pageShell({ tab, bodyHtml }) {
   </main>
 </div>
 
-<script type="module" src="assets/app.js"></script>
+<script type="module" src="${assets.app}"></script>
 </body>
 </html>
 `;
@@ -375,6 +372,13 @@ async function main() {
   // Parsed once: both the ledger table and the narrative's citation chips
   // read it, and they must agree about every row.
   const figuresData = JSON.parse(await readFile(path.join(ROOT, 'data/figures.json'), 'utf8'));
+  const assets = {
+    tokens: await versionedAsset('assets/tokens.css'),
+    styles: await versionedAsset('assets/styles.css'),
+    app: await versionedAsset('assets/app.js'),
+    narrativeCss: await versionedAsset('assets/narrative.css'),
+    narrativeJs: await versionedAsset('assets/narrative.js'),
+  };
   const built = [];
   for (const tab of TABS) {
     let html;
@@ -382,12 +386,12 @@ async function main() {
       // The narrative page brings its own shell: no sidebar, its own
       // stylesheet, and the social/meta tags the portal pages don't need.
       const narrative = JSON.parse(await readFile(path.join(ROOT, tab.file), 'utf8'));
-      html = renderNarrativePage({ narrative, figuresData, tabs: TABS });
+      html = renderNarrativePage({ narrative, figuresData, tabs: TABS, assets });
     } else if (tab.isLedger) {
-      html = pageShell({ tab, bodyHtml: renderLedgerBody(figuresData) });
+      html = pageShell({ tab, bodyHtml: renderLedgerBody(figuresData), assets });
     } else {
       const raw = await readFile(path.join(ROOT, tab.file), 'utf8');
-      html = pageShell({ tab, bodyHtml: renderModuleBody(tab, raw) });
+      html = pageShell({ tab, bodyHtml: renderModuleBody(tab, raw), assets });
     }
     await writeFile(path.join(ROOT, tab.page), html, 'utf8');
     built.push(tab.page);

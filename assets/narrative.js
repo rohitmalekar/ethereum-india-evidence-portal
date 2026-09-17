@@ -79,9 +79,11 @@ function enhanceSplitSort() {
     reveal.textContent = 'Show me the answers';
     controls.append(score, reveal);
 
-    widget.querySelector('.sort-prompt').after(legend, grid);
+    // Score and "show me the answers" sit above the tiles: the reader should
+    // see the way out before committing to nine guesses, not after scrolling
+    // past them.
+    widget.querySelector('.sort-prompt').after(legend, controls, grid);
     cols.forEach(col => col.remove());
-    widget.appendChild(controls);
 
     items.slice().sort(() => Math.random() - 0.5).forEach(item => {
       item.el.classList.add('is-pending');
@@ -140,6 +142,75 @@ function enhanceSplitSort() {
   });
 }
 
+
+/* --- "Explore with your own LLM" widget -------------------------------------
+   Mirrors enhanceLandingPrompt() in assets/app.js. The markup is identical
+   (both come from scripts/llm-prompt.js), but this page loads narrative.js
+   instead of app.js, so the behaviour has to exist here too. Without JS the
+   textarea still holds the prompt and a reader can select and copy it by hand;
+   only the {{BASE_URL}} substitution and the one-click button are lost, and the
+   hint text says so. */
+
+async function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) { /* fall through */ }
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+  document.body.removeChild(ta);
+  return ok;
+}
+
+function flashCopied(el, message) {
+  const original = el.textContent;
+  el.textContent = message;
+  el.classList.add('copied');
+  setTimeout(() => { el.textContent = original; el.classList.remove('copied'); }, 2000);
+}
+
+function pageBaseUrl() {
+  let base = location.href.split(/[?#]/)[0];
+  base = base.replace(/[^/]*\.html$/, '');
+  if (!base.endsWith('/')) base += '/';
+  return base;
+}
+
+function enhanceLlmPrompt() {
+  const details = document.querySelector('.landing-prompt-details');
+  if (!details) return;
+  const textarea = details.querySelector('.copy-textarea');
+  const summary = details.querySelector('.landing-prompt-summary');
+  if (!textarea) return;
+
+  // The build ships a placeholder; only the browser knows the real address.
+  textarea.value = textarea.value.split('{{BASE_URL}}').join(pageBaseUrl());
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy to clipboard';
+  btn.addEventListener('click', async () => {
+    const ok = await copyToClipboard(textarea.value);
+    flashCopied(btn, ok ? 'Copied' : 'Copy failed');
+  });
+  textarea.parentNode.insertBefore(btn, textarea);
+
+  if (summary) {
+    summary.addEventListener('click', async () => {
+      if (details.open) return; // copy only on the click that opens it
+      const ok = await copyToClipboard(textarea.value);
+      flashCopied(summary, ok ? 'Copied \u2014 go paste it into your LLM' : 'Copy failed \u2014 use the box below');
+    });
+  }
+}
+
 /** Opt sections into a fade-up on scroll. The hiding rule lives under
  *  .js-reveal, which only exists once this runs — so JS-off keeps everything. */
 function enhanceReveal() {
@@ -162,6 +233,7 @@ function enhanceReveal() {
 
 function init() {
   enhanceCountdown();
+  enhanceLlmPrompt();
   enhanceSplitSort();
   enhanceReveal();
 }

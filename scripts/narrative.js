@@ -14,6 +14,7 @@
 import { renderMarkdown } from '../vendor/minimark.js';
 import { stalenessCutoff } from '../assets/ledger-core.js';
 import { buildFigureIndex, citeTokens, warnOnWeakCitations } from './citations.js';
+import { renderLandingPromptCta } from './llm-prompt.js';
 
 function escapeHtmlText(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -53,6 +54,9 @@ function couldNotEstablish(scene, ctx) {
 
 function deeperLink(scene) {
   if (!scene.deeper) return '';
+  // The arrow glyph is UI chrome, not prose. The house style's "type ->"
+  // rule targets writing; a literal -> on a designed page reads as unstyled
+  // markup. aria-hidden keeps it out of the accessibility tree.
   return `<p class="scene-deeper"><a href="${escapeAttr(scene.deeper.page)}">${escapeHtmlText(scene.deeper.label)}<span aria-hidden="true"> →</span></a></p>`;
 }
 
@@ -154,14 +158,16 @@ function renderCta(scene, ctx) {
           <ul class="tier-list">
             ${tiers}
           </ul>
+          <!-- Arrow is UI chrome; see the note above renderDeeperLink. -->
           <a class="btn btn-primary btn-lg" href="${escapeAttr(d.tickets_url)}">Get a ticket<span aria-hidden="true"> →</span></a>
           <p class="cta-fineprint">Ticket tiers and prices are Devcon's and change in waves — check the store for what is open now.</p>
         </div>
         <div class="cta-secondary">
-          <p class="cta-secondary-label">Or go the slower way</p>
+          <p class="cta-secondary-label">Whether or not you come</p>
           <ul>
             ${secondary}
           </ul>
+          ${renderLandingPromptCta()}
         </div>
       </div>
     </section>`;
@@ -190,7 +196,7 @@ ${items}
     </nav>`;
 }
 
-function narrativeShell({ meta, bodyHtml, tabs, generated }) {
+function narrativeShell({ meta, bodyHtml, tabs, generated, assets }) {
   const base = meta.site_base;
   const title = `${meta.title}: ${meta.tagline}`;
   return `<!doctype html>
@@ -208,8 +214,8 @@ function narrativeShell({ meta, bodyHtml, tabs, generated }) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escapeAttr(title)}">
 <meta name="twitter:description" content="${escapeAttr(meta.description)}">
-<link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="assets/narrative.css">
+<link rel="stylesheet" href="${assets.tokens}">
+<link rel="stylesheet" href="${assets.narrativeCss}">
 </head>
 <body class="narrative">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -221,13 +227,13 @@ function narrativeShell({ meta, bodyHtml, tabs, generated }) {
     <p class="foot-note">Every quantitative claim on this page links to the Figure Ledger, which carries its source, date and source tier (T1 primary … T5 crypto media). Roughly a quarter of the figures in this base rest on the weakest two tiers, and the ledger flags them rather than hiding them. Figures current as of ${escapeHtmlText(generated)}; this subject moves monthly.</p>
     <p class="foot-note">Prose and data CC BY 4.0. Code MIT. <a href="reconciliation.html">Every place two modules disagreed is logged here.</a></p>
   </footer>
-<script type="module" src="assets/narrative.js"></script>
+<script type="module" src="${assets.narrativeJs}"></script>
 </body>
 </html>
 `;
 }
 
-export function renderNarrativePage({ narrative, figuresData, tabs }) {
+export function renderNarrativePage({ narrative, figuresData, tabs, assets }) {
   const ctx = {
     narrative,
     index: buildFigureIndex(figuresData),
@@ -257,5 +263,6 @@ export function renderNarrativePage({ narrative, figuresData, tabs }) {
     bodyHtml: parts.join('\n\n    '),
     tabs,
     generated: figuresData.meta.generated,
+    assets,
   });
 }
