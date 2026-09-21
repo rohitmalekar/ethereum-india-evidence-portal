@@ -11,16 +11,20 @@ function escapeHtmlText(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-export const OVERVIEW_PROMPT = `Please fetch {{BASE_URL}}llms.txt first. It indexes the twelve pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}}evidence.html and open whichever module pages look most relevant.
+export const OVERVIEW_PROMPT = `Please fetch {{BASE_URL}}llms.txt first. It indexes the eleven pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, and a Reconciliation page. Then read the Overview at {{BASE_URL}}evidence.html and open whichever module pages look most relevant.
 
 Before you answer, use what you already know about me from memory and our past conversations: what I work on, what I follow, what I have asked you before. If you know nothing about me, ask me that first.
 
-Then give me a handful of bullet points about Ethereum's institutional potential in India that I'm least likely to already know, each with a line on why it is new or useful for me specifically. Flag the source tier (T1–T5) behind anything surprising; roughly a fifth of this report rests on the weakest two.
+Then give me a handful of bullet points about Ethereum's institutional potential in India that I'm least likely to already know, each with a line on why it is new or useful for me specifically.`;
 
-Stay ready for my follow-ups: a specific module, a number in the Figure Ledger, or an objection I want pressure-tested.`;
-
-export function renderLandingPromptCta() {
-  return `<div class="landing-prompt" id="llm">
+/**
+ * `id` is a parameter because index.html carries this widget twice — once in
+ * the hero and once in the closing Devcon call to action — and two elements
+ * cannot share an id. The markup is otherwise identical, which is the point:
+ * both surfaces copy the same prompt text.
+ */
+export function renderLandingPromptCta({ id = 'llm' } = {}) {
+  return `<div class="landing-prompt" id="${id}">
     <details class="landing-prompt-details js-copy-widget" data-copy-label="a personalized exploration prompt">
       <summary class="landing-prompt-summary">Copy a personalized prompt — explore this report with your own LLM</summary>
       <div class="landing-prompt-panel">

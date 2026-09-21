@@ -228,7 +228,14 @@ a { color: var(--n-accent); }
 .scene-limit-strong .scene-limit-label,
 .scene-limit-strong p { color: var(--n-amber-text); }
 
-.scene-deeper { margin: 2rem 0 0; }
+/* Flex so a scene that points at two modules lays them side by side on a
+   wide screen and stacks them on a phone. */
+.scene-deeper {
+  margin: 2rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+}
 .scene-deeper a {
   display: inline-block;
   font-weight: 600;

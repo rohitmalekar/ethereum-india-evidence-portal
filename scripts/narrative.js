@@ -57,7 +57,13 @@ function deeperLink(scene) {
   // The arrow glyph is UI chrome, not prose. The house style's "type ->"
   // rule targets writing; a literal -> on a designed page reads as unstyled
   // markup. aria-hidden keeps it out of the accessibility tree.
-  return `<p class="scene-deeper"><a href="${escapeAttr(scene.deeper.page)}">${escapeHtmlText(scene.deeper.label)}<span aria-hidden="true"> →</span></a></p>`;
+  //
+  // A scene may carry one `deeper` object or an array of them; a scene that
+  // sends the reader to two modules gets two links inside the one paragraph.
+  const links = [].concat(scene.deeper).map(d =>
+    `<a href="${escapeAttr(d.page)}">${escapeHtmlText(d.label)}<span aria-hidden="true"> →</span></a>`
+  ).join('');
+  return `<p class="scene-deeper">${links}</p>`;
 }
 
 // --- Scene renderers -------------------------------------------------------
@@ -75,6 +81,7 @@ function renderHero(scene, ctx) {
           <a class="btn btn-primary" href="#${escapeAttr(ctx.narrative.scenes[1].id)}">Start reading</a>
           <a class="btn btn-ghost" href="evidence.html">Skip to the evidence base</a>
         </div>
+        ${renderLandingPromptCta({ id: 'llm-top' })}
         <p class="hero-devcon">Built ahead of <a href="${escapeAttr(d.url)}">${escapeHtmlText(d.name)}</a> — ${escapeHtmlText(d.city)}, ${escapeHtmlText(d.date_label)}</p>
       </div>
     </header>`;
@@ -182,9 +189,14 @@ const RENDERERS = {
 
 // --- Page shell ------------------------------------------------------------
 
-/** Every portal page as a real link, so a crawler or LLM can traverse from "/". */
+/**
+ * The reading path as real links, so a crawler or LLM can traverse from "/".
+ * The reference tables (Figure Ledger, Reconciliation) are left out: this page
+ * already links the ledger from every figure chip and from the note below, and
+ * the two are one click from any portal page's sidebar and listed in llms.txt.
+ */
 function renderFooterNav(tabs) {
-  const items = tabs.filter(t => !t.isNarrative).map(t => {
+  const items = tabs.filter(t => !t.isNarrative && t.group !== 'reference').map(t => {
     const letter = t.module ? `<span class="foot-letter" aria-hidden="true">${t.module}</span>` : '';
     return `        <li><a href="${escapeAttr(t.page)}">${letter}${escapeHtmlText(t.label)}</a></li>`;
   }).join('\n');
@@ -196,7 +208,7 @@ ${items}
     </nav>`;
 }
 
-function narrativeShell({ meta, bodyHtml, tabs, generated, assets }) {
+function narrativeShell({ meta, bodyHtml, tabs, assets }) {
   const base = meta.site_base;
   const title = `${meta.title}: ${meta.tagline}`;
   return `<!doctype html>
@@ -224,8 +236,7 @@ function narrativeShell({ meta, bodyHtml, tabs, generated, assets }) {
   </main>
 <footer class="site-foot">
     ${renderFooterNav(tabs)}
-    <p class="foot-note">Every quantitative claim on this page links to the Figure Ledger, which carries its source, date and source tier (T1 primary … T5 crypto media). Roughly a quarter of the figures in this base rest on the weakest two tiers, and the ledger flags them rather than hiding them. Figures current as of ${escapeHtmlText(generated)}; this subject moves monthly.</p>
-    <p class="foot-note">Prose and data CC BY 4.0. Code MIT. <a href="reconciliation.html">Every place two modules disagreed is logged here.</a></p>
+    <p class="foot-note">Prose and data CC BY 4.0. Code MIT.</p>
   </footer>
 <script type="module" src="${assets.narrativeJs}"></script>
 </body>
@@ -262,7 +273,6 @@ export function renderNarrativePage({ narrative, figuresData, tabs, assets }) {
     meta: narrative.meta,
     bodyHtml: parts.join('\n\n    '),
     tabs,
-    generated: figuresData.meta.generated,
     assets,
   });
 }
