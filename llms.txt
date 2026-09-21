@@ -14,7 +14,6 @@
 - [How adoption happens](how-adoption-happens.html)
 - [Figure Ledger](ledger.html)
 - [Reconciliation](reconciliation.html)
-- [The Devcon pitch](devcon-pitch.html)
 
 ## Data
 - [Figure Ledger data (JSON)](data/figures.json) — every quantitative claim with its claim, figure, unit, source, date, tier and flags.

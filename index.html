@@ -14,7 +14,7 @@
 <meta name="twitter:title" content="Tokenised settlement in India: what's live, what's legal, where Ethereum fits">
 <meta name="twitter:description" content="Where distributed-ledger settlement actually stands in Indian institutional finance: what is live, what Indian law permits, and where public Ethereum fits. Built ahead of Devcon 8, Mumbai, 3–6 November 2026.">
 <link rel="stylesheet" href="assets/tokens.css?v=aa017298">
-<link rel="stylesheet" href="assets/narrative.css?v=040215d1">
+<link rel="stylesheet" href="assets/narrative.css?v=497bb1f0">
 </head>
 <body class="narrative">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -31,6 +31,19 @@
           <a class="btn btn-primary" href="#the-mandate">Start reading</a>
           <a class="btn btn-ghost" href="evidence.html">Skip to the evidence base</a>
         </div>
+        <div class="landing-prompt" id="llm-top">
+    <details class="landing-prompt-details js-copy-widget" data-copy-label="a personalized exploration prompt">
+      <summary class="landing-prompt-summary">Copy a personalized prompt — explore this report with your own LLM</summary>
+      <div class="landing-prompt-panel">
+        <p class="landing-prompt-hint">Paste this into ChatGPT, Claude, Gemini, or any LLM that can fetch a URL. With JavaScript on, the box below already has this page's real address in it. Reading without JavaScript? Swap the <code>{{BASE_URL}}</code> placeholder for this page's address before you paste.</p>
+        <textarea class="copy-textarea landing-prompt-textarea" readonly rows="14" aria-label="Personalized prompt for exploring this report with an LLM">Please fetch {{BASE_URL}}llms.txt first. It indexes the eleven pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, and a Reconciliation page. Then read the Overview at {{BASE_URL}}evidence.html and open whichever module pages look most relevant.
+
+Before you answer, use what you already know about me from memory and our past conversations: what I work on, what I follow, what I have asked you before. If you know nothing about me, ask me that first.
+
+Then give me a handful of bullet points about Ethereum's institutional potential in India that I'm least likely to already know, each with a line on why it is new or useful for me specifically.</textarea>
+      </div>
+    </details>
+  </div>
         <p class="hero-devcon">Built ahead of <a href="https://devcon.org/en/">Devcon 8</a> — Mumbai, 3–6 November 2026</p>
       </div>
     </header>
@@ -137,9 +150,24 @@
       </div>
     </section>
 
+    <section class="scene scene-prose" id="the-concession">
+      <div class="scene-inner">
+        <p class="scene-eyebrow"><span class="scene-num" aria-hidden="true">04</span>What the case has to survive</p><h2 class="scene-headline">Confidentiality ruled out every public chain.</h2>
+        <div class="scene-body"><p>On a public chain, positions and transfers are visible to anyone who looks; a whitelist controls who can enter, not who can see. That is the stated reason JPMorgan, Goldman Sachs, DTCC and HSBC built on permissioned Canton, and the reason India's own tokenised bonds settled on a ledger owned by the depositories. The requirement disqualifies any ledger whose contents are public by default, Ethereum included, so a proposal that puts confidential bank activity on one is answering a question nobody asked.</p>
+<p>Privacy is the fastest-moving part of the Ethereum stack, and none of it has yet reached the layer where the rejection happened. The Ethereum Foundation's roadmap leaves the base layer alone: L1 stays a public ledger by design, and confidentiality is built above it at the wallet, application and layer-2 layers. So the overlay is what an institution actually has to judge. The Enterprise Ethereum Alliance's own April 2026 survey rates <a class="fig-chip fig-safe" href="ledger.html#fig-142" title="Enterprise privacy solutions rated generally available (of 7 profiled): 1 solutions (as of Apr 2026) — EEA Privacy WG, State of Privacy on Ethereum for Enterprise v1 [T1]">one of seven<span class="fig-tier">T1</span></a> enterprise privacy stacks generally available, with <a class="fig-chip fig-safe" href="ledger.html#fig-143" title="Enterprise privacy solutions still at pilot stage (of 7 profiled): 5 solutions (as of Apr 2026) — EEA Privacy WG, State of Privacy on Ethereum for Enterprise v1 [T1]">five<span class="fig-tier">T1</span></a> still at pilot.</p>
+<p>The one regulated production deployment sits in fund distribution rather than bank settlement. Since February 2026, tokenised money-market funds from <a class="fig-chip fig-warn is-stale" href="ledger.html#fig-144" title="Named fund managers with privacy-wrapped tokenised MMFs live via Archax on Silent Data: 4 managers (Aberdeen, BlackRock, Fidelity Intl, State Street) (as of 19 Feb 2026) — Applied Blockchain / Archax release; Asset Servicing Times [T4/T3], WEAK_TIER">four managers<span class="fig-tier">T4/T3</span></a> — Aberdeen, BlackRock, Fidelity International and State Street — have been available through Archax with a privacy wrapper on a TEE-based Ethereum layer-2. That is a layer which had already chosen public chains. No bank-run core-settlement venue has moved. SWIFT built its shared ledger on Linea, Ethereum layer-2 technology, put <a class="fig-chip fig-safe" href="ledger.html#fig-148" title="SWIFT shared ledger (built on Linea) banks at initial use: 17 banks (as of 9 Jul 2026) — SWIFT press release [T1]">17 banks<span class="fig-tier">T1</span></a> on it, and kept it permissioned.</p>
+<p>The remaining objections concede better than they argue. Every consortium blockchain of the last decade failed, which is true, and the failures were governance failures rather than technical ones. And India already has UPI, an account aggregator and a working depository, which is largely correct for the retail and data layers. What survives both concessions is narrow and specific: bond secondary settlement, cross-border, and deep-tier MSME receivables, none of which those rails were built to solve.</p></div>
+        <aside class="scene-limit">
+        <span class="scene-limit-label">What this could not establish</span>
+        <p>How firmly India has closed the shielded-pool branch of this work. FIU-IND's 2026 guidelines appear to leave <a class="fig-chip fig-neutral is-stale is-unverified" href="ledger.html#fig-153" title="FIU-IND 2026 AML/CFT guidelines: permitted AEC deposit/withdrawal flows for reporting entities: 0 permitted flows (as of 2026) — Law-firm summary of FIU-IND guidelines; primary circular not located [T3], UNVERIFIED">no permitted flows<span class="fig-tier">T3</span></a> for a reporting entity handling anonymity-enhancing assets, but that reading rests on a law-firm summary; the primary circular could not be located.</p>
+      </aside>
+        <p class="scene-deeper"><a href="the-privacy-question.html">Module E — what is actually moving on privacy, and what is not<span aria-hidden="true"> →</span></a><a href="the-objections.html">Module F — every objection in its strongest form, with its residual weakness<span aria-hidden="true"> →</span></a></p>
+      </div>
+    </section>
+
     <section class="scene scene-cta" id="devcon">
       <div class="scene-inner">
-        <p class="scene-eyebrow"><span class="scene-num" aria-hidden="true">04</span>Devcon 8, Mumbai</p><h2 class="scene-headline">The question is open. In November it gets argued in Mumbai.</h2>
+        <p class="scene-eyebrow"><span class="scene-num" aria-hidden="true">05</span>Devcon 8, Mumbai</p><h2 class="scene-headline">The question is open. In November it gets argued in Mumbai.</h2>
         <div class="scene-body"><p>Devcon is the Ethereum community's annual gathering, and the eighth edition runs from 3 to 6 November at the Jio World Centre in Bandra Kurla Complex, the same district as SEBI's headquarters.</p>
 <p>No Indian regulator is on the programme, and four days will not settle which rail a country runs on. What the week offers is the argument itself, held in the city where the decision will be made, in front of people who will take this page apart rather than nod at it.</p></div>
         <aside class="scene-limit scene-limit-strong">
@@ -174,20 +202,18 @@
         <div class="cta-secondary">
           <p class="cta-secondary-label">Whether or not you come</p>
           <ul>
-            <li><a href="evidence.html">Read the evidence base</a> <span>Seven modules, 164 sourced figures, every contradiction logged</span></li>
+            <li><a href="evidence.html">Read the evidence base</a> <span>What shipped worldwide and what failed, what Indian law actually permits, where the rupee value sits, and every objection in its strongest form.</span></li>
           </ul>
           <div class="landing-prompt" id="llm">
     <details class="landing-prompt-details js-copy-widget" data-copy-label="a personalized exploration prompt">
       <summary class="landing-prompt-summary">Copy a personalized prompt — explore this report with your own LLM</summary>
       <div class="landing-prompt-panel">
         <p class="landing-prompt-hint">Paste this into ChatGPT, Claude, Gemini, or any LLM that can fetch a URL. With JavaScript on, the box below already has this page's real address in it. Reading without JavaScript? Swap the <code>{{BASE_URL}}</code> placeholder for this page's address before you paste.</p>
-        <textarea class="copy-textarea landing-prompt-textarea" readonly rows="14" aria-label="Personalized prompt for exploring this report with an LLM">Please fetch {{BASE_URL}}llms.txt first. It indexes the twelve pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, a Reconciliation page, and the Devcon pitch. Then read the Overview at {{BASE_URL}}evidence.html and open whichever module pages look most relevant.
+        <textarea class="copy-textarea landing-prompt-textarea" readonly rows="14" aria-label="Personalized prompt for exploring this report with an LLM">Please fetch {{BASE_URL}}llms.txt first. It indexes the eleven pages of "Ethereum and Distributed Settlement Infrastructure in Indian Institutional Finance": seven module reports, a Figure Ledger carrying a source tier and date on every claim, and a Reconciliation page. Then read the Overview at {{BASE_URL}}evidence.html and open whichever module pages look most relevant.
 
 Before you answer, use what you already know about me from memory and our past conversations: what I work on, what I follow, what I have asked you before. If you know nothing about me, ask me that first.
 
-Then give me a handful of bullet points about Ethereum's institutional potential in India that I'm least likely to already know, each with a line on why it is new or useful for me specifically. Flag the source tier (T1–T5) behind anything surprising; roughly a fifth of this report rests on the weakest two.
-
-Stay ready for my follow-ups: a specific module, a number in the Figure Ledger, or an objection I want pressure-tested.</textarea>
+Then give me a handful of bullet points about Ethereum's institutional potential in India that I'm least likely to already know, each with a line on why it is new or useful for me specifically.</textarea>
       </div>
     </details>
   </div>
@@ -207,14 +233,10 @@ Stay ready for my follow-ups: a specific module, a number in the Figure Ledger, 
         <li><a href="the-privacy-question.html"><span class="foot-letter" aria-hidden="true">E</span>The privacy question</a></li>
         <li><a href="the-objections.html"><span class="foot-letter" aria-hidden="true">F</span>The objections</a></li>
         <li><a href="how-adoption-happens.html"><span class="foot-letter" aria-hidden="true">G</span>How adoption happens</a></li>
-        <li><a href="ledger.html">Figure Ledger</a></li>
-        <li><a href="reconciliation.html">Reconciliation</a></li>
-        <li><a href="devcon-pitch.html">The Devcon pitch</a></li>
       </ul>
     </nav>
-    <p class="foot-note">Every quantitative claim on this page links to the Figure Ledger, which carries its source, date and source tier (T1 primary … T5 crypto media). Roughly a quarter of the figures in this base rest on the weakest two tiers, and the ledger flags them rather than hiding them. Figures current as of 2026-09-15; this subject moves monthly.</p>
-    <p class="foot-note">Prose and data CC BY 4.0. Code MIT. <a href="reconciliation.html">Every place two modules disagreed is logged here.</a></p>
+    <p class="foot-note">Prose and data CC BY 4.0. Code MIT.</p>
   </footer>
-<script type="module" src="assets/narrative.js?v=c455e236"></script>
+<script type="module" src="assets/narrative.js?v=a5458831"></script>
 </body>
 </html>

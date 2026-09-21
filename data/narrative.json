@@ -152,9 +152,28 @@
       }
     },
     {
+      "id": "the-concession",
+      "kind": "prose",
+      "number": "04",
+      "eyebrow": "What the case has to survive",
+      "headline": "Confidentiality ruled out every public chain.",
+      "body": "On a public chain, positions and transfers are visible to anyone who looks; a whitelist controls who can enter, not who can see. That is the stated reason JPMorgan, Goldman Sachs, DTCC and HSBC built on permissioned Canton, and the reason India's own tokenised bonds settled on a ledger owned by the depositories. The requirement disqualifies any ledger whose contents are public by default, Ethereum included, so a proposal that puts confidential bank activity on one is answering a question nobody asked.\n\nPrivacy is the fastest-moving part of the Ethereum stack, and none of it has yet reached the layer where the rejection happened. The Ethereum Foundation's roadmap leaves the base layer alone: L1 stays a public ledger by design, and confidentiality is built above it at the wallet, application and layer-2 layers. So the overlay is what an institution actually has to judge. The Enterprise Ethereum Alliance's own April 2026 survey rates [[fig:142|one of seven]] enterprise privacy stacks generally available, with [[fig:143|five]] still at pilot.\n\nThe one regulated production deployment sits in fund distribution rather than bank settlement. Since February 2026, tokenised money-market funds from [[fig:144|four managers]] — Aberdeen, BlackRock, Fidelity International and State Street — have been available through Archax with a privacy wrapper on a TEE-based Ethereum layer-2. That is a layer which had already chosen public chains. No bank-run core-settlement venue has moved. SWIFT built its shared ledger on Linea, Ethereum layer-2 technology, put [[fig:148|17 banks]] on it, and kept it permissioned.\n\nThe remaining objections concede better than they argue. Every consortium blockchain of the last decade failed, which is true, and the failures were governance failures rather than technical ones. And India already has UPI, an account aggregator and a working depository, which is largely correct for the retail and data layers. What survives both concessions is narrow and specific: bond secondary settlement, cross-border, and deep-tier MSME receivables, none of which those rails were built to solve.",
+      "couldNotEstablish": "How firmly India has closed the shielded-pool branch of this work. FIU-IND's 2026 guidelines appear to leave [[fig:153|no permitted flows]] for a reporting entity handling anonymity-enhancing assets, but that reading rests on a law-firm summary; the primary circular could not be located.",
+      "deeper": [
+        {
+          "page": "the-privacy-question.html",
+          "label": "Module E — what is actually moving on privacy, and what is not"
+        },
+        {
+          "page": "the-objections.html",
+          "label": "Module F — every objection in its strongest form, with its residual weakness"
+        }
+      ]
+    },
+    {
       "id": "devcon",
       "kind": "cta",
-      "number": "04",
+      "number": "05",
       "eyebrow": "Devcon 8, Mumbai",
       "headline": "The question is open. In November it gets argued in Mumbai.",
       "body": "Devcon is the Ethereum community's annual gathering, and the eighth edition runs from 3 to 6 November at the Jio World Centre in Bandra Kurla Complex, the same district as SEBI's headquarters.\n\nNo Indian regulator is on the programme, and four days will not settle which rail a country runs on. What the week offers is the argument itself, held in the city where the decision will be made, in front of people who will take this page apart rather than nod at it.",
@@ -169,7 +188,7 @@
           "kind": "secondary",
           "label": "Read the evidence base",
           "href": "evidence.html",
-          "note": "Seven modules, 164 sourced figures, every contradiction logged"
+          "note": "What shipped worldwide and what failed, what Indian law actually permits, where the rupee value sits, and every objection in its strongest form."
         }
       ]
     }

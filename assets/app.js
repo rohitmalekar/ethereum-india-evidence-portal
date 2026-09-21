@@ -72,24 +72,26 @@ function landingBaseUrl() {
 }
 
 function enhanceLandingPrompt() {
-  const details = document.querySelector('.landing-prompt-details');
-  if (!details) return; // only present on evidence.html
-  const textarea = details.querySelector('.copy-textarea');
-  const summary = details.querySelector('.landing-prompt-summary');
-  if (!textarea) return;
+  // Every instance, not just the first: evidence.html ships one today, and the
+  // widget's renderer is shared with index.html, which carries two.
+  document.querySelectorAll('.landing-prompt-details').forEach(details => {
+    const textarea = details.querySelector('.copy-textarea');
+    const summary = details.querySelector('.landing-prompt-summary');
+    if (!textarea) return;
 
-  // The static build can only ship a placeholder — the real URL is known
-  // only at runtime. Substitute before the fallback button (added below by
-  // enhanceModuleCopy) or this summary's own click handler can copy it.
-  textarea.value = textarea.value.split('{{BASE_URL}}').join(landingBaseUrl());
+    // The static build can only ship a placeholder — the real URL is known
+    // only at runtime. Substitute before the fallback button (added below by
+    // enhanceModuleCopy) or this summary's own click handler can copy it.
+    textarea.value = textarea.value.split('{{BASE_URL}}').join(landingBaseUrl());
 
-  if (summary) {
-    summary.addEventListener('click', async () => {
-      if (details.open) return; // only copy on the click that opens the panel
-      const ok = await copyToClipboard(textarea.value);
-      flashCopied(summary, ok ? 'Copied — go paste it into your LLM' : 'Copy failed — use the box below');
-    });
-  }
+    if (summary) {
+      summary.addEventListener('click', async () => {
+        if (details.open) return; // only copy on the click that opens the panel
+        const ok = await copyToClipboard(textarea.value);
+        flashCopied(summary, ok ? 'Copied — go paste it into your LLM' : 'Copy failed — use the box below');
+      });
+    }
+  });
 }
 
 function enhanceSectionCopy() {

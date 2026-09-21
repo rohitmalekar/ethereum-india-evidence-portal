@@ -183,32 +183,34 @@ function pageBaseUrl() {
 }
 
 function enhanceLlmPrompt() {
-  const details = document.querySelector('.landing-prompt-details');
-  if (!details) return;
-  const textarea = details.querySelector('.copy-textarea');
-  const summary = details.querySelector('.landing-prompt-summary');
-  if (!textarea) return;
+  // index.html carries this widget twice, in the hero and in the closing CTA,
+  // so every instance gets the substitution and its own button.
+  document.querySelectorAll('.landing-prompt-details').forEach(details => {
+    const textarea = details.querySelector('.copy-textarea');
+    const summary = details.querySelector('.landing-prompt-summary');
+    if (!textarea) return;
 
-  // The build ships a placeholder; only the browser knows the real address.
-  textarea.value = textarea.value.split('{{BASE_URL}}').join(pageBaseUrl());
+    // The build ships a placeholder; only the browser knows the real address.
+    textarea.value = textarea.value.split('{{BASE_URL}}').join(pageBaseUrl());
 
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'copy-btn';
-  btn.textContent = 'Copy to clipboard';
-  btn.addEventListener('click', async () => {
-    const ok = await copyToClipboard(textarea.value);
-    flashCopied(btn, ok ? 'Copied' : 'Copy failed');
-  });
-  textarea.parentNode.insertBefore(btn, textarea);
-
-  if (summary) {
-    summary.addEventListener('click', async () => {
-      if (details.open) return; // copy only on the click that opens it
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy to clipboard';
+    btn.addEventListener('click', async () => {
       const ok = await copyToClipboard(textarea.value);
-      flashCopied(summary, ok ? 'Copied \u2014 go paste it into your LLM' : 'Copy failed \u2014 use the box below');
+      flashCopied(btn, ok ? 'Copied' : 'Copy failed');
     });
-  }
+    textarea.parentNode.insertBefore(btn, textarea);
+
+    if (summary) {
+      summary.addEventListener('click', async () => {
+        if (details.open) return; // copy only on the click that opens it
+        const ok = await copyToClipboard(textarea.value);
+        flashCopied(summary, ok ? 'Copied \u2014 go paste it into your LLM' : 'Copy failed \u2014 use the box below');
+      });
+    }
+  });
 }
 
 /** Opt sections into a fade-up on scroll. The hiding rule lives under

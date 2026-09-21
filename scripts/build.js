@@ -36,20 +36,24 @@ async function versionedAsset(relPath) {
   return `${relPath}?v=${hash}`;
 }
 
+// `group` drives the sidebar headings. Entries must stay in reading order:
+// renderSidebar() emits a heading wherever the group changes, so interleaving
+// two runs of the same group would print its heading twice.
 const TABS = [
   { id: 'narrative', label: 'Start here', file: 'data/narrative.json', page: 'index.html', isNarrative: true },
   { id: 'overview', label: 'Overview', file: 'content/intro.md', page: 'evidence.html', hasTiers: false },
-  { id: 'what-shipped', label: 'What shipped', module: 'A', file: 'content/module-a.md', page: 'what-shipped.html', hasTiers: true },
-  { id: 'whats-legal-in-india', label: "What's legal in India", module: 'B', file: 'content/module-b.md', page: 'whats-legal-in-india.html', hasTiers: true },
-  { id: 'where-the-value-is', label: 'Where the value is', module: 'C', file: 'content/module-c.md', page: 'where-the-value-is.html', hasTiers: true },
-  { id: 'ethereum-vs-alternatives', label: 'Ethereum vs alternatives', module: 'D', file: 'content/module-d.md', page: 'ethereum-vs-alternatives.html', hasTiers: true },
-  { id: 'the-privacy-question', label: 'The privacy question', module: 'E', file: 'content/module-e.md', page: 'the-privacy-question.html', hasTiers: true },
-  { id: 'the-objections', label: 'The objections', module: 'F', file: 'content/module-f.md', page: 'the-objections.html', hasTiers: true },
-  { id: 'how-adoption-happens', label: 'How adoption happens', module: 'G', file: 'content/module-g.md', page: 'how-adoption-happens.html', hasTiers: true },
-  { id: 'ledger', label: 'Figure Ledger', page: 'ledger.html', isLedger: true },
-  { id: 'reconciliation', label: 'Reconciliation', file: 'content/reconciliation.md', page: 'reconciliation.html', hasTiers: false },
-  { id: 'devcon-pitch', label: 'The Devcon pitch', file: 'content/devcon-pitch.md', page: 'devcon-pitch.html', hasTiers: false },
+  { id: 'what-shipped', label: 'What shipped', module: 'A', group: 'modules', file: 'content/module-a.md', page: 'what-shipped.html', hasTiers: true },
+  { id: 'whats-legal-in-india', label: "What's legal in India", module: 'B', group: 'modules', file: 'content/module-b.md', page: 'whats-legal-in-india.html', hasTiers: true },
+  { id: 'where-the-value-is', label: 'Where the value is', module: 'C', group: 'modules', file: 'content/module-c.md', page: 'where-the-value-is.html', hasTiers: true },
+  { id: 'ethereum-vs-alternatives', label: 'Ethereum vs alternatives', module: 'D', group: 'modules', file: 'content/module-d.md', page: 'ethereum-vs-alternatives.html', hasTiers: true },
+  { id: 'the-privacy-question', label: 'The privacy question', module: 'E', group: 'modules', file: 'content/module-e.md', page: 'the-privacy-question.html', hasTiers: true },
+  { id: 'the-objections', label: 'The objections', module: 'F', group: 'modules', file: 'content/module-f.md', page: 'the-objections.html', hasTiers: true },
+  { id: 'how-adoption-happens', label: 'How adoption happens', module: 'G', group: 'modules', file: 'content/module-g.md', page: 'how-adoption-happens.html', hasTiers: true },
+  { id: 'ledger', label: 'Figure Ledger', group: 'reference', page: 'ledger.html', isLedger: true },
+  { id: 'reconciliation', label: 'Reconciliation', group: 'reference', file: 'content/reconciliation.md', page: 'reconciliation.html', hasTiers: false },
 ];
+
+const GROUP_LABELS = { modules: 'Modules', reference: 'Reference' };
 
 const TIER_ORDER = ['30s', '5min', 'full'];
 const TIER_LABELS = { '30s': '30 seconds', '5min': '5 minutes', full: 'Full report' };
@@ -152,10 +156,44 @@ function splitBeforeFirstH2(raw) {
   return { introRaw: normalized.slice(0, splitAt), restRaw: normalized.slice(splitAt) };
 }
 
+/**
+ * The findings list is the overview's router into the seven modules, and as a
+ * plain <ul> of long paragraphs it read as a wall. Each item opens
+ * `**A \u2014 What shipped.** ...`, so the letter and title are lifted out into a
+ * linked card head and the rest becomes the card body. The destination comes
+ * from TABS, so the links cannot drift from the pages that exist.
+ *
+ * Anything that does not match the pattern is left exactly as markdown
+ * rendered it, which is also what happens if the list is ever rewritten.
+ */
+function renderFindingCards(listHtml) {
+  const byModule = new Map(TABS.filter(t => t.module).map(t => [t.module, t]));
+  const items = listHtml.match(/<li>[\s\S]*?<\/li>/g);
+  if (!items) return listHtml;
+
+  const cards = items.map(item => {
+    const m = item.match(/^<li><strong>([A-G])\s*\u2014\s*([^<]*?)\.?<\/strong>\s*([\s\S]*)<\/li>$/);
+    if (!m) return item;
+    const [, letter, title, body] = m;
+    const tab = byModule.get(letter);
+    if (!tab) return item;
+    return `<li class="finding">
+        <a class="finding-head" href="${escapeAttr(tab.page)}" aria-label="Module ${letter}, ${escapeAttr(title)}">
+          <span class="finding-letter" aria-hidden="true">${letter}</span>
+          <span class="finding-title">${escapeHtmlText(title)}</span>
+        </a>
+        <p class="finding-body">${body}</p>
+      </li>`;
+  });
+
+  return `<ul class="findings">\n      ${cards.join('\n      ')}\n    </ul>`;
+}
+
 function renderOverviewBody(raw) {
   const { introRaw, restRaw } = splitBeforeFirstH2(raw);
   const introHtml = renderMarkdown(introRaw);
-  const restHtml = restRaw ? renderMarkdown(restRaw) : '';
+  let restHtml = restRaw ? renderMarkdown(restRaw) : '';
+  restHtml = restHtml.replace(/<ul>[\s\S]*?<\/ul>/, renderFindingCards);
   return `<div class="tab-header"></div>
 <div class="tab-body">${introHtml}
 ${renderLandingPromptCta()}
@@ -178,7 +216,7 @@ function renderModuleBody(tab, raw) {
     : '';
 
   if (availableTiers.length === 1) {
-    // Single tier present (e.g. the Devcon stub): no switcher, just render it.
+    // Only one tier present: no switcher to offer, so just render it.
     const only = availableTiers[0];
     let bodyHtml = renderMarkdown(tiers[only]);
     if (only === 'full') bodyHtml = attachSectionAttrs(bodyHtml, extractSections(tiers.full), tab);
@@ -299,18 +337,47 @@ function renderLedgerBody(data) {
   </div>`;
 }
 
-function renderSidebar(activeId) {
-  const items = TABS.map(tab => {
-    const active = tab.id === activeId;
-    const cls = 'nav-item' + (active ? ' active' : '');
-    const currentAttr = active ? ' aria-current="page"' : '';
-    const ariaLabel = tab.module ? ` aria-label="Module ${tab.module}, ${tab.label}"` : '';
-    const inner = tab.module
+function renderNavItem(tab, activeId) {
+  const active = tab.id === activeId;
+  const classes = ['nav-item', tab.isNarrative ? 'nav-return' : '', active ? 'active' : ''].filter(Boolean).join(' ');
+  const currentAttr = active ? ' aria-current="page"' : '';
+  const ariaLabel = tab.module ? ` aria-label="Module ${tab.module}, ${tab.label}"` : '';
+  // The arrow is chrome, like the → in scripts/narrative.js deeperLink().
+  const inner = tab.isNarrative
+    ? `<span class="nav-arrow" aria-hidden="true">←</span>${tab.label}`
+    : tab.module
       ? `<span class="nav-letter" aria-hidden="true">${tab.module}</span> ${tab.label}`
       : tab.label;
-    return `      <a href="${tab.page}" class="${cls}"${currentAttr}${ariaLabel}>${inner}</a>`;
-  }).join('\n');
-  return `<div class="sidebar-nav">\n${items}\n    </div>`;
+  return `<a href="${tab.page}" class="${classes}"${currentAttr}${ariaLabel}>${inner}</a>`;
+}
+
+/**
+ * Twelve flat links told a reader nothing about which of them were the front
+ * door, the seven modules and the two reference tables. Consecutive tabs
+ * sharing a `group` are wrapped in a labelled role="group", so the grouping
+ * reaches a screen reader rather than being a visual heading only. Ungrouped
+ * tabs (the narrative and the overview) render as bare links, as before.
+ */
+function renderSidebar(activeId) {
+  const parts = [];
+  let i = 0;
+  while (i < TABS.length) {
+    const group = TABS[i].group;
+    if (!group) {
+      parts.push(`      ${renderNavItem(TABS[i], activeId)}`);
+      i++;
+      continue;
+    }
+    const run = [];
+    while (i < TABS.length && TABS[i].group === group) run.push(TABS[i++]);
+    const headingId = `nav-group-${group}`;
+    const links = run.map(tab => `        ${renderNavItem(tab, activeId)}`).join('\n');
+    parts.push(`      <div class="nav-group" role="group" aria-labelledby="${headingId}">
+        <p class="nav-group-label" id="${headingId}">${escapeHtmlText(GROUP_LABELS[group])}</p>
+${links}
+      </div>`);
+  }
+  return `<div class="sidebar-nav">\n${parts.join('\n')}\n    </div>`;
 }
 
 function pageShell({ tab, bodyHtml, assets }) {

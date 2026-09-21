@@ -173,10 +173,9 @@ comments themselves never reach the renderer, then renders each tier to a
 separate `<div class="tier-panel">` in the generated HTML.
 
 Files with no `<!-- TIER: -->` markers at all (`intro.md`, `reconciliation.md`)
-render as a single flowing document with no tier switcher. `devcon-pitch.md`
-carries a single `<!-- TIER:full -->` marker by design (see its stub content). Since
-only one tier exists, it also renders without a switcher, and (per the
-original design) without the "copy for an LLM" affordance either.
+render as a single flowing document with no tier switcher. A file carrying
+exactly one marker renders the same way: no switcher, and no "copy for an LLM"
+affordance either.
 
 The `**Question:**` line is detected and styled as a callout automatically;
 you don't need to add any markup for it. Just keep the line as
