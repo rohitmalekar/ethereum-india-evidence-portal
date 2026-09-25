@@ -2215,6 +2215,48 @@
         "DERIVED"
       ],
       "id": 164
+    },
+    {
+      "module": "D",
+      "claim": "Daml contributor base",
+      "figure": "~200",
+      "unit": "contributors",
+      "as_of": "Jan 2026",
+      "as_of_sort": "2026-01-30",
+      "source": "EthSystems, Public rails vs private ledgers",
+      "tier": "T4",
+      "flags": [
+        "WEAK_TIER"
+      ],
+      "id": 165
+    },
+    {
+      "module": "D",
+      "claim": "Canton protocol-change threshold",
+      "figure": "2/3",
+      "unit": "Super Validator vote",
+      "as_of": "Jan 2026",
+      "as_of_sort": "2026-01-30",
+      "source": "EthSystems, Public rails vs private ledgers",
+      "tier": "T4",
+      "flags": [
+        "WEAK_TIER"
+      ],
+      "id": 166
+    },
+    {
+      "module": "D",
+      "claim": "Zenith (EVM layer on Canton) mainnet status",
+      "figure": "Not live; external_call() scheduled for Canton 3.6",
+      "unit": "status",
+      "as_of": "Jul 2026",
+      "as_of_sort": "2026-07-08",
+      "source": "Canton Network blog (Mar 2026); Canton Network Forum (Jul 2026)",
+      "tier": "T4",
+      "flags": [
+        "WEAK_TIER"
+      ],
+      "id": 167
     }
   ]
 }
