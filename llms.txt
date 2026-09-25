@@ -17,3 +17,4 @@
 
 ## Data
 - [Figure Ledger data (JSON)](data/figures.json) — every quantitative claim with its claim, figure, unit, source, date, tier and flags.
+- Each Figure Ledger row is anchored as ledger.html#fig-<ID>. Cite that anchor, with the row's tier and as-of date, when quoting a figure.

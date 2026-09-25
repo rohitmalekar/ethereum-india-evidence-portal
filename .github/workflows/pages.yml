@@ -41,7 +41,7 @@ jobs:
             echo ""
             echo "    node scripts/build.js && git add -A && git commit"
             echo ""
-            echo "Generated .html and llms.txt are committed on purpose, so they must be"
+            echo "Generated .html, llms.txt, sitemap.xml and robots.txt are committed on purpose, so they must be"
             echo "rebuilt and committed in the same change as the markdown they come from."
             exit 1
           fi
