@@ -59,7 +59,7 @@ function buildLegend(meta) {
   grid.className = 'legend-grid';
 
   const tierCol = document.createElement('div');
-  tierCol.innerHTML = '<h3>Source tiers</h3>';
+  tierCol.innerHTML = '<h2>Source tiers</h2>';
   const tierDl = document.createElement('dl');
   Object.entries(meta.tier_legend).forEach(([k, v]) => {
     const dt = document.createElement('dt');
@@ -72,7 +72,7 @@ function buildLegend(meta) {
   tierCol.appendChild(tierDl);
 
   const flagCol = document.createElement('div');
-  flagCol.innerHTML = '<h3>Flags</h3>';
+  flagCol.innerHTML = '<h2>Flags</h2>';
   const flagDl = document.createElement('dl');
   Object.entries(meta.flag_legend).forEach(([k, v]) => {
     const dt = document.createElement('dt');
@@ -112,7 +112,7 @@ export function renderLedger(container, data) {
 
   const heading = document.createElement('div');
   heading.className = 'tab-header';
-  heading.innerHTML = `<h1>Figure Ledger</h1><p class="ledger-intro">Every quantitative claim in this evidence base, with its source tier and "as of" date — filterable, searchable, and one click from a properly-attributed citation.</p>`;
+  heading.innerHTML = `<h1>Figure Ledger</h1><p class="ledger-intro">Every quantitative claim in this evidence base, with its source tier and "as of" date — filterable, searchable, and one click from a properly-attributed citation.</p><p class="ledger-data-link"><a href="data/figures.json">Download the ledger as JSON</a> (data/figures.json)</p>`;
   root.appendChild(heading);
 
   root.appendChild(buildLegend(meta));

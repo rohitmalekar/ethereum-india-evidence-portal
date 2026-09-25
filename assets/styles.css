@@ -656,6 +656,11 @@ body {
   color: var(--color-text-muted);
 }
 
+.ledger-data-link {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
 .ledger-legend {
   max-width: var(--content-max);
   margin-bottom: 1.25rem;
@@ -678,7 +683,7 @@ body {
   margin-top: 0.75rem;
 }
 
-.legend-grid h3 {
+.legend-grid h2 {
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;

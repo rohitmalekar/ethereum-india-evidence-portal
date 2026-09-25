@@ -4,8 +4,66 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Figure Ledger — Ethereum/India Institutional Evidence Portal</title>
+<meta name="description" content="Every quantitative claim in the evidence base with its figure, unit, as-of date, source and tier (T1 to T5). Rows are deep-linkable; the full set is JSON.">
+<link rel="canonical" href="https://rohitmalekar.github.io/ethereum-india-evidence-portal/ledger.html">
+<link rel="alternate" type="application/json" href="data/figures.json" title="Figure Ledger data">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ethereum/India Institutional Evidence Portal">
+<meta property="og:url" content="https://rohitmalekar.github.io/ethereum-india-evidence-portal/ledger.html">
+<meta property="og:title" content="Figure Ledger — Ethereum/India Institutional Evidence Portal">
+<meta property="og:description" content="Every quantitative claim in the evidence base with its figure, unit, as-of date, source and tier (T1 to T5). Rows are deep-linkable; the full set is JSON.">
+<meta property="og:image" content="https://rohitmalekar.github.io/ethereum-india-evidence-portal/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ethereum/India Institutional Evidence Portal: tokenised settlement in India, what's live, what's legal, where Ethereum fits">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Figure Ledger — Ethereum/India Institutional Evidence Portal">
+<meta name="twitter:description" content="Every quantitative claim in the evidence base with its figure, unit, as-of date, source and tier (T1 to T5). Rows are deep-linkable; the full set is JSON.">
+<meta name="twitter:image" content="https://rohitmalekar.github.io/ethereum-india-evidence-portal/assets/og-card.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Ethereum/India Institutional Evidence Portal: Figure Ledger",
+  "description": "Every quantitative claim in the evidence base with its figure, unit, as-of date, source and tier (T1 to T5). Rows are deep-linkable; the full set is JSON.",
+  "url": "https://rohitmalekar.github.io/ethereum-india-evidence-portal/ledger.html",
+  "dateModified": "2026-09-15",
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {
+    "@type": "Person",
+    "name": "Rohit Malekar"
+  },
+  "isPartOf": {
+    "@id": "https://rohitmalekar.github.io/ethereum-india-evidence-portal/#website"
+  },
+  "isAccessibleForFree": true,
+  "keywords": [
+    "tokenisation",
+    "distributed ledger",
+    "Ethereum",
+    "India",
+    "institutional finance",
+    "settlement"
+  ],
+  "variableMeasured": [
+    "claim",
+    "figure",
+    "unit",
+    "as_of",
+    "source",
+    "tier",
+    "flags"
+  ],
+  "distribution": {
+    "@type": "DataDownload",
+    "encodingFormat": "application/json",
+    "contentUrl": "https://rohitmalekar.github.io/ethereum-india-evidence-portal/data/figures.json"
+  }
+}
+</script>
 <link rel="stylesheet" href="assets/tokens.css?v=aa017298">
-<link rel="stylesheet" href="assets/styles.css?v=91f01419">
+<link rel="stylesheet" href="assets/styles.css?v=86d47ccd">
 </head>
 <body>
 <input type="checkbox" id="nav-toggle-checkbox" class="nav-toggle-checkbox" aria-hidden="true">
@@ -49,16 +107,17 @@
     <div class="tab-header">
       <h1>Figure Ledger</h1>
       <p class="ledger-intro">Every quantitative claim in this evidence base, with its source tier and "as of" date.</p>
+      <p class="ledger-data-link"><a href="data/figures.json">Download the ledger as JSON</a> (data/figures.json)</p>
     </div>
     <details class="ledger-legend">
     <summary>Legend: source tiers and flags</summary>
     <div class="legend-grid">
-      <div><h3>Source tiers</h3><dl><dt>T1</dt><dd>Primary - regulator/statute/filing/on-chain</dd>
+      <div><h2>Source tiers</h2><dl><dt>T1</dt><dd>Primary - regulator/statute/filing/on-chain</dd>
 <dt>T2</dt><dd>Named data provider - RWA.xyz, DefiLlama, World Bank, etc.</dd>
 <dt>T3</dt><dd>Tier-1 financial press</dd>
 <dt>T4</dt><dd>Company blog / press release - promotional</dd>
 <dt>T5</dt><dd>Crypto media / aggregator - leads only</dd></dl></div>
-      <div><h3>Flags</h3><dl><dt>WEAK_TIER</dt><dd>Sole source is T4/T5 (or T3/T4 with no primary) - cannot stand alone for a volume/adoption/performance figure</dd>
+      <div><h2>Flags</h2><dl><dt>WEAK_TIER</dt><dd>Sole source is T4/T5 (or T3/T4 with no primary) - cannot stand alone for a volume/adoption/performance figure</dd>
 <dt>STALE</dt><dd>Older than staleness_cutoff, non-historical, non-evergreen - re-pull before external use</dd>
 <dt>HISTORICAL</dt><dd>Old but stable fact - do not amber-flag</dd>
 <dt>CURRENT</dt><dd>Evergreen statute/rate - never stale</dd>
@@ -125,7 +184,7 @@
       <td class="col-claim">J.P. Morgan total payments per day</td>
       <td>&gt;10</td>
       <td>$tn/day</td>
-      <td>2025</td>
+      <td><time datetime="2025">2025</time></td>
       <td class="col-source">American Banker</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -169,7 +228,7 @@
       <td class="col-claim">BENJI/FOBXX suite AUM</td>
       <td>1.98</td>
       <td>$bn</td>
-      <td>29 Apr 2026</td>
+      <td><time datetime="2026-04-29">29 Apr 2026</time></td>
       <td class="col-source">Stellar / Franklin</td>
       <td><span class="chip tier-chip tier-warn">T4</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -191,7 +250,7 @@
       <td class="col-claim">BENJI 7-day effective yield</td>
       <td>3.58</td>
       <td>%</td>
-      <td>8 Apr 2026</td>
+      <td><time datetime="2026-04-08">8 Apr 2026</time></td>
       <td class="col-source">aggregator</td>
       <td><span class="chip tier-chip tier-warn">T5</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -257,7 +316,7 @@
       <td class="col-claim">Stablecoin total market cap</td>
       <td>~316</td>
       <td>$bn</td>
-      <td>12 Jun 2026</td>
+      <td><time datetime="2026-06-12">12 Jun 2026</time></td>
       <td class="col-source">DefiLlama</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"></td>
@@ -268,7 +327,7 @@
       <td class="col-claim">USDT market cap / share</td>
       <td>~187 / 59</td>
       <td>$bn / %</td>
-      <td>12 Jun 2026</td>
+      <td><time datetime="2026-06-12">12 Jun 2026</time></td>
       <td class="col-source">DefiLlama</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"></td>
@@ -279,7 +338,7 @@
       <td class="col-claim">USDC market cap / share</td>
       <td>~75 / 24</td>
       <td>$bn / %</td>
-      <td>12 Jun 2026</td>
+      <td><time datetime="2026-06-12">12 Jun 2026</time></td>
       <td class="col-source">DefiLlama</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"></td>
@@ -312,7 +371,7 @@
       <td class="col-claim">Visa stablecoin settlement run-rate (earlier)</td>
       <td>~3.5</td>
       <td>$bn annualised</td>
-      <td>30 Nov 2025</td>
+      <td><time datetime="2025-11-30">30 Nov 2025</time></td>
       <td class="col-source">Visa</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -389,7 +448,7 @@
       <td class="col-claim">Tokenised equity: BNB Chain vs Ethereum</td>
       <td>1.2 vs ~0.8</td>
       <td>$bn</td>
-      <td>31 Aug 2026</td>
+      <td><time datetime="2026-08-31">31 Aug 2026</time></td>
       <td class="col-source">RWA.xyz</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"></td>
@@ -400,7 +459,7 @@
       <td class="col-claim">we.trade losses vs revenue</td>
       <td>&gt;8 loss on ~4 rev</td>
       <td>$m</td>
-      <td>2020</td>
+      <td><time datetime="2020">2020</time></td>
       <td class="col-source">S&amp;P Global / Ledger Insights</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -433,7 +492,7 @@
       <td class="col-claim">ASX CHESS software completion</td>
       <td>~63</td>
       <td>%</td>
-      <td>2022</td>
+      <td><time datetime="2022">2022</time></td>
       <td class="col-source">ASIC / press</td>
       <td><span class="chip tier-chip tier-neutral">T1/T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -499,7 +558,7 @@
       <td class="col-claim">NSDL registered issuers</td>
       <td>79,773 (6,287 listed)</td>
       <td>issuers</td>
-      <td>31 Mar 2025</td>
+      <td><time datetime="2025-03-31">31 Mar 2025</time></td>
       <td class="col-source">NSDL RHP</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -543,7 +602,7 @@
       <td class="col-claim">e-Rupee retail cumulative transactions</td>
       <td>~120m / &gt;28,000</td>
       <td>txns / Rs cr</td>
-      <td>5 Dec 2025</td>
+      <td><time datetime="2025-12-05">5 Dec 2025</time></td>
       <td class="col-source">Dep. Governor speech</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -554,7 +613,7 @@
       <td class="col-claim">e-Rupee users / transactions (mid-2026)</td>
       <td>~12m / &gt;175m / ~400</td>
       <td>users / txns / Rs bn</td>
-      <td>2 Jul 2026</td>
+      <td><time datetime="2026-07-02">2 Jul 2026</time></td>
       <td class="col-source">Governor speech</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"></td>
@@ -598,7 +657,7 @@
       <td class="col-claim">DPDP Act maximum penalty</td>
       <td>250 per contravention</td>
       <td>Rs cr</td>
-      <td>2023</td>
+      <td><time datetime="2023">2023</time></td>
       <td class="col-source">DPDP Act 2023 s.33</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">CURRENT</span></td>
@@ -620,7 +679,7 @@
       <td class="col-claim">GST rate deliberated (not enacted)</td>
       <td>28</td>
       <td>%</td>
-      <td>2022</td>
+      <td><time datetime="2022">2022</time></td>
       <td class="col-source">Business Standard</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -642,7 +701,7 @@
       <td class="col-claim">IFSCA RWA tokenisation consultation paper</td>
       <td>1</td>
       <td>paper</td>
-      <td>26 Feb 2025</td>
+      <td><time datetime="2025-02-26">26 Feb 2025</time></td>
       <td class="col-source">IFSCA</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -653,7 +712,7 @@
       <td class="col-claim">UK Digital Securities Sandbox duration</td>
       <td>5 from 8 Jan 2024</td>
       <td>years</td>
-      <td>2024</td>
+      <td><time datetime="2024">2024</time></td>
       <td class="col-source">Bank of England / FCA</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -708,7 +767,7 @@
       <td class="col-claim">G-sec annual settlement value</td>
       <td>1,812 lakh</td>
       <td>Rs cr</td>
-      <td>2024</td>
+      <td><time datetime="2024">2024</time></td>
       <td class="col-source">RBI Payment Systems Report</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -741,7 +800,7 @@
       <td class="col-claim">Inward remittances</td>
       <td>129</td>
       <td>US$bn</td>
-      <td>2024</td>
+      <td><time datetime="2024">2024</time></td>
       <td class="col-source">World Bank</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -840,7 +899,7 @@
       <td class="col-claim">NPS + APY AUM</td>
       <td>16.55 lakh</td>
       <td>Rs cr</td>
-      <td>29 Mar 2026</td>
+      <td><time datetime="2026-03-29">29 Mar 2026</time></td>
       <td class="col-source">PFRDA</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"></td>
@@ -862,7 +921,7 @@
       <td class="col-claim">Trade finance covered vs required</td>
       <td>28.5 of 284</td>
       <td>% of US$bn</td>
-      <td>2025</td>
+      <td><time datetime="2025">2025</time></td>
       <td class="col-source">ADB / DGFT</td>
       <td><span class="chip tier-chip tier-safe">T1/T2</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -950,7 +1009,7 @@
       <td class="col-claim">FX rate used (Module C)</td>
       <td>95.45</td>
       <td>Rs/USD</td>
-      <td>31 Aug 2026</td>
+      <td><time datetime="2026-08-31">31 Aug 2026</time></td>
       <td class="col-source">CEIC / RBI</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"><span class="chip flag-chip">CONFLICT</span></td>
@@ -972,7 +1031,7 @@
       <td class="col-claim">Solana network outages</td>
       <td>&gt;=11 (2020-24)</td>
       <td>outages</td>
-      <td>2024</td>
+      <td><time datetime="2024">2024</time></td>
       <td class="col-source">Helius / MEXC</td>
       <td><span class="chip tier-chip tier-warn">T5</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -994,7 +1053,7 @@
       <td class="col-claim">Ethereum economic finality</td>
       <td>~12.8 (2 epochs)</td>
       <td>minutes</td>
-      <td>2026</td>
+      <td><time datetime="2026">2026</time></td>
       <td class="col-source">ethereum.org</td>
       <td><span class="chip tier-chip tier-warn">T4</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1005,7 +1064,7 @@
       <td class="col-claim">Broadridge DLR monthly (Jan/Mar/Jun)</td>
       <td>7.3 / 8.0 / 7.5</td>
       <td>$tn</td>
-      <td>2026</td>
+      <td><time datetime="2026">2026</time></td>
       <td class="col-source">Broadridge</td>
       <td><span class="chip tier-chip tier-warn">T4</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">WEAK_TIER</span><span class="chip flag-chip">CONFLICT</span></td>
@@ -1016,7 +1075,7 @@
       <td class="col-claim">Canton represented asset value</td>
       <td>~344.8</td>
       <td>$bn</td>
-      <td>12 May 2026</td>
+      <td><time datetime="2026-05-12">12 May 2026</time></td>
       <td class="col-source">RWA.xyz</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"></td>
@@ -1038,7 +1097,7 @@
       <td class="col-claim">Cross-chain bridge hacks 2022</td>
       <td>2 / 13 hacks / 69</td>
       <td>$bn / count / %</td>
-      <td>2022</td>
+      <td><time datetime="2022">2022</time></td>
       <td class="col-source">Chainalysis</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -1082,7 +1141,7 @@
       <td class="col-claim">India new-developer onboarding 2024</td>
       <td>17 of 39,148</td>
       <td>%</td>
-      <td>2024</td>
+      <td><time datetime="2024">2024</time></td>
       <td class="col-source">Electric Capital</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -1192,7 +1251,7 @@
       <td class="col-claim">Crypto scams / fraud 2025</td>
       <td>~17 (&gt;=14 on-chain)</td>
       <td>$bn</td>
-      <td>13 Jan 2026</td>
+      <td><time datetime="2026-01-13">13 Jan 2026</time></td>
       <td class="col-source">Chainalysis</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -1203,7 +1262,7 @@
       <td class="col-claim">Impersonation scam YoY growth</td>
       <td>1,400</td>
       <td>%</td>
-      <td>2025</td>
+      <td><time datetime="2025">2025</time></td>
       <td class="col-source">Chainalysis</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -1225,7 +1284,7 @@
       <td class="col-claim">Personal-wallet compromise 2025</td>
       <td>158,000 / 713</td>
       <td>cases / $m</td>
-      <td>2025</td>
+      <td><time datetime="2025">2025</time></td>
       <td class="col-source">Chainalysis</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span></td>
@@ -1236,7 +1295,7 @@
       <td class="col-claim">Stablecoin market cap (Module E)</td>
       <td>314.68 / 382 coins</td>
       <td>$bn</td>
-      <td>21 Jun 2026</td>
+      <td><time datetime="2026-06-21">21 Jun 2026</time></td>
       <td class="col-source">DefiLlama</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"></td>
@@ -1247,7 +1306,7 @@
       <td class="col-claim">Stablecoin market cap all-time high</td>
       <td>322.4</td>
       <td>$bn</td>
-      <td>17 May 2026</td>
+      <td><time datetime="2026-05-17">17 May 2026</time></td>
       <td class="col-source">DefiLlama</td>
       <td><span class="chip tier-chip tier-safe">T2</span></td>
       <td class="col-flags"></td>
@@ -1258,7 +1317,7 @@
       <td class="col-claim">On-chain insurance active coverage</td>
       <td>130.2 (-20.2%), ~0.9% of losses</td>
       <td>$m</td>
-      <td>27 Aug 2026</td>
+      <td><time datetime="2026-08-27">27 Aug 2026</time></td>
       <td class="col-source">CoinGecko</td>
       <td><span class="chip tier-chip tier-warn">T4</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1269,7 +1328,7 @@
       <td class="col-claim">Uninsured share of crypto holders</td>
       <td>89 (11 insured)</td>
       <td>%</td>
-      <td>2024</td>
+      <td><time datetime="2024">2024</time></td>
       <td class="col-source">GlobalData</td>
       <td><span class="chip tier-chip tier-warn">T4</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1346,7 +1405,7 @@
       <td class="col-claim">NSDL commenced operations</td>
       <td>20 Nov 1996</td>
       <td>date</td>
-      <td>1996</td>
+      <td><time datetime="1996">1996</time></td>
       <td class="col-source">Depositories Act / SEBI</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1357,7 +1416,7 @@
       <td class="col-claim">Demat mandatory for institutions</td>
       <td>Jan 1998, 8 scrips</td>
       <td>date</td>
-      <td>1998</td>
+      <td><time datetime="1998">1998</time></td>
       <td class="col-source">SEBI Annual Report 1998-99</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1368,7 +1427,7 @@
       <td class="col-claim">Demat mandatory for all investors</td>
       <td>4 Jan 1999</td>
       <td>date</td>
-      <td>1999</td>
+      <td><time datetime="1999">1999</time></td>
       <td class="col-source">SEBI Annual Report</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1379,7 +1438,7 @@
       <td class="col-claim">NSDL investor accounts</td>
       <td>~5.0m (4,989,734)</td>
       <td>accounts</td>
-      <td>29 Feb 2004</td>
+      <td><time datetime="2004-02-29">29 Feb 2004</time></td>
       <td class="col-source">NSDL Nest Update</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1467,7 +1526,7 @@
       <td class="col-claim">Aadhaar Sec 57 struck down</td>
       <td>26 Sep 2018</td>
       <td>date</td>
-      <td>2018</td>
+      <td><time datetime="2018">2018</time></td>
       <td class="col-source">Supreme Court</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1522,7 +1581,7 @@
       <td class="col-claim">RTGS live</td>
       <td>26 Mar 2004</td>
       <td>date</td>
-      <td>2004</td>
+      <td><time datetime="2004">2004</time></td>
       <td class="col-source">BIS / RBI</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1533,7 +1592,7 @@
       <td class="col-claim">NEFT launch</td>
       <td>Nov 2005</td>
       <td>date</td>
-      <td>2005</td>
+      <td><time datetime="2005">2005</time></td>
       <td class="col-source">RBI</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1544,7 +1603,7 @@
       <td class="col-claim">NACH replaced ECS</td>
       <td>1 May 2016</td>
       <td>date</td>
-      <td>2016</td>
+      <td><time datetime="2016">2016</time></td>
       <td class="col-source">NPCI</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">HISTORICAL</span></td>
@@ -1599,7 +1658,7 @@
       <td class="col-claim">Global Fintech Fest 2024</td>
       <td>&gt;80,000 / 120 central bankers</td>
       <td>participants</td>
-      <td>2024</td>
+      <td><time datetime="2024">2024</time></td>
       <td class="col-source">GFF / Business Standard</td>
       <td><span class="chip tier-chip tier-warn">T4/T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1665,7 +1724,7 @@
       <td class="col-claim">Named fund managers with privacy-wrapped tokenised MMFs live via Archax on Silent Data</td>
       <td>4</td>
       <td>managers (Aberdeen, BlackRock, Fidelity Intl, State Street)</td>
-      <td>19 Feb 2026</td>
+      <td><time datetime="2026-02-19">19 Feb 2026</time></td>
       <td class="col-source">Applied Blockchain / Archax release; Asset Servicing Times</td>
       <td><span class="chip tier-chip tier-warn">T4/T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1676,7 +1735,7 @@
       <td class="col-claim">Aztec Ignition mainnet activation (validators in queue at launch)</td>
       <td>500</td>
       <td>validators</td>
-      <td>20 Nov 2025</td>
+      <td><time datetime="2025-11-20">20 Nov 2025</time></td>
       <td class="col-source">Aztec / The Block</td>
       <td><span class="chip tier-chip tier-warn">T4/T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1687,7 +1746,7 @@
       <td class="col-claim">Aztec Alpha V5 transaction fee</td>
       <td>&lt;0.05</td>
       <td>$/tx</td>
-      <td>21 Jul 2026</td>
+      <td><time datetime="2026-07-21">21 Jul 2026</time></td>
       <td class="col-source">Aztec (project-reported)</td>
       <td><span class="chip tier-chip tier-warn">T4</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">WEAK_TIER</span><span class="chip flag-chip flag-unverified">UNVERIFIED</span></td>
@@ -1698,7 +1757,7 @@
       <td class="col-claim">Aztec Alpha V5 private-transaction proving time on a consumer laptop</td>
       <td>~2.5</td>
       <td>seconds</td>
-      <td>21 Jul 2026</td>
+      <td><time datetime="2026-07-21">21 Jul 2026</time></td>
       <td class="col-source">Aztec (project-reported)</td>
       <td><span class="chip tier-chip tier-warn">T4</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">WEAK_TIER</span><span class="chip flag-chip flag-unverified">UNVERIFIED</span></td>
@@ -1709,7 +1768,7 @@
       <td class="col-claim">SWIFT shared ledger (built on Linea) banks at initial use</td>
       <td>17</td>
       <td>banks</td>
-      <td>9 Jul 2026</td>
+      <td><time datetime="2026-07-09">9 Jul 2026</time></td>
       <td class="col-source">SWIFT press release</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"></td>
@@ -1731,7 +1790,7 @@
       <td class="col-claim">Kohaku wallet privacy SDK release (Ethereum Foundation)</td>
       <td>1</td>
       <td>release</td>
-      <td>25 May 2026</td>
+      <td><time datetime="2026-05-25">25 May 2026</time></td>
       <td class="col-source">Crypto Briefing / The Defiant</td>
       <td><span class="chip tier-chip tier-warn">T5</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1742,7 +1801,7 @@
       <td class="col-claim">EU AMLR (Reg. (EU) 2024/1624) application date; anonymous accounts and AEC handling barred for CASPs</td>
       <td>2027-07-01</td>
       <td>date</td>
-      <td>1 Jul 2027</td>
+      <td><time datetime="2027-07-01">1 Jul 2027</time></td>
       <td class="col-source">EUR-Lex</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">CURRENT</span></td>
@@ -1753,7 +1812,7 @@
       <td class="col-claim">EU AMLR customer due diligence threshold for crypto transfers</td>
       <td>1,000</td>
       <td>EUR</td>
-      <td>1 Jul 2027</td>
+      <td><time datetime="2027-07-01">1 Jul 2027</time></td>
       <td class="col-source">EUR-Lex</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"><span class="chip flag-chip">CURRENT</span></td>
@@ -1764,7 +1823,7 @@
       <td class="col-claim">FIU-IND 2026 AML/CFT guidelines: permitted AEC deposit/withdrawal flows for reporting entities</td>
       <td>0</td>
       <td>permitted flows</td>
-      <td>2026</td>
+      <td><time datetime="2026">2026</time></td>
       <td class="col-source">Law-firm summary of FIU-IND guidelines; primary circular not located</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-unverified">UNVERIFIED</span></td>
@@ -1786,7 +1845,7 @@
       <td class="col-claim">US v. Storm: counts convicted at trial, of three charged</td>
       <td>1</td>
       <td>counts</td>
-      <td>6 Aug 2025</td>
+      <td><time datetime="2025-08-06">6 Aug 2025</time></td>
       <td class="col-source">SDNY verdict; DOJ retrial sought ~Oct 2026</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-stale">STALE</span><span class="chip flag-chip flag-warn">WEAK_TIER</span></td>
@@ -1797,7 +1856,7 @@
       <td class="col-claim">Demat 2.0 tokenised corporate bond pilot: total raised</td>
       <td>1,025</td>
       <td>Rs cr</td>
-      <td>10 Sep 2026</td>
+      <td><time datetime="2026-09-10">10 Sep 2026</time></td>
       <td class="col-source">SEBI PR 56/2026</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"></td>
@@ -1808,7 +1867,7 @@
       <td class="col-claim">REC tokenised bond issuance (first under Demat 2.0)</td>
       <td>500</td>
       <td>Rs cr</td>
-      <td>7 Sep 2026</td>
+      <td><time datetime="2026-09-07">7 Sep 2026</time></td>
       <td class="col-source">SEBI PR 56/2026; Business Standard</td>
       <td><span class="chip tier-chip tier-safe">T1</span></td>
       <td class="col-flags"></td>
@@ -1819,7 +1878,7 @@
       <td class="col-claim">REC tokenised bond: bid book</td>
       <td>796</td>
       <td>Rs cr</td>
-      <td>7 Sep 2026</td>
+      <td><time datetime="2026-09-07">7 Sep 2026</time></td>
       <td class="col-source">Business Standard</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"></td>
@@ -1830,7 +1889,7 @@
       <td class="col-claim">REC tokenised bond: coupon</td>
       <td>7.30</td>
       <td>% p.a.</td>
-      <td>7 Sep 2026</td>
+      <td><time datetime="2026-09-07">7 Sep 2026</time></td>
       <td class="col-source">Business Standard</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"></td>
@@ -1841,7 +1900,7 @@
       <td class="col-claim">L&amp;T tokenised bond issuance</td>
       <td>500</td>
       <td>Rs cr</td>
-      <td>9 Sep 2026</td>
+      <td><time datetime="2026-09-09">9 Sep 2026</time></td>
       <td class="col-source">Business Standard</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"></td>
@@ -1852,7 +1911,7 @@
       <td class="col-claim">IIFL Finance tokenised bond issuance</td>
       <td>25</td>
       <td>Rs cr</td>
-      <td>9 Sep 2026</td>
+      <td><time datetime="2026-09-09">9 Sep 2026</time></td>
       <td class="col-source">Business Standard; The Block</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"></td>
@@ -1863,7 +1922,7 @@
       <td class="col-claim">RBI UMI: cumulative tokenised certificate-of-deposit transactions</td>
       <td>248</td>
       <td>transactions</td>
-      <td>9 Sep 2026</td>
+      <td><time datetime="2026-09-09">9 Sep 2026</time></td>
       <td class="col-source">P Vasudevan, ED RBI, at GFF 2026 (Medianama)</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"></td>
@@ -1874,7 +1933,7 @@
       <td class="col-claim">RBI UMI: cumulative tokenised certificate-of-deposit value</td>
       <td>~17,000</td>
       <td>Rs cr</td>
-      <td>9 Sep 2026</td>
+      <td><time datetime="2026-09-09">9 Sep 2026</time></td>
       <td class="col-source">P Vasudevan, ED RBI, at GFF 2026 (Medianama)</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-chip">VAGUE</span></td>
@@ -1885,7 +1944,7 @@
       <td class="col-claim">Maharashtra DELTA Act: claimed dormant land value</td>
       <td>~50 lakh</td>
       <td>Rs cr</td>
-      <td>9 Sep 2026</td>
+      <td><time datetime="2026-09-09">9 Sep 2026</time></td>
       <td class="col-source">CM Fadnavis at GFF 2026 (Business Today)</td>
       <td><span class="chip tier-chip tier-neutral">T3</span></td>
       <td class="col-flags"><span class="chip flag-chip flag-warn">DERIVED</span></td>

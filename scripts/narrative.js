@@ -15,14 +15,8 @@ import { renderMarkdown } from '../vendor/minimark.js';
 import { stalenessCutoff } from '../assets/ledger-core.js';
 import { buildFigureIndex, citeTokens, warnOnWeakCitations } from './citations.js';
 import { renderLandingPromptCta } from './llm-prompt.js';
+import { escapeHtmlText, escapeAttr, renderHeadMeta, websiteLd } from './meta.js';
 
-function escapeHtmlText(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function escapeAttr(str) {
-  return escapeHtmlText(str).replace(/"/g, '&quot;');
-}
 
 /** Markdown -> HTML -> citation chips. Order matters: minimark leaves [[fig:N]] alone. */
 function prose(md, ctx, where) {
@@ -217,15 +211,14 @@ function narrativeShell({ meta, bodyHtml, tabs, assets }) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtmlText(title)}</title>
-<meta name="description" content="${escapeAttr(meta.description)}">
-<link rel="canonical" href="${escapeAttr(base)}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="${escapeAttr(base)}">
-<meta property="og:title" content="${escapeAttr(title)}">
-<meta property="og:description" content="${escapeAttr(meta.description)}">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="${escapeAttr(title)}">
-<meta name="twitter:description" content="${escapeAttr(meta.description)}">
+${renderHeadMeta({
+  title,
+  description: meta.description,
+  url: base,
+  type: 'website',
+  siteBase: base,
+  jsonLd: websiteLd({ siteBase: base, title, description: meta.description }),
+})}
 <link rel="stylesheet" href="${assets.tokens}">
 <link rel="stylesheet" href="${assets.narrativeCss}">
 </head>

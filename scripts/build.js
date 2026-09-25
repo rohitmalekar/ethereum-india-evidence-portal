@@ -16,6 +16,7 @@ import { renderMarkdown } from '../vendor/minimark.js';
 import { isStale, worstTierNum, stalenessCutoff } from '../assets/ledger-core.js';
 import { renderNarrativePage } from './narrative.js';
 import { renderLandingPromptCta } from './llm-prompt.js';
+import { SITE_NAME, escapeHtmlText, escapeAttr, renderHeadMeta, articleLd, datasetLd } from './meta.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -41,16 +42,16 @@ async function versionedAsset(relPath) {
 // two runs of the same group would print its heading twice.
 const TABS = [
   { id: 'narrative', label: 'Start here', file: 'data/narrative.json', page: 'index.html', isNarrative: true },
-  { id: 'overview', label: 'Overview', file: 'content/intro.md', page: 'evidence.html', hasTiers: false },
-  { id: 'what-shipped', label: 'What shipped', module: 'A', group: 'modules', file: 'content/module-a.md', page: 'what-shipped.html', hasTiers: true },
-  { id: 'whats-legal-in-india', label: "What's legal in India", module: 'B', group: 'modules', file: 'content/module-b.md', page: 'whats-legal-in-india.html', hasTiers: true },
-  { id: 'where-the-value-is', label: 'Where the value is', module: 'C', group: 'modules', file: 'content/module-c.md', page: 'where-the-value-is.html', hasTiers: true },
-  { id: 'ethereum-vs-alternatives', label: 'Ethereum vs alternatives', module: 'D', group: 'modules', file: 'content/module-d.md', page: 'ethereum-vs-alternatives.html', hasTiers: true },
-  { id: 'the-privacy-question', label: 'The privacy question', module: 'E', group: 'modules', file: 'content/module-e.md', page: 'the-privacy-question.html', hasTiers: true },
-  { id: 'the-objections', label: 'The objections', module: 'F', group: 'modules', file: 'content/module-f.md', page: 'the-objections.html', hasTiers: true },
-  { id: 'how-adoption-happens', label: 'How adoption happens', module: 'G', group: 'modules', file: 'content/module-g.md', page: 'how-adoption-happens.html', hasTiers: true },
-  { id: 'ledger', label: 'Figure Ledger', group: 'reference', page: 'ledger.html', isLedger: true },
-  { id: 'reconciliation', label: 'Reconciliation', group: 'reference', file: 'content/reconciliation.md', page: 'reconciliation.html', hasTiers: false },
+  { id: 'overview', label: 'Overview', file: 'content/intro.md', page: 'evidence.html', hasTiers: false, description: 'A seven-module evidence base on Ethereum and distributed settlement in Indian institutional finance: the finding of each module, with sources and source tiers.' },
+  { id: 'what-shipped', label: 'What shipped', module: 'A', group: 'modules', file: 'content/module-a.md', page: 'what-shipped.html', hasTiers: true, description: 'Which blockchain systems the largest financial institutions run in production, at what volume, on which chains, and why bank settlement went permissioned.' },
+  { id: 'whats-legal-in-india', label: "What's legal in India", module: 'B', group: 'modules', file: 'content/module-b.md', page: 'whats-legal-in-india.html', hasTiers: true, description: 'What RBI, SEBI and IFSCA permit in India today for tokenised instruments, distributed settlement and blockchain registries, and where the legal gaps remain.' },
+  { id: 'where-the-value-is', label: 'Where the value is', module: 'C', group: 'modules', file: 'content/module-c.md', page: 'where-the-value-is.html', hasTiers: true, description: 'Which processes in Indian financial institutions are costly or slow enough for tokenised settlement to help, sized in rupees, with the budget owner for each.' },
+  { id: 'ethereum-vs-alternatives', label: 'Ethereum vs alternatives', module: 'D', group: 'modules', file: 'content/module-d.md', page: 'ethereum-vs-alternatives.html', hasTiers: true, description: 'Public Ethereum against Canton and permissioned EVM chains on the criteria institutions use to pick infrastructure, and where Ethereum is the wrong choice.' },
+  { id: 'the-privacy-question', label: 'The privacy question', module: 'E', group: 'modules', file: 'content/module-e.md', page: 'the-privacy-question.html', hasTiers: true, description: 'Institutions rejected public Ethereum on confidentiality. What has changed in protocol, wallets, layer-2s and standards since, and whether it changes that call.' },
+  { id: 'the-objections', label: 'The objections', module: 'F', group: 'modules', file: 'content/module-f.md', page: 'the-objections.html', hasTiers: true, description: 'The strongest objections Indian institutions and regulators raise to tokenised settlement on Ethereum, each in its strongest form, with the evidence in reply.' },
+  { id: 'how-adoption-happens', label: 'How adoption happens', module: 'G', group: 'modules', file: 'content/module-g.md', page: 'how-adoption-happens.html', hasTiers: true, description: 'How new financial infrastructure such as demat and UPI reached institutional adoption in India, and what that sequence implies for a tokenised settlement layer.' },
+  { id: 'ledger', label: 'Figure Ledger', group: 'reference', page: 'ledger.html', isLedger: true, description: 'Every quantitative claim in the evidence base with its figure, unit, as-of date, source and tier (T1 to T5). Rows are deep-linkable; the full set is JSON.' },
+  { id: 'reconciliation', label: 'Reconciliation', group: 'reference', file: 'content/reconciliation.md', page: 'reconciliation.html', hasTiers: false, description: 'A cross-module audit of the evidence base: where the modules contradict each other, which figures rest on weak sources, and which claims were retired.' },
 ];
 
 const GROUP_LABELS = { modules: 'Modules', reference: 'Reference' };
@@ -62,14 +63,6 @@ const TIER_MARKERS = {
   '5min': '<!-- TIER:5min -->',
   full: '<!-- TIER:full -->',
 };
-
-function escapeHtmlText(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function escapeAttr(str) {
-  return escapeHtmlText(str).replace(/"/g, '&quot;');
-}
 
 const PROVENANCE_HEADER = (label, file) =>
   `[Source: ${label} — ${file} — Ethereum/India institutional evidence base]\n` +
@@ -263,10 +256,25 @@ function renderLedgerLegend(meta) {
   return `<details class="ledger-legend">
     <summary>Legend: source tiers and flags</summary>
     <div class="legend-grid">
-      <div><h3>Source tiers</h3><dl>${tierRows}</dl></div>
-      <div><h3>Flags</h3><dl>${flagRows}</dl></div>
+      <div><h2>Source tiers</h2><dl>${tierRows}</dl></div>
+      <div><h2>Flags</h2><dl>${flagRows}</dl></div>
     </div>
   </details>`;
+}
+
+const MONTHS = { Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06', Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12' };
+
+/**
+ * "10 Sep 2026" and "2026" get a machine-readable <time>, so a retrieved row
+ * carries its date in a form a parser does not have to guess at. Ranges and
+ * annotated values ("2024-25", "2026 (cut)") stay plain text.
+ */
+function renderAsOf(asOf) {
+  const text = escapeHtmlText(asOf);
+  const dmy = /^(\d{1,2}) ([A-Z][a-z]{2}) (\d{4})$/.exec(asOf);
+  if (dmy && MONTHS[dmy[2]]) return `<time datetime="${dmy[3]}-${MONTHS[dmy[2]]}-${dmy[1].padStart(2, '0')}">${text}</time>`;
+  if (/^\d{4}$/.test(asOf)) return `<time datetime="${asOf}">${text}</time>`;
+  return text;
 }
 
 function renderLedgerRow(row, stalenessCutoff) {
@@ -289,7 +297,7 @@ function renderLedgerRow(row, stalenessCutoff) {
       <td class="col-claim">${escapeHtmlText(row.claim)}</td>
       <td>${escapeHtmlText(row.figure)}</td>
       <td>${escapeHtmlText(row.unit)}</td>
-      <td>${escapeHtmlText(row.as_of)}</td>
+      <td>${renderAsOf(row.as_of)}</td>
       <td class="col-source">${escapeHtmlText(row.source)}</td>
       <td><span class="chip tier-chip ${tierClass}">${row.tier}</span></td>
       <td class="col-flags">${flagChips}</td>
@@ -311,6 +319,7 @@ function renderLedgerBody(data) {
     <div class="tab-header">
       <h1>Figure Ledger</h1>
       <p class="ledger-intro">Every quantitative claim in this evidence base, with its source tier and "as of" date.</p>
+      <p class="ledger-data-link"><a href="data/figures.json">Download the ledger as JSON</a> (data/figures.json)</p>
     </div>
     ${renderLedgerLegend(meta)}
     <p class="ledger-count">Showing ${rows.length} of ${rows.length}</p>
@@ -380,13 +389,33 @@ ${links}
   return `<div class="sidebar-nav">\n${parts.join('\n')}\n    </div>`;
 }
 
-function pageShell({ tab, bodyHtml, assets }) {
+/** `# Module A — What Actually Shipped` -> the Article headline. */
+function markdownTitle(raw) {
+  const m = /^# (.+)$/m.exec(raw);
+  return m ? m[1].trim() : null;
+}
+
+function pageHeadMeta({ tab, raw, site }) {
+  const url = site.base + tab.page;
+  const title = `${tab.label} — ${SITE_NAME}`;
+  const common = { url, description: tab.description, siteBase: site.base, dateModified: site.dateModified };
+  const jsonLd = tab.isLedger
+    ? datasetLd({ ...common, name: `${SITE_NAME}: Figure Ledger` })
+    : articleLd({ ...common, headline: markdownTitle(raw) ?? tab.label });
+  const extraLinks = tab.isLedger
+    ? ['<link rel="alternate" type="application/json" href="data/figures.json" title="Figure Ledger data">']
+    : [];
+  return renderHeadMeta({ title, description: tab.description, url, type: 'article', siteBase: site.base, jsonLd, extraLinks });
+}
+
+function pageShell({ tab, raw, bodyHtml, assets, site }) {
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${tab.label} — Ethereum/India Institutional Evidence Portal</title>
+<title>${tab.label} — ${SITE_NAME}</title>
+${pageHeadMeta({ tab, raw, site })}
 <link rel="stylesheet" href="${assets.tokens}">
 <link rel="stylesheet" href="${assets.styles}">
 </head>
@@ -399,7 +428,7 @@ function pageShell({ tab, bodyHtml, assets }) {
     <span class="hamburger" aria-hidden="true"></span>
   </label>
   <div class="site-title">
-    <span class="portal-name">Ethereum/India Institutional Evidence Portal</span>
+    <span class="portal-name">${SITE_NAME}</span>
     <span class="current-tab">${tab.label}</span>
   </div>
 </header>
@@ -422,7 +451,7 @@ function pageShell({ tab, bodyHtml, assets }) {
 
 async function writeLlmsTxt() {
   const lines = [
-    '# Ethereum/India Institutional Evidence Portal',
+    `# ${SITE_NAME}`,
     '',
     '> A seven-module evidence base on Ethereum and distributed-settlement infrastructure for Indian institutional finance. Every claim carries a source and date; every quantitative figure carries a source tier (T1 primary … T5 crypto media/aggregator) in the Figure Ledger.',
     '',
@@ -431,11 +460,38 @@ async function writeLlmsTxt() {
     '',
     '## Data',
     '- [Figure Ledger data (JSON)](data/figures.json) — every quantitative claim with its claim, figure, unit, source, date, tier and flags.',
+    '- Each Figure Ledger row is anchored as ledger.html#fig-<ID>. Cite that anchor, with the row\'s tier and as-of date, when quoting a figure.',
   ];
   await writeFile(path.join(ROOT, 'llms.txt'), lines.join('\n') + '\n', 'utf8');
 }
 
+/**
+ * No <lastmod>: the only honest source is git history, and CI's shallow
+ * checkout would date every page to the latest commit, so the file would
+ * differ between a local build and CI and fail the drift check.
+ */
+async function writeSitemap(siteBase) {
+  const urls = TABS.map(t => `  <url><loc>${escapeHtmlText(siteBase + (t.page === 'index.html' ? '' : t.page))}</loc></url>`);
+  const xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ...urls, '</urlset>'];
+  await writeFile(path.join(ROOT, 'sitemap.xml'), xml.join('\n') + '\n', 'utf8');
+}
+
+async function writeRobots(siteBase) {
+  const lines = ['User-agent: *', 'Allow: /', '', `Sitemap: ${siteBase}sitemap.xml`];
+  await writeFile(path.join(ROOT, 'robots.txt'), lines.join('\n') + '\n', 'utf8');
+}
+
+/** A new page without a description would ship with a bare link preview. */
+function checkDescriptions() {
+  for (const tab of TABS) {
+    if (tab.isNarrative) continue; // described in data/narrative.json meta
+    if (!tab.description) throw new Error(`TABS: "${tab.id}" has no description.`);
+    if (tab.description.length > 160) throw new Error(`TABS: "${tab.id}" description is ${tab.description.length} chars; keep it to 160 so search results do not truncate it.`);
+  }
+}
+
 async function main() {
+  checkDescriptions();
   // Parsed once: both the ledger table and the narrative's citation chips
   // read it, and they must agree about every row.
   const figuresData = JSON.parse(await readFile(path.join(ROOT, 'data/figures.json'), 'utf8'));
@@ -446,26 +502,31 @@ async function main() {
     narrativeCss: await versionedAsset('assets/narrative.css'),
     narrativeJs: await versionedAsset('assets/narrative.js'),
   };
+  const narrativeTab = TABS.find(t => t.isNarrative);
+  const narrative = JSON.parse(await readFile(path.join(ROOT, narrativeTab.file), 'utf8'));
+  // One base URL for every canonical, og:url, sitemap entry and JSON-LD id.
+  const site = { base: narrative.meta.site_base, dateModified: figuresData.meta.generated };
   const built = [];
   for (const tab of TABS) {
     let html;
     if (tab.isNarrative) {
       // The narrative page brings its own shell: no sidebar, its own
-      // stylesheet, and the social/meta tags the portal pages don't need.
-      const narrative = JSON.parse(await readFile(path.join(ROOT, tab.file), 'utf8'));
+      // stylesheet, and a WebSite rather than Article JSON-LD.
       html = renderNarrativePage({ narrative, figuresData, tabs: TABS, assets });
     } else if (tab.isLedger) {
-      html = pageShell({ tab, bodyHtml: renderLedgerBody(figuresData), assets });
+      html = pageShell({ tab, bodyHtml: renderLedgerBody(figuresData), assets, site });
     } else {
       const raw = await readFile(path.join(ROOT, tab.file), 'utf8');
-      html = pageShell({ tab, bodyHtml: renderModuleBody(tab, raw), assets });
+      html = pageShell({ tab, raw, bodyHtml: renderModuleBody(tab, raw), assets, site });
     }
     await writeFile(path.join(ROOT, tab.page), html, 'utf8');
     built.push(tab.page);
   }
   await writeLlmsTxt();
+  await writeSitemap(site.base);
+  await writeRobots(site.base);
   console.log(`Built ${built.length} pages: ${built.join(', ')}`);
-  console.log('Wrote llms.txt');
+  console.log('Wrote llms.txt, sitemap.xml, robots.txt');
 }
 
 main().catch(err => {
