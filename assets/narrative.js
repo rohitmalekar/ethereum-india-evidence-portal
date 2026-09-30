@@ -9,21 +9,6 @@
 //
 // No localStorage or sessionStorage anywhere: the site must run from file://.
 
-/** Devcon countdown. The absolute date is already in the HTML; this adds the
- *  day count, which is the only part that has to come from the client clock. */
-function enhanceCountdown() {
-  document.querySelectorAll('[data-countdown-to]').forEach(el => {
-    const target = new Date(el.dataset.countdownTo + 'T00:00:00');
-    if (Number.isNaN(target.getTime())) return;
-    const today = new Date();
-    const days = Math.ceil((target - today) / 86400000);
-    if (days > 1) el.textContent = `${days} days away`;
-    else if (days === 1) el.textContent = 'Tomorrow';
-    else if (days === 0) el.textContent = 'Today';
-    else el.textContent = 'This one has been and gone';
-  });
-}
-
 /**
  * Split sort: the static HTML has every item already in its correct column
  * with the real status visible. This collapses the two columns into one
@@ -183,7 +168,7 @@ function pageBaseUrl() {
 }
 
 function enhanceLlmPrompt() {
-  // index.html carries this widget twice, in the hero and in the closing CTA,
+  // research.html carries this widget twice, in the hero and after the modules,
   // so every instance gets the substitution and its own button.
   document.querySelectorAll('.landing-prompt-details').forEach(details => {
     const textarea = details.querySelector('.copy-textarea');
@@ -234,7 +219,6 @@ function enhanceReveal() {
 }
 
 function init() {
-  enhanceCountdown();
   enhanceLlmPrompt();
   enhanceSplitSort();
   enhanceReveal();
