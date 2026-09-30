@@ -1,13 +1,10 @@
 // The A-G finding cards on research.html, built from content/intro.md.
 //
-// The findings list is the overview's router into the seven modules, and as a
-// plain <ul> of long paragraphs it read as a wall. Each item opens
-// `**A — What shipped.** ...`, so the letter and title are lifted out into a
-// linked card head and the rest becomes the card body. The destination comes
-// from the module tabs, so the links cannot drift from the pages that exist.
-//
-// Anything that does not match the pattern is left exactly as markdown
-// rendered it, which is also what happens if the list is ever rewritten.
+// Each module is a `### A — What shipped` heading followed by a bullet list.
+// The letter and title become a linked card head and the list becomes the
+// card body. The destination comes from the module tabs, so the links cannot
+// drift from the pages that exist. A heading that does not match the pattern,
+// or names no module, fails the build rather than rendering a dead card.
 
 import { renderMarkdown } from '../vendor/minimark.js';
 import { escapeHtmlText, escapeAttr } from './meta.js';
@@ -20,23 +17,22 @@ function splitBeforeFirstH2(raw) {
   return { introRaw: normalized.slice(0, splitAt), restRaw: normalized.slice(splitAt) };
 }
 
-function renderFindingCards(listHtml, moduleTabs) {
+function renderFindingCards(html, moduleTabs) {
   const byModule = new Map(moduleTabs.map(t => [t.module, t]));
-  const items = listHtml.match(/<li>[\s\S]*?<\/li>/g);
-  if (!items) return listHtml;
+  const blocks = [...html.matchAll(/<h3>([\s\S]*?)<\/h3>\s*(<ul>[\s\S]*?<\/ul>)/g)];
+  if (!blocks.length) throw new Error('content/intro.md: no "### X — Title" headings with bullet lists under "## Findings by module".');
 
-  const cards = items.map(item => {
-    const m = item.match(/^<li><strong>([A-G])\s*—\s*([^<]*?)\.?<\/strong>\s*([\s\S]*)<\/li>$/);
-    if (!m) return item;
-    const [, letter, title, body] = m;
-    const tab = byModule.get(letter);
-    if (!tab) return item;
+  const cards = blocks.map(([, heading, list]) => {
+    const m = heading.match(/^([A-G])\s*\u2014\s*(.+)$/);
+    const tab = m && byModule.get(m[1]);
+    if (!tab) throw new Error(`content/intro.md: finding heading "${heading}" does not name a module as "X — Title".`);
+    const [, letter, title] = m;
     return `<li class="finding">
             <a class="finding-head" href="${escapeAttr(tab.page)}" aria-label="Module ${letter}, ${escapeAttr(title)}">
               <span class="finding-letter" aria-hidden="true">${letter}</span>
               <span class="finding-title">${escapeHtmlText(title)}</span>
             </a>
-            <p class="finding-body">${body}</p>
+            ${list.replace('<ul>', '<ul class="finding-body">')}
           </li>`;
   });
 
@@ -46,12 +42,10 @@ function renderFindingCards(listHtml, moduleTabs) {
 /**
  * content/intro.md -> { summaryHtml, cardsHtml }. The H1 is dropped: the
  * research page's hero already carries the title. The "What this is" line is
- * the summary; the first list after it becomes the cards.
+ * the summary; the headings and lists after it become the cards.
  */
 export function renderFindings(raw, moduleTabs) {
   const { introRaw, restRaw } = splitBeforeFirstH2(raw);
   const summaryHtml = renderMarkdown(introRaw.replace(/^# .*\n/, ''));
-  const listMatch = renderMarkdown(restRaw).match(/<ul>[\s\S]*?<\/ul>/);
-  if (!listMatch) throw new Error('content/intro.md: no findings list found under the first ## heading.');
-  return { summaryHtml, cardsHtml: renderFindingCards(listMatch[0], moduleTabs) };
+  return { summaryHtml, cardsHtml: renderFindingCards(renderMarkdown(restRaw), moduleTabs) };
 }

@@ -350,10 +350,15 @@ a { color: var(--n-accent); }
 
 .finding-body {
   margin: 0;
+  padding-left: 1.1rem;
+  list-style: disc;
   font-size: 0.9rem;
   line-height: 1.55;
   color: var(--color-text-muted);
 }
+.finding-body li { margin: 0 0 0.45rem; }
+.finding-body li:last-child { margin-bottom: 0; }
+.finding-body li::marker { color: var(--color-accent); }
 
 .findings { margin: 2rem 0 2.5rem; }
 
@@ -490,6 +495,7 @@ a { color: var(--n-accent); }
 .sort-item.is-wrong { border-left-color: var(--n-amber-border); }
 
 .sort-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+.sort-actions[hidden] { display: none; }
 .sort-btn {
   font: inherit;
   font-size: 0.78rem;
